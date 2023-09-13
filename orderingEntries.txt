@@ -1,0 +1,21 @@
+// SORT BY NUMBER
+for (key in data){
+    data[key].bill = parseInt(data[key].billNumber.split('/')[0]);
+}
+console.log(data);
+
+
+data.sort(function(a, b) { return a.bill - b.bill });
+
+
+_________________________________________________
+
+// SORTING COMBINATION OF NUMBERS AND ALPHANUMERIC STRING
+var arr = [{"name":"sbxbn", "number":"1256"}, {"name":"sbxbn", "number":"A123"}, {"name":"sbxbn", "number":"1012"}, {"name":"sbxbn", "number":"A313"}, {"name":"sbxbn", "number":"A918"}, {"name":"sbxbn", "number":"2345"}]
+arr = arr.sort(function(a, b) {
+    return a.number.localeCompare(b.number, undefined, {
+        numeric: true,
+        sensitivity: 'base'
+    });
+});
+console.log(arr);
