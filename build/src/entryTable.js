@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
-import {Link } from 'react-router-dom';
 import axios from 'axios';
 import EditEntryModal from './editEntryModal.js';
 import FilterEntries from './searchEntry.js';
 import fileDownload from 'js-file-download';
 import ReactToPrint from "react-to-print";
-import PledgeBill from './pledgeBill.js';
-import DeliveryNote from './deliveryNote.js';
 import moment from 'moment';
 import Pagination from './components/pagination';
 import _ from 'lodash';
@@ -26,14 +24,7 @@ const AllUserEntries = (props, ref) => {
 	const [delId, setDelId] = useState();
 	const [deleteEntry, confirmDeletion] = useState(false);
 
-	const [filterRedeemed, setFilterRedeemed] = useState([]);
-	const[filtering, setSearchFiltering] = useState([]);
-
 	let value = useContext(User);
-
-	let componentRef = useRef();
-	const billPrint = useRef({});
-	const note = useRef({});
 
 	// Jump to page in pagination
 	let jumpNo;
@@ -46,6 +37,10 @@ const AllUserEntries = (props, ref) => {
 		}
 	}
 
+	let componentRef = useRef();
+	const billPrint = useRef({});
+	const note = useRef({});
+
 	const getLists = () => {
 		axios.get("http://localhost:4000/customers/get-result", { params: { createdBy: value.data.userName } })
 			.then(response => {
@@ -54,14 +49,70 @@ const AllUserEntries = (props, ref) => {
 			});
 	};
 
-	const setEntries = () => {
-		console.log("calling set entries fn");
-		setFilterRedeemed(entries.filter((entry) => entry.redemptionDate));
+	const [filterUnredeemed, setfilterUnredeemed] = useState([]);
+	const [allUnredeemed, setAllUnredeemed] = useState([]);
+	const [findYear, setFindYear] = useState([]);
+
+	let filterUnredeem = [], getYear = [], years = [];
+	const filterUnreedemedEntry = () => {
+		filterUnredeem = entries.filter((entry) => !entry.redemptionDate);
+		years = filterUnredeem.map(function (ele, i) {
+			// Push date to array only if its valid date
+			if (new Date(ele.date).getFullYear()) {
+				getYear.push(new Date(ele.date).getFullYear());
+			}
+		})
+		setFindYear([...new Set(getYear)]);
+		// Remove all duplicate Years
+		console.log([...new Set(getYear)]);
+		// Setting a state, to acheive filter by year and not change the original state
+		setAllUnredeemed(filterUnredeem);
+		setfilterUnredeemed(filterUnredeem);
 	}
 
-	// filter only redeemed entries
-		 let filtered= entries.filter((entry) => entry.redemptionDate);
-	
+	const [selectYear, setSelectYear] = useState("All");
+
+	const handleYearChange = (e) => {
+		setSelectYear(e.target.value);
+		// Pass year and search text, so that pagination doesn't conflict
+		setYear(e.target.value, searchText);
+	};
+
+	let selectYr;
+	const setYear = (selectYear, searchText) => {
+		selectYr = selectYear;
+		if (searchText) {
+			if (selectYr == "all") {
+				// set state to default entries, if all is clicked
+				let filterYear = allUnredeemed.filter((entry) => entry.cName.toLowerCase() == searchText.toLowerCase() || entry.billNumber == searchText);
+				setfilterUnredeemed(filterYear);
+			}
+			else if (selectYr == "noDate") {
+				// All unredeemed entries with no date
+				let filterYear = allUnredeemed.filter((entry) => (entry.date == null || entry.date == undefined || entry.date == "" || entry.date == "Invalid date") && (entry.cName.toLowerCase() == searchText.toLowerCase() || entry.billNumber == searchText));
+				setfilterUnredeemed(filterYear);
+			}
+			else {
+				// Filter entries by selected year
+				let filterYear = allUnredeemed.filter((entry) => (new Date(entry.date).getFullYear() == selectYr) && (entry.cName.toLowerCase() == searchText.toLowerCase() || entry.billNumber == searchText));
+				setfilterUnredeemed(filterYear);
+
+			}
+		}
+		else {
+			if (selectYr == "noDate") {
+				// All unredeemed entries with no date
+				let filterYear = allUnredeemed.filter((entry) => (entry.date == null || entry.date == undefined || entry.date == "" || entry.date == "Invalid date") && (entry.cName.toLowerCase() == searchText.toLowerCase() || entry.billNumber == searchText));
+				setfilterUnredeemed(filterYear);
+			}
+			else {
+				// Filter entries by selected year
+				let filterYear = allUnredeemed.filter((entry) => (new Date(entry.date).getFullYear() == selectYr) && (entry.cName.toLowerCase() == searchText.toLowerCase() || entry.billNumber == searchText));
+				setfilterUnredeemed(filterYear);
+
+			}
+		}
+	}
 
 	let amount = [], tAmount = 0, redemptionAmount = [], reAmount = 0;
 	const [totalAmount, setTotal] = useState();
@@ -85,12 +136,14 @@ const AllUserEntries = (props, ref) => {
 		setDifference(parseInt(totalAmount) - parseInt(redemAmount));
 	}
 	useEffect(() => {
+		console.log(value.data);
 		if (isFirstRender.current) {
 			isFirstRender.current = false;
 			return
 		}
 		getTotals();
 		getDifference();
+		filterUnreedemedEntry();
 	}, [allEntries, totalAmount, redemAmount]);
 
 	const editData = (id) => {
@@ -140,10 +193,6 @@ const AllUserEntries = (props, ref) => {
 
 	const [pledge, setPledgeData] = useState();
 	const [hidePledge, SetHideState] = useState(true);
-	function handleBeforePrint(dataContent) {
-		console.log("onBeforePrint", dataContent);
-		setPledgeData(dataContent);
-	};
 
 	const [billDetails, pledgeBillDetails] = useState([]);
 	const [printPledge, isPrintingPledge] = useState(false);
@@ -173,15 +222,15 @@ const AllUserEntries = (props, ref) => {
 		const diffTime = Math.abs(new Date() - new Date(date1));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		let months = Math.ceil(diffDays / 30);
-		let interest;
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
+		let interest = (amount * (months) * 1.33) / 100;
+		// Check if its valid number, because sometimes date is not defined
+		if (interest == NaN) {
+			return 0;
 		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
-		return interest;
+		else {
+			return interest;
+		}
+
 	}
 
 	const [art, articleBox] = useState(false);
@@ -197,8 +246,14 @@ const AllUserEntries = (props, ref) => {
 		return list;
 	}
 
-	const [isDelivery, setIsDeliveryNote] = useState(false);
-
+	// pagination logic
+	const [currentPage, setCurrentPage] = useState(1);
+	const currentTableData = useMemo(() => {
+		console.log(filterUnredeemed);
+		const firstPageIndex = (currentPage - 1) * PageSize;
+		const lastPageIndex = firstPageIndex + PageSize;
+		return filterUnredeemed.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, filterUnredeemed]);
 
 	const DeliveryNote = () => {
 		return (
@@ -207,9 +262,10 @@ const AllUserEntries = (props, ref) => {
 				<div className="bill-header" id="header">
 					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
 					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
-					<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+						<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2></div>
+						<div>{value.data.address} <br /> {value.data.area} </div>
 					</div>
+
 				</div>
 				<p> பெயர் <span className="content-spacer"> {deliveryNt.cName} </span> எண் <span className="content-spacer"> </span> </p>
 				<p> ரசீது எண் <span className="content-spacer"> {deliveryNt.billNumber} </span> வைத்த  தேதி <span className="content-spacer"> </span>
@@ -248,8 +304,8 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
-							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block","textTransform":"capitalize" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2></div>
+								<div>{value.data.address} <br /> {value.data.area} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> DUPLICATE BILL</h4>
@@ -274,15 +330,15 @@ const AllUserEntries = (props, ref) => {
 								<td>Name of the pawner</td>
 								<td className='bold'>{billDetails.cName}</td>
 								<td>Address</td>
-								<td className='bold'>{billDetails.address} {billDetails.cityPincode}</td>
+								<td className='bold'>{billDetails.address}</td>
 								<td>Identity Proof</td>
-								<td className='bold'>{billDetails.idProof} </td>
+								<td className='bold'> {billDetails.idProof}</td>
 							</tr>
 							<tr className="empty-child">
 								<td>Principle of the loan amount</td>
 								<td className='bold'>{billDetails.amount}</td>
-								<td style={{ "borderLeft": "1px solid #ccc" }} >Rupees in words</td>
-								<td className='bold' style={{ "borderLeft": "1px solid #ccc" }}>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
+								<td style={{ "borderLeft": "1px solid #000" }} >Rupees in words</td>
+								<td style={{ "borderLeft": "1px solid #000" }} className='bold'>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
 								<td>Old Bill No.</td>
 								<td className='bold'> {billDetails.oldBillNumber}</td>
 							</tr>
@@ -291,16 +347,16 @@ const AllUserEntries = (props, ref) => {
 						</tbody>
 					</table>
 					<p>
-						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year கடைசி தவணை 1 வருடம் 7 நாள்)
+						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year. கடைசி தவணை 1 வருடம் 7 நாள் )
 					</p>
 					<table className="articles-table">
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
-								<td style={{ "padding": "0","border":"0px"}}>
-									<div style={{ "lineHeight": "21px" }}>Gross Wt</div>
-									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #ccc" }}>
-										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "display": "inline-block", "width": "48%" }}>Gm</div>
+								<td style={{ "padding": "0" }}>
+									<div style={{ "lineHeight": "30px" }}>Gross Wt</div>
+									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #000" }}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "48%" }}>Gm</div>
 										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%" }}>Mg</div>
 									</div>
 								</td>
@@ -308,21 +364,21 @@ const AllUserEntries = (props, ref) => {
 							<tr className="articles-table-body">
 								<td style={{ "width": "80%" }}>
 									<ul className='article-lists'>
-									{billDetails.articleName.map((item, index) => {
-										return <li>{item} - {billDetails.metal} </li>
-									})}
-								</ul>
+										{billDetails.articleName.map((item, index) => {
+											return <li>{item} - {billDetails.metal} </li>
+										})}
+									</ul>
 								</td>
 								<td style={{ "padding": "0" }}>
 									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
-									<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%","paddingTop":"15px"}} className='bold'>{billDetails.gram}</div>
-										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%","paddingTop":"15px" }} className='bold'>{billDetails.mg}</div>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%", "paddingTop": "15px" }} className='bold'>{billDetails.gram}</div>
+										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%", "paddingTop": "15px" }} className='bold'>{billDetails.mg}</div>
 									</div>
 								</td>
 							</tr>
 							<tr className="articles-table-body">
 								<td></td>
-								<td style={{ "borderTop": "1px solid #ccc", "paddingBottom": "15px" }}><b>PRESENT VALUE</b></td>
+								<td style={{ "borderTop": "1px solid #000", "paddingBottom": "15px" }}><b>PRESENT VALUE</b></td>
 							</tr>
 							<tr className="articles-table-body">
 								<td></td>
@@ -335,45 +391,16 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
 					</div>
 					<div className="redeemed-pi">
-						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
+						<h4> RECEIVED PRINCIPLE &amp; INTEREST </h4>
 						<table>
-							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
-								<tr>
-									<td>No.</td>
-									<td>Principle Amt</td>
-									<td>RECEIVED TOTAL MONTH OF INT</td>
-									<td>Date</td>
-									<td>Signature</td>
-								</tr>
-							</thead>
 							<tbody>
 								<tr>
-									<td style={{ "textAlign":"center" }}>1</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>1. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>2. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
 								</tr>
 								<tr>
-									<td style={{ "textAlign":"center" }}> 2</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>3</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>4</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>3. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>4. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>       months interest on </td>
 								</tr>
 							</tbody>
 						</table>
@@ -411,75 +438,82 @@ const AllUserEntries = (props, ref) => {
 	}
 	// Default page state with pagination
 	const RenderTableData = () => {
+		console.log('1');
 		let data = currentTableData.map(function (data, idx) {
-			return (
-				<ul className="table-body" key={data._id}>
-					<li>{data.cName}</li>
-					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-						{data.address}
-						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
-					</li>
-					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
-					<li>{data.billNumber}</li>
-					<li>{data.amount}</li>
-					<li>
-						<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-							<ul className="all-articles">
-								{renderArticleList(data.articleName)}
-							</ul>
-						</div>
-					</li>
-					<li> {data.gram}.{data.mg} </li>
-					<li style={{ "color": "red" }}>
-						{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')} </li>
-					{/* <li>{data.remark}</li> */}
-					<li> {data.redemptionAmount} </li>
-					<li className="actions">
-						<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
-						<button onClick={() => editData(data._id)} className="edit-icon"></button>
-						<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
-						<button onClick={() => printBill(data)} className="print-icon"></button>
-					</li>
-				</ul>
-			);
+			/* Show only unrdeeemed entries */
+			if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+				return (
+					<ul className="table-body" key={data.billNumber}>
+						<li>{data.cName}</li>
+						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
+							{data.address}
+							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
+						</li>
+						<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
+						<li>{data.billNumber}</li>
+						<li>{data.amount}</li>
+						<li>
+							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
+								<ul className="all-articles">
+									{renderArticleList(data.articleName)}
+								</ul>
+							</div>
+						</li>
+						<li> {data.gram}.{data.mg} </li>
+						<li className="remarks">{data.remark}</li>
+						<li className="actions">
+							<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
+							<button onClick={() => editData(data._id)} className="edit-icon"></button>
+							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
+							<button onClick={() => printBill(data)} className="print-icon"></button>
+						</li>
+					</ul>
+				);
+			}
+			else {
+				return false;
+			}
 		});
-				return data
+		return data
 	}
 
 	// Show only search result
-	
 	const RenderSearchData = () => {
-		
-		let data = filterRedeemed.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText || ele.address.toLowerCase().includes(searchText.toLowerCase())).map(function (data, idx) {
-			return (
-				<ul className="table-body" key={data._id}>
-					<li>{data.cName}</li>
-					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-						{data.address}
-						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
-					</li>
-					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
-					<li>{data.billNumber}</li>
-					<li>{data.amount}</li>
-					<li>
-						<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-							<ul className="all-articles">
-								{renderArticleList(data.articleName)}
-							</ul>
-						</div>
-					</li>
-					<li> {data.gram}.{data.mg} </li>
-					<li style={{ "color": "red" }}>
-						{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')} </li>
-					<li>{data.remark}</li>
-					<li className="actions">
-						<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
-						<button onClick={() => editData(data._id)} className="edit-icon"></button>
-						<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
-						<button onClick={() => printBill(data)} className="print-icon"></button>
-					</li>
-				</ul>
-			);
+		console.log('2');
+		let data = filterUnredeemed.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
+			/* Show only unrdeeemed entries */
+			if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+				return (
+					<ul className="table-body" key={data.billNumber}>
+						<li>{data.cName}</li>
+						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
+							{data.address}
+							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
+						</li>
+						<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
+						<li>{data.billNumber}</li>
+						<li>{data.amount}</li>
+						<li>
+							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
+								<ul className="all-articles">
+									{renderArticleList(data.articleName)}
+								</ul>
+							</div>
+						</li>
+						<li> {data.gram}.{data.mg} </li>
+						<li>{data.remark}</li>
+						<li className="actions">
+							<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
+							<button onClick={() => editData(data._id)} className="edit-icon"></button>
+							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
+							<button onClick={() => printBill(data)} className="print-icon"></button>
+						</li>
+					</ul>
+				);
+			}
+			else {
+				return false;
+			}
 		});
 		return data
 	}
@@ -490,30 +524,28 @@ const AllUserEntries = (props, ref) => {
 	// State for checking if search is clicked by user
 	const [isSearch, setIsSearching] = useState(false);
 	const [searchText, setSearchText] = useState();
+
 	let filteredEntry;
 
 	function callbackFunction(childData) {
-		console.log('child Data', childData)
-		setSearchVal(childData);
-		// setFilterRedeemed(filtered);
+		setSearchVal(childData)
 		if (childData == "clear") {
 			setIsSearching(false);
+			setSelectYear("All");
 			getLists();
-			//setFilterRedeemed(filtered);
-			setSearchFiltering([]);
+
 		}
 		else {
 			setSearchText(childData.trim());
 			setIsSearching(true);
-			setFilterRedeemed(filterRedeemed.filter((ele) => ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData || ele.address.toLowerCase().includes(childData.toLowerCase())));
-			//setSearchFiltering(data);
+			setYear("all", childData.trim());
 		}
 	}
 
 	function setModalStatus(modalStat) {
 		setCloseModal(modalStat);
-		setIsDeliveryNote(false);
 	}
+
 
 	const downloadData = async () => {
 		const fileName = "entriesCopy";
@@ -530,32 +562,43 @@ const AllUserEntries = (props, ref) => {
 	}
 	useEffect(() => {
 		getLists();
-		// setEntries()
 	}, [data, closeModal]);
 
-	useEffect(() => {
-		if(entries){
-			setEntries()
-		}
-		
-	}, [entries]);
-	// pagination logic
-	const [currentPage, setCurrentPage] = useState(1);
-	const currentTableData = useMemo(() => {
-		console.log(isSearch);
-		const firstPageIndex = (currentPage - 1) * PageSize;
-		const lastPageIndex = firstPageIndex + PageSize;
-		console.log(filterRedeemed.length);
-		return filterRedeemed.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, filterRedeemed, isSearch]);
-	
- 
+
+
 	return (
 		<>
-		 <NavBar page="redeemed" />
+			<div className="navbar" >
+				<ul className="tabs" id="page-tabs">
+					<li>
+						<Link to="/addEntry">Add Entry</Link>
+					</li>
+					<li className='active'>
+						<Link to="/unredeemed">Unredeemed Entries</Link>
+					</li>
+					<li>
+						<Link to="/redeemed"> Redeemed Entries</Link>
+					</li>
+					<li>
+						<Link to="/InterestCalculator"> Interest Calculator</Link>
+					</li>
+					<li>
+						<Link to="/pledge"> Pledge</Link>
+					</li>
+				</ul>
+				<div style={{ "marginLeft": "auto" }}>
+					<h5 style={{ "margin": "0" }}>Welcome {value.data.userName} !</h5>
+					<div style={{ "textAlign": "right", "fontSize": "12px" }}>
+						<Link to="/"> Logout </Link>
+					</div>
+				</div>
+			</div>
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
+				<div style={{ "display": "flex", "marginBottom": "15px" }}>
+					<div> Total Amount: <strong>{diffAmount} </strong></div>
+				</div>
 				<div style={{ "display": "flex" }}>
 					<FilterEntries parentCallback={callbackFunction} />
 					<div style={{ "marginLeft": "auto" }}>
@@ -566,22 +609,37 @@ const AllUserEntries = (props, ref) => {
 						/>
 					</div>
 				</div>
-				{filterRedeemed.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end" ,"marginTop":"15px"}}>
-					<input type="number" className="jumpPage" onChange={handleChange} onKeyPress={(e) => {
-						if (e.key === "Enter") {
-							setCurrentPage(Number(jumpNo));
-						}
-					}} />
-					<Pagination
-						className="pagination-bar"
-						currentPage={currentPage}
-						totalCount={filterRedeemed.length}
-						pageSize={PageSize}
-						onPageChange={page => setCurrentPage(page)}
-					/>
-				</div> : '' }
-				{entries && entries.length ?
-					<div style={{ "display": "table", "width": "100%", "marginTop":"15px" }} ref={el => (componentRef = el)} >
+				{/* Show pagination, when there are more entries */}
+				<div style={{ "display": "flex", "alignItems": "center", "marginTop": "15px" }}>
+					<div>
+						<label style={{ "fontWeight": "bold" }}>Filter By: </label>
+						<select value={selectYear} onChange={handleYearChange} style={{ "height": "40px", "fontSize": "16px" }}>
+							<option value="all">All</option>
+							<option value="noDate">No Date</option>
+							{findYear.map((item, key) => {
+								return <option value={item}>{item} </option>
+							})
+							}
+						</select>
+					</div>
+					{filterUnredeemed.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end", "marginLeft": "auto" }}>
+						<input type="number" className="jumpPage" onChange={handleChange} onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								setCurrentPage(Number(jumpNo));
+							}
+						}} />
+						<Pagination
+							className="pagination-bar"
+							currentPage={currentPage}
+							totalCount={filterUnredeemed.length}
+							pageSize={PageSize}
+							onPageChange={page => setCurrentPage(page)}
+						/>
+					</div> : ''}
+
+				</div>
+				{allEntries && allEntries.length ?
+					<div style={{ "display": "table", "width": "100%", "marginTop": "20px" }} ref={el => (componentRef = el)} >
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
 							<li>Name</li>
 							<li>Address</li>
@@ -590,16 +648,13 @@ const AllUserEntries = (props, ref) => {
 							<li>Amount</li>
 							<li>Article Name</li>
 							<li> Weight </li>
-							<li style={{ "color": "red" }}>Redemption Date</li>
-							<li>Remark</li>
+							<li className="remarks">Remark</li>
 							<li className="actions">Actions</li>
 						</ul>
-						<RenderTableData />
-						{/* {isSearch ? <RenderSearchData /> : <RenderTableData />} */}
-					</div>
-					: <h3 style={{ "marginTop": "50px", "textAlign": "centre" }}> Loading... </h3>}
-				{editModal && closeModal == "open" ? <EditEntryModal toEdit={editId} delivery={isDelivery} parentModalCallBack={setModalStatus} /> : ''}
-
+						{isSearch ? <RenderSearchData /> : <RenderTableData />}
+					</div> :
+					<h3> Loading.. please wait </h3>}
+				{editModal && closeModal == "open" ? <EditEntryModal toEdit={editId} parentModalCallBack={setModalStatus}  /> : ''}
 
 				{deleteModal ?
 					<>

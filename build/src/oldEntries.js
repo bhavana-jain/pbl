@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 import './App.css';
-import {Link } from 'react-router-dom';
 import axios from 'axios';
 import EditEntryModal from './editEntryModal.js';
 import FilterEntries from './searchEntry.js';
 import fileDownload from 'js-file-download';
 import ReactToPrint from "react-to-print";
-import PledgeBill from './pledgeBill.js';
-import DeliveryNote from './deliveryNote.js';
 import moment from 'moment';
 import Pagination from './components/pagination';
 import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
-import NavBar from './navBar.js';
+
 let PageSize = 30;
 const toWords = new ToWords();
-const AllUserEntries = (props, ref) => {
+const OldEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
 	const [allEntries, saveAllEntries] = useState();
 	const [editId, setEditModalId] = useState();
@@ -26,14 +23,7 @@ const AllUserEntries = (props, ref) => {
 	const [delId, setDelId] = useState();
 	const [deleteEntry, confirmDeletion] = useState(false);
 
-	const [filterRedeemed, setFilterRedeemed] = useState([]);
-	const[filtering, setSearchFiltering] = useState([]);
-
 	let value = useContext(User);
-
-	let componentRef = useRef();
-	const billPrint = useRef({});
-	const note = useRef({});
 
 	// Jump to page in pagination
 	let jumpNo;
@@ -46,22 +36,19 @@ const AllUserEntries = (props, ref) => {
 		}
 	}
 
+	let componentRef = useRef();
+	const billPrint = useRef({});
+	const note = useRef({});
+
 	const getLists = () => {
-		axios.get("http://localhost:4000/customers/get-result", { params: { createdBy: value.data.userName } })
+		axios.get("http://localhost:4000/customers/get-result", {params: {createdBy: value.data.userName}})
 			.then(response => {
 				fetchUserEntries(response.data);
 				saveAllEntries(response.data);
 			});
 	};
 
-	const setEntries = () => {
-		console.log("calling set entries fn");
-		setFilterRedeemed(entries.filter((entry) => entry.redemptionDate));
-	}
-
-	// filter only redeemed entries
-		 let filtered= entries.filter((entry) => entry.redemptionDate);
-	
+	const filterUnredeemed = entries.filter((entry) => entry.redemptionDate == null || entry.redemptionDate == undefined || entry.redemptionDate == "");
 
 	let amount = [], tAmount = 0, redemptionAmount = [], reAmount = 0;
 	const [totalAmount, setTotal] = useState();
@@ -127,7 +114,7 @@ const AllUserEntries = (props, ref) => {
 			}).catch((error) => {
 				console.log(error)
 			})
-	}
+	}	
 
 	useEffect(() => {
 		if (deleteEntry) {
@@ -140,10 +127,6 @@ const AllUserEntries = (props, ref) => {
 
 	const [pledge, setPledgeData] = useState();
 	const [hidePledge, SetHideState] = useState(true);
-	function handleBeforePrint(dataContent) {
-		console.log("onBeforePrint", dataContent);
-		setPledgeData(dataContent);
-	};
 
 	const [billDetails, pledgeBillDetails] = useState([]);
 	const [printPledge, isPrintingPledge] = useState(false);
@@ -155,8 +138,8 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	window.onafterprint = (event) => {
-		isPrintingPledge(false);
-		isPrintingDelivery(false);
+		 isPrintingPledge(false);
+		 isPrintingDelivery(false);
 	};
 
 	const [deliveryNt, setDeliveryNote] = useState([]);
@@ -173,14 +156,7 @@ const AllUserEntries = (props, ref) => {
 		const diffTime = Math.abs(new Date() - new Date(date1));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		let months = Math.ceil(diffDays / 30);
-		let interest;
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
-		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
+		let interest = (amount * (months - 1) * 1.33) / 100;
 		return interest;
 	}
 
@@ -197,19 +173,31 @@ const AllUserEntries = (props, ref) => {
 		return list;
 	}
 
-	const [isDelivery, setIsDeliveryNote] = useState(false);
-
+	// pagination logic
+	const [currentPage, setCurrentPage] = useState(1);
+	const currentTableData = useMemo(() => {
+		const firstPageIndex = (currentPage - 1) * PageSize;
+		const lastPageIndex = firstPageIndex + PageSize;
+		return filterUnredeemed.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, entries]);
 
 	const DeliveryNote = () => {
 		return (
 			<div id="delivery-note">
-				<h2 className="text-centre"> DELIVERY NOTE </h2>
 				<div className="bill-header" id="header">
-					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
-					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
-					<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+					<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
+						<div className="logo" style={{ "display": "inline-block" }}></div>
+						<div style={{ "display": "inline-block" }}>
+							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> NAKODA </h2> Pawn Broker</div>
+							<div> Plot No.9, V.O.C. Nagar, Market Lane, <br /> Tondiarpet, Chennai- 600 081 </div>
+						</div>
+						<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
+							<div> PAWN TICKET </div>
+							<div> Form F Section 7 &amp; Rule 8 </div>
+							<div> L.No. 2118/2020-21 </div>
+						</div>
 					</div>
+
 				</div>
 				<p> பெயர் <span className="content-spacer"> {deliveryNt.cName} </span> எண் <span className="content-spacer"> </span> </p>
 				<p> ரசீது எண் <span className="content-spacer"> {deliveryNt.billNumber} </span> வைத்த  தேதி <span className="content-spacer"> </span>
@@ -219,20 +207,21 @@ const AllUserEntries = (props, ref) => {
 						இப்படிக்கு <br /> <br /> <br />  <br />  <br />
 						கையொப்பம் </div>
 				</div>
-				<p style={{ "lineHeight": "27px" }}>
+				<h3 className="text-centre"> Delivery Note </h3>
+				<p className="text-centre" style={{ "width": "70%", "margin": "0 auto", "lineHeight": "27px" }}>
 					THE AMOUNT OF EVERY PAYMENT RECEIVED TOWARDS LOAN DATE
 					<span className="content-spacer">
 						{deliveryNt.date == "" || deliveryNt.date == undefined || deliveryNt.date == null || deliveryNt.date == "Invalid date" ? '' : moment(deliveryNt.date).format('DD/MM/YYYY')}</span>
 					FOR PRINCIPLE <span className="content-spacer"> {deliveryNt.amount}</span> FOR INTEREST </p>
-				<p style={{ "lineHeight": "27px" }}> I HAVE THIS DAY PAID RS <span className="content-spacer"> {deliveryNt.amount} </span>
+				<p style={{ "lineHeight": "27px" }}> I HAVE THIS DAY PAID RS <span className="content-spacer"> </span>
 					TOWARDS PRINCIPLE &amp; RS <span className="content-spacer"> {calculateInterest(deliveryNt.date, deliveryNt.amount)} </span> TOWARDS INTEREST &amp; RECEIVED THE ARTICLE MENTIONED OVER LEAF WITH FULL
 					MANUFACTION </p>
-				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "alignItems": "center" }}>
-					<div>
+				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "alignItems":"center" }}>
+					<div> 
 						<div> Date: <span className="content-spacer"> {today} </span> </div>
-						<div style={{ "paddingTop": "15px" }}> Delivery Receipt No: <span className="content-spacer"> </span> </div>
-					</div>
-					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> {deliveryNt.amount + calculateInterest(deliveryNt.date, deliveryNt.amount)} </span> </div>
+						<div style={{"paddingTop":"5px"}}> Delivery Receipt No: <span className="content-spacer"> </span> </div>
+						</div>
+					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> </span> </div>
 				</div>
 				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
 					<div style={{ "marginLeft": "auto" }}> Signature or Thumb Impression of the Pawner </div>
@@ -248,14 +237,14 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
-							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block","textTransform":"capitalize" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> NAKODA </h2> Pawn Broker</div>
+								<div> Plot No.9, V.O.C. Nagar, Market Lane, <br /> Tondiarpet, Chennai- 600 081 </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> DUPLICATE BILL</h4>
 								<div> PAWN TICKET </div>
 								<div> Form F Section 7 &amp; Rule 8 </div>
-								<div> L.No. {value.data.license} </div>
+								<div> L.No. 2118/2020-21 </div>
 							</div>
 						</div>
 					</div>
@@ -264,59 +253,51 @@ const AllUserEntries = (props, ref) => {
 						<tbody>
 							<tr>
 								<td>Bill No</td>
-								<td className='bold'>{billDetails.billNumber}</td>
+								<td>{billDetails.billNumber}</td>
 								<td>Pledge Date</td>
-								<td className='bold'>{billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')}</td>
+								<td>{moment(billDetails.date).format('DD/MM/YYYY')}</td>
 								<td>Mobile</td>
-								<td className='bold'> {billDetails.contactNo}</td>
+								<td> {billDetails.contactNo}</td>
 							</tr>
 							<tr>
 								<td>Name of the pawner</td>
-								<td className='bold'>{billDetails.cName}</td>
+								<td>{billDetails.cName}</td>
 								<td>Address</td>
-								<td className='bold'>{billDetails.address} {billDetails.cityPincode}</td>
+								<td>{billDetails.address}</td>
 								<td>Identity Proof</td>
-								<td className='bold'>{billDetails.idProof} </td>
+								<td> {billDetails.idProof}</td>
 							</tr>
 							<tr className="empty-child">
 								<td>Principle of the loan amount</td>
-								<td className='bold'>{billDetails.amount}</td>
+								<td>{billDetails.amount}</td>
 								<td style={{ "borderLeft": "1px solid #ccc" }} >Rupees in words</td>
-								<td className='bold' style={{ "borderLeft": "1px solid #ccc" }}>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
-								<td>Old Bill No.</td>
-								<td className='bold'> {billDetails.oldBillNumber}</td>
+								<td style={{ "borderLeft": "1px solid #ccc" }} colSpan="3">{toWords.convert(parseInt(billDetails.amount), { currency: true })} </td>
 							</tr>
 							<tr>
 							</tr>
 						</tbody>
 					</table>
 					<p>
-						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year கடைசி தவணை 1 வருடம் 7 நாள்)
+						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year )
 					</p>
 					<table className="articles-table">
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
-								<td style={{ "padding": "0","border":"0px"}}>
-									<div style={{ "lineHeight": "21px" }}>Gross Wt</div>
+								<td style={{ "padding": "0" }}>
+									<div style={{ "lineHeight": "30px" }}>Gross Wt</div>
 									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #ccc" }}>
-										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "display": "inline-block", "width": "48%" }}>Gm</div>
-										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%" }}>Mg</div>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc" }}>Gm</div>
+										<div style={{ "padding": "0", "border": "0" }}>Mg</div>
 									</div>
 								</td>
 							</tr>
 							<tr className="articles-table-body">
-								<td style={{ "width": "80%" }}>
-									<ul className='article-lists'>
-									{billDetails.articleName.map((item, index) => {
-										return <li>{item} - {billDetails.metal} </li>
-									})}
-								</ul>
-								</td>
+								<td style={{ "width": "80%" }}>{billDetails.articleName.length > 0 ? billDetails.articleName.join(', ') : ''}</td>
 								<td style={{ "padding": "0" }}>
-									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
-									<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%","paddingTop":"15px"}} className='bold'>{billDetails.gram}</div>
-										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%","paddingTop":"15px" }} className='bold'>{billDetails.mg}</div>
+									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #ccc", "minHeight": "55px" }}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "width": "51%" }}>{billDetails.gram}</div>
+										<div style={{ "padding": "0", "border": "0" }}>{billDetails.mg}</div>
 									</div>
 								</td>
 							</tr>
@@ -326,7 +307,7 @@ const AllUserEntries = (props, ref) => {
 							</tr>
 							<tr className="articles-table-body">
 								<td></td>
-								<td style={{ "paddingBottom": "15px" }} className='bold'>{billDetails.presentValue}</td>
+								<td style={{ "paddingBottom": "15px" }}>{billDetails.presentValue}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -335,50 +316,20 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
 					</div>
 					<div className="redeemed-pi">
-						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
+						<h4> REDEEMED PRINCIPLE &amp; INTEREST </h4>
 						<table>
-							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
-								<tr>
-									<td>No.</td>
-									<td>Principle Amt</td>
-									<td>RECEIVED TOTAL MONTH OF INT</td>
-									<td>Date</td>
-									<td>Signature</td>
-								</tr>
-							</thead>
 							<tbody>
 								<tr>
-									<td style={{ "textAlign":"center" }}>1</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>1. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>2. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
 								</tr>
 								<tr>
-									<td style={{ "textAlign":"center" }}> 2</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>3</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>4</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>3. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>4. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>       months interest on </td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<p style={{ "fontWeight": "bold", "textAlign": "center", "fontSize": "16px" }}>Terms &amp; Conditions</p>
 					<ol className="tos">
 						<li> The rate of interest on any pledge shall be 16% per annum simple interest that is to say one paise per one rupees per mensum simple interest. </li>
 						<li> Every pledge shall be redeemable within a period of one year of such longer period ass may be provided in the contract between the parties from the day of powing (exclusive of that day) and shall continue to be redeemable during seven days of
@@ -388,7 +339,6 @@ const AllUserEntries = (props, ref) => {
 							for and loan exceeding Rs. 250 for incidental expenses connected with the advances of such loan. </li>
 						<li> The pawn broker empowered to reledge the jewels with any bank or bankers. </li>
 						<li> The pawner shall communicate his change of address in writing and the article will be delivered the next day of payment. </li>
-						<li>The pawner should pay the interest once in 3 months. Failure to pay interest once in 3 months will fall in compund interest for every three months failure.</li>
 					</ol>
 					<p style={{ "fontSize": "12px", "lineHeight": "16px" }} >
 						3 மாதத்திற்கு ஒரு முறை தவறாமல் வட்டி கட்ட வேண்டும். இன்று பணம் காட்டினாள் மறு நாள் பொருள் கொடுக்கப்படும்.
@@ -411,75 +361,82 @@ const AllUserEntries = (props, ref) => {
 	}
 	// Default page state with pagination
 	const RenderTableData = () => {
+		console.log('1');
 		let data = currentTableData.map(function (data, idx) {
-			return (
-				<ul className="table-body" key={data._id}>
-					<li>{data.cName}</li>
-					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-						{data.address}
-						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
-					</li>
-					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
-					<li>{data.billNumber}</li>
-					<li>{data.amount}</li>
-					<li>
-						<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-							<ul className="all-articles">
-								{renderArticleList(data.articleName)}
-							</ul>
-						</div>
-					</li>
-					<li> {data.gram}.{data.mg} </li>
-					<li style={{ "color": "red" }}>
-						{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')} </li>
-					{/* <li>{data.remark}</li> */}
-					<li> {data.redemptionAmount} </li>
-					<li className="actions">
-						<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
-						<button onClick={() => editData(data._id)} className="edit-icon"></button>
-						<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
-						<button onClick={() => printBill(data)} className="print-icon"></button>
-					</li>
-				</ul>
-			);
+			/* Show only unrdeeemed entries */
+			if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+				return (
+					<ul className="table-body" key={data._id}>
+						<li>{data.cName}</li>
+						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
+							{data.address}
+							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
+						</li>
+						<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
+						<li>{data.billNumber}</li>
+						<li>{data.amount}</li>
+						<li>
+							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
+								<ul className="all-articles">
+									{renderArticleList(data.articleName)}
+								</ul>
+							</div>
+						</li>
+						<li> {data.gram}.{data.mg} </li>
+						<li>{data.remark}</li>
+						<li className="actions">
+							<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
+							<button onClick={() => editData(data._id)} className="edit-icon"></button>
+							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
+							<button onClick={() => printBill(data)} className="print-icon"></button>
+						</li>
+					</ul>
+				);
+			}
+			else {
+				return false;
+			}
 		});
-				return data
+		return data
 	}
 
 	// Show only search result
-	
 	const RenderSearchData = () => {
-		
-		let data = filterRedeemed.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText || ele.address.toLowerCase().includes(searchText.toLowerCase())).map(function (data, idx) {
-			return (
-				<ul className="table-body" key={data._id}>
-					<li>{data.cName}</li>
-					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-						{data.address}
-						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
-					</li>
-					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
-					<li>{data.billNumber}</li>
-					<li>{data.amount}</li>
-					<li>
-						<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-							<ul className="all-articles">
-								{renderArticleList(data.articleName)}
-							</ul>
-						</div>
-					</li>
-					<li> {data.gram}.{data.mg} </li>
-					<li style={{ "color": "red" }}>
-						{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')} </li>
-					<li>{data.remark}</li>
-					<li className="actions">
+		console.log('2');
+		let data = allEntries.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
+			/* Show only unrdeeemed entries */
+			if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+				return (
+					<ul className="table-body" key={data._id}>
+						<li>{data.cName}</li>
+						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
+							{data.address}
+							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
+						</li>
+						<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
+						<li>{data.billNumber}</li>
+						<li>{data.amount}</li>
+						<li>
+							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
+								<ul className="all-articles">
+									{renderArticleList(data.articleName)}
+								</ul>
+							</div>
+						</li>
+						<li> {data.gram}.{data.mg} </li>
+						<li>{data.remark}</li>
+						<li className="actions">
 						<button onClick={() => printDeliveryNote(data)} className="deliveryNote-icon">DLY</button>
-						<button onClick={() => editData(data._id)} className="edit-icon"></button>
-						<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
-						<button onClick={() => printBill(data)} className="print-icon"></button>
-					</li>
-				</ul>
-			);
+							<button onClick={() => editData(data._id)} className="edit-icon"></button>
+							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
+							<button onClick={() => printBill(data)} className="print-icon"></button>
+						</li>
+					</ul>
+				);
+			}
+			else {
+				return false;
+			}
 		});
 		return data
 	}
@@ -490,29 +447,23 @@ const AllUserEntries = (props, ref) => {
 	// State for checking if search is clicked by user
 	const [isSearch, setIsSearching] = useState(false);
 	const [searchText, setSearchText] = useState();
+
 	let filteredEntry;
 
 	function callbackFunction(childData) {
-		console.log('child Data', childData)
-		setSearchVal(childData);
-		// setFilterRedeemed(filtered);
+		setSearchVal(childData)
 		if (childData == "clear") {
 			setIsSearching(false);
 			getLists();
-			//setFilterRedeemed(filtered);
-			setSearchFiltering([]);
 		}
 		else {
 			setSearchText(childData.trim());
 			setIsSearching(true);
-			setFilterRedeemed(filterRedeemed.filter((ele) => ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData || ele.address.toLowerCase().includes(childData.toLowerCase())));
-			//setSearchFiltering(data);
 		}
 	}
 
 	function setModalStatus(modalStat) {
 		setCloseModal(modalStat);
-		setIsDeliveryNote(false);
 	}
 
 	const downloadData = async () => {
@@ -530,32 +481,18 @@ const AllUserEntries = (props, ref) => {
 	}
 	useEffect(() => {
 		getLists();
-		// setEntries()
 	}, [data, closeModal]);
 
-	useEffect(() => {
-		if(entries){
-			setEntries()
-		}
-		
-	}, [entries]);
-	// pagination logic
-	const [currentPage, setCurrentPage] = useState(1);
-	const currentTableData = useMemo(() => {
-		console.log(isSearch);
-		const firstPageIndex = (currentPage - 1) * PageSize;
-		const lastPageIndex = firstPageIndex + PageSize;
-		console.log(filterRedeemed.length);
-		return filterRedeemed.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, filterRedeemed, isSearch]);
-	
- 
+
+
 	return (
 		<>
-		 <NavBar page="redeemed" />
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
+				<div style={{ "display": "flex", "marginBottom": "15px" }}>
+					<div> Total Amount: <strong>{diffAmount} </strong></div>
+				</div>	
 				<div style={{ "display": "flex" }}>
 					<FilterEntries parentCallback={callbackFunction} />
 					<div style={{ "marginLeft": "auto" }}>
@@ -566,7 +503,8 @@ const AllUserEntries = (props, ref) => {
 						/>
 					</div>
 				</div>
-				{filterRedeemed.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end" ,"marginTop":"15px"}}>
+				{/* Show pagination, when there are more entries */}
+				{filterUnredeemed.length >= PageSize  ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end" }}>
 					<input type="number" className="jumpPage" onChange={handleChange} onKeyPress={(e) => {
 						if (e.key === "Enter") {
 							setCurrentPage(Number(jumpNo));
@@ -575,13 +513,13 @@ const AllUserEntries = (props, ref) => {
 					<Pagination
 						className="pagination-bar"
 						currentPage={currentPage}
-						totalCount={filterRedeemed.length}
+						totalCount={filterUnredeemed.length}
 						pageSize={PageSize}
 						onPageChange={page => setCurrentPage(page)}
 					/>
 				</div> : '' }
-				{entries && entries.length ?
-					<div style={{ "display": "table", "width": "100%", "marginTop":"15px" }} ref={el => (componentRef = el)} >
+				{allEntries && allEntries.length ?
+					<div style={{ "display": "table", "width": "100%", "marginTop": "20px"}} ref={el => (componentRef = el)} >
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
 							<li>Name</li>
 							<li>Address</li>
@@ -590,16 +528,13 @@ const AllUserEntries = (props, ref) => {
 							<li>Amount</li>
 							<li>Article Name</li>
 							<li> Weight </li>
-							<li style={{ "color": "red" }}>Redemption Date</li>
 							<li>Remark</li>
 							<li className="actions">Actions</li>
 						</ul>
-						<RenderTableData />
-						{/* {isSearch ? <RenderSearchData /> : <RenderTableData />} */}
-					</div>
-					: <h3 style={{ "marginTop": "50px", "textAlign": "centre" }}> Loading... </h3>}
-				{editModal && closeModal == "open" ? <EditEntryModal toEdit={editId} delivery={isDelivery} parentModalCallBack={setModalStatus} /> : ''}
-
+						{isSearch ? <RenderSearchData /> : <RenderTableData />}
+					</div> :
+					<h3> Loading.. please wait </h3>}
+				{editModal && closeModal == "open" ? <EditEntryModal toEdit={editId} parentModalCallBack={setModalStatus} /> : ''}
 
 				{deleteModal ?
 					<>
@@ -617,4 +552,4 @@ const AllUserEntries = (props, ref) => {
 	)
 }
 
-export default AllUserEntries;
+export default OldEntries;

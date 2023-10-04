@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useContext, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import moment from 'moment';
 import ReactToPrint from "react-to-print";
 import PledgeBill from './pledgeBill.js';
-import ListExample from './listFunction.js';
 import { User } from './userContext.js';
 import NavBar from './navBar.js';
 
@@ -15,13 +14,8 @@ const AddEntry = () => {
 	const isFirstRender = useRef(true);
 	let value = useContext(User);
 	const date = useRef();
-	const cName = useRef();
-	const address = useRef();
-	const cityPincode = useRef();
 	const metalType = useRef();
-	const page = useRef(null);
-
-
+	
 	// Fetch entries to get last bill number
 	const getLists = () => {
 		isSetLoading(false);
@@ -33,33 +27,23 @@ const AddEntry = () => {
 
 	};
 
-	const [names, setAllNames] = useState([]);
-	const [addresses, setAllAddress] = useState([]);
-	let allNames = [], allAddress = [];
-
-	const fetchNameAddress = () => {
-		entries.map(function (ele, i) {
-			allNames.push(ele.cName);
-			allAddress.push(ele.address);
-		})
-		//console.log(allNames, allAddress);
-		setAllNames([...new Set(allNames)]);
-		setAllAddress([...new Set(allAddress)]);
-	}
-
 	// Create and update new bill number
 	const [updatedBillNum, setNewBillNum] = useState(0);
 	const setBillNumber = () => {
-		let newBill, len, currentYear = new Date().getFullYear();
-		if (entries.length > 0) {
+		let newBill, len , currentYear = new Date().getFullYear();
+		if(entries.length > 0 ){
 			len = entries.length;
 			let arrlen = (entries[len - 1].billNumber);
-			// Temp bill number check -- to be removed later
-			if (arrlen.split('/').length > 1 && currentYear == arrlen.split('/')[1]) {
-				newBill = parseInt((arrlen.split('/')[0])) + 1;
-			}
+			console.log(arrlen)
+		// Temp bill number check -- to be removed later
+		if (arrlen.split('/').length > 1 && currentYear == arrlen.split('/')[1]) {
+			newBill = parseInt((arrlen.split('/')[0])) + 1;
 		}
-
+		else {
+			newBill = 1;
+		}
+		}
+		
 		else {
 			newBill = 1;
 		}
@@ -70,7 +54,6 @@ const AddEntry = () => {
 
 	useEffect(() => {
 		setBillNumber();
-		fetchNameAddress();
 	}, [entries]);
 	useEffect(() => {
 		getLists();
@@ -78,6 +61,7 @@ const AddEntry = () => {
 
 	// Get last bill number, after data is fetched
 	useEffect(() => {
+		console.log(value.data);
 		if (isFirstRender.current) {
 			isFirstRender.current = false;
 			return
@@ -92,13 +76,12 @@ const AddEntry = () => {
 			"cName": "",
 			"date": "",
 			"address": "",
-			"cityPincode": "Chennai - 600 081",
 			"amount": "",
 			"redemptionAmount": "",
 			"billNumber": updatedBillNum,
 			"redemptionDate": "",
 			"articleName": "",
-			"metal": "",
+			"metal":"",
 			"remark": "",
 			"contactNo": "",
 			"gram": "",
@@ -114,7 +97,7 @@ const AddEntry = () => {
 	const [counter, inputCounter] = useState(0);
 
 	function handleChange(e) {
-		let value;
+			let value;
 		if (e.target.name == "billNumber") {
 			setNewBillNum(e.target.value)
 		}
@@ -124,33 +107,8 @@ const AddEntry = () => {
 		setInputValue({ ...inputVal, [e.target.name]: value, "articleName": article, "billNumber": updatedBillNum });
 	}
 
-	const [nameSuggestion, showNameSuggestion] = useState("");
-	const [addressSuggestion, setAddressSuggestion] = useState(false);
-	const [navigateList, setListNumber] = useState(0);
-	let fieldvalue;
-
-	const checkIfDropdown = (e) => {
-		if (!e.target.classList.contains('suggestion-name')) {
-			showNameSuggestion(false);
-			setAddressSuggestion(false);
-		}
-
-	}
-	function showNames(e) {
-		showNameSuggestion(true);
-	}
-
-	function showAddress(e) {
-		setAddressSuggestion(true);
-	}
-
-	const updateInput = (name, refName) => {
-		console.log(refName);
-		setInputValue({ ...inputVal, "cName": name });
-	}
-
-	const [metal, setMetal] = useState();
-	function updateMetal(e) {
+	const[metal, setMetal] = useState();
+	function updateMetal(e){
 		setMetal(e.target.value);
 	}
 
@@ -161,23 +119,16 @@ const AddEntry = () => {
 
 	const [article, articleList] = useState([]);
 	function appendInput(e) {
+		// Prevent form submission when button is clicked
+		if (e != undefined) {
+			e.preventDefault();
+		}
 		inputCounter(counter + 1);
 		let ele = document.createElement("input");
 		ele.type = "text";
 		ele.placeholder = "Enter article Name";
 		ele.id = "article" + counter;
 		document.getElementById("addArticle").appendChild(ele);
-		ele.setAttribute('autosuggest', 'off');
-		ele.onblur = function (ele) {
-			saveArticle(ele);
-		}
-		// Add new input field, when enter key is pressed
-		ele.onkeydown = (e) =>  {
-			if(e.keyCode == 13){
-				console.log('is enter');
-				appendInput();
-			}
-		}
 	}
 
 	let listVal = [], val = '';
@@ -196,18 +147,19 @@ const AddEntry = () => {
 
 	// Create list of articles array
 	function saveArticle(e) {
-		var art = document.getElementById('addArticle');
-		var allArt = art.getElementsByTagName("input"), list = [];
-		for (let i = 0; i < allArt.length; i++) {
-			list.push(allArt[i].value);
-		}
-		articleList(list);
+		val = e.target.value;
+		// Do not concatenate empty and undefined values
+		if (val == "" || val == null || val == undefined) {
 
+		}
+		else {
+			articleList(article => article.concat(val));
+		}
 	}
 
 	useEffect((e) => {
 		// Duplicating for printing bill, as original form values will be cleared once data is posted
-		setFormVal({ ...inputVal, "date": date.current.value, "metal": metalType.current.value, "createdBy": value.data.userName });
+		setFormVal({...inputVal, "date": date.current.value, "metal":metalType.current.value, "createdBy": value.data.userName});
 	}, [inputVal]);
 
 
@@ -218,16 +170,20 @@ const AddEntry = () => {
 	}
 
 	const postData = (e) => {
+		var art = document.getElementById('addArticle');
+		var allArt = art.getElementsByTagName("input"), list = [] ;
+		for (let i = 0; i < allArt.length; i++){
+list.push(allArt[i].value);
+		}
+		console.log(allArt, list);
 		// e.preventDefault();
-		//console.log(article, 'after update');
-		axios.post('http://localhost:4000/customers/create-student', { ...inputVal, "date": date.current.value, "metal": metalType.current.value, "createdBy": value.data.userName, "cityPincode": cityPincode.current.value }, { headers: { 'Content-Type': 'application/json' } })
+		axios.post('http://localhost:4000/customers/create-student', { ...inputVal, "date": date.current.value, "metal":metalType.current.value, "createdBy": value.data.userName, "articleName": list }, { headers: { 'Content-Type': 'application/json' } })
 			.then(res => {
 				console.log(res.data);
 				setInputValue({
 					"cName": "",
 					"date": "",
 					"address": "",
-					"cityPincode": "Chennai - 600 081",
 					"amount": "",
 					"redemptionAmount": "",
 					"billNumber": "",
@@ -252,126 +208,45 @@ const AddEntry = () => {
 
 	const setData = (e) => {
 		postData(e);
+		console.log('before print called', formVal);
 	}
 
 
 	return (
-		<div className='add-entry' onClick={checkIfDropdown} ref={page} style={{ "minHeight": "100vh" }}>
-			<NavBar page="addEntry" />
-			<form className="entry-form" 
-			onSubmit={(e) => {e.preventDefault()}}
-			onKeyDown={(e) => {if(e.keyCode == 13) {e.preventDefault()}}}
-			>
-				<div className={`relative ${nameSuggestion ? "hasDropdown" : ""}`}>
+		<div>
+			 <div className="navbar" >
+          <ul className="tabs" id="page-tabs">
+            <li className='active'>
+              <Link to="/addEntry">Add Entry</Link>
+            </li>
+            <li>
+              <Link to="/unredeemed">Unredeemed Entries</Link>
+            </li>
+            <li>
+              <Link to="/redeemed"> Redeemed Entries</Link>
+            </li>
+            <li>
+              <Link to="/InterestCalculator"> Interest Calculator</Link>
+            </li>
+            <li>
+              <Link to="/pledge"> Pledge</Link>
+            </li>            
+          </ul>
+          <div style={{"marginLeft": "auto"}}>
+            <h5 style={{"margin": "0"}}>Welcome {value.data.userName} !</h5>
+            <div style={{"textAlign": "right", "fontSize":"12px"}}>
+            <Link to="/"> Logout </Link>
+            </div>
+          </div>
+        </div>
+			<form className="entry-form" >
+				<div>
 					<label htmlFor="cName">Name</label>
-					<input type="text" name="cName" id="first-field" placeholder="Enter name" value={inputVal.cName} AutoComplete="off"
-						onChange={e => { handleChange(e); showNameSuggestion("cName"); setListNumber(0) }}
-						className={`suggestion ${nameSuggestion ? "active" : ""}`}
-						onBlur={(e) => showNameSuggestion(false)}
-						onKeyDown={(e) => {
-							let count = names.filter((ele) => ele.toLowerCase().startsWith(inputVal.cName.toLowerCase()));
-							// setListNumber(navigateList+1);
-							if (e.keyCode == 40) {
-								console.log(navigateList, count.length)
-								if (navigateList == count.length - 1) {
-									console.log('equal equal');
-								}
-								else {
-									setListNumber(navigateList + 1);
-								}
-							}
-							else if (e.keyCode == 38 && navigateList >= 1) {
-								console.log(navigateList, count.length)
-
-								//	if(navigateList == 1){ return false} 
-								if (navigateList == 1) {
-									setListNumber(0);
-								}
-								else {
-									setListNumber(navigateList - 1);
-								}
-
-							}
-							else if (e.keyCode == 13) {
-								setInputValue({ ...inputVal, "cName": count[navigateList] })
-								setListNumber(0);
-								showNameSuggestion(false);
-
-							}
-						}}
-						ref={cName} />
-					<ul className="suggestion-list">
-						{names.filter((ele) => ele.toLowerCase().startsWith(inputVal.cName.toLowerCase())).map(function (data, idx) {
-							return <li className={`suggestion-name ${navigateList == idx ? "highlight" : ""}`}
-								onClick={() => {
-									setInputValue({ ...inputVal, "cName": data }); showNameSuggestion(false);
-								}}
-								onMouseDown={(e) => e.preventDefault()} // Added to prevent the blur event trigger
-							>{data}
-
-								{/* Assigning highlighted value to the var fieldvalue, as using state here causes infinite re-render issue */}
-								<div style={{ "display": "none" }}>{navigateList == idx ? fieldvalue = data : ''}</div>
-							</li>
-
-						})}
-					</ul>
-				</div>
-				<div className={`relative ${addressSuggestion ? "hasDropdown" : ""}`}>
-					<label htmlFor="address">Address</label>
-					<input type="text" name="address" placeholder="Enter address" value={inputVal.address}
-						onChange={e => { handleChange(e); showAddress(e); setListNumber(0) }}
-						onBlur={(e) => setAddressSuggestion(false)}
-						className={`suggestion ${addressSuggestion ? "active" : ""}`}
-						autoComplete='off'
-						onKeyDown={(e) => {
-							let count = addresses.filter((ele) => ele.toLowerCase().includes(inputVal.address.toLowerCase()));
-							console.log('address', count);
-							// setListNumber(navigateList+1);
-							if (e.keyCode == 40) {
-								console.log(navigateList, count.length)
-								if (navigateList == count.length - 1) {
-									console.log('equal equal');
-								}
-								else {
-									setListNumber(navigateList + 1);
-								}
-							}
-							else if (e.keyCode == 38 && navigateList >= 1) {
-								console.log(navigateList, count.length)
-
-								//	if(navigateList == 1){ return false} 
-								if (navigateList == 1) {
-									setListNumber(0);
-								}
-								else {
-									setListNumber(navigateList - 1);
-								}
-
-							}
-							else if (e.keyCode == 13) {
-								setInputValue({ ...inputVal, "address": count[navigateList] })
-								setListNumber(0);
-								setAddressSuggestion(false)
-
-							}
-						}}
-						ref={address}
-					/>
-					<ul className='suggestion-list'>
-						{addresses.filter((ele) => ele.toLowerCase().includes(inputVal.address.toLowerCase())).map(function (data, idx) {
-							return <li className={`suggestion-name ${navigateList == idx ? "highlight" : ""}`} 
-							onClick={() => updateInput(data, address)}
-							onMouseDown={(e) => e.preventDefault()}
-							>{data} 
-							{/* Assigning highlighted value to the var fieldvalue, as using state here causes infinite re-render issue */}
-							<div style={{ "display": "none" }}>{navigateList == idx ? fieldvalue = data : ''}</div>
-							</li>
-						})}
-					</ul>
+					<input type="text" name="cName" id="first-field" placeholder="Enter name" value={inputVal.cName} onChange={handleChange} autoComplete="off" />
 				</div>
 				<div>
-					<label htmlFor="cityPincode">City</label>
-					<input type="text" name="cityPincode" placeholder="Enter city and pincode" value={inputVal.cityPincode} defaultValue="Chennai - 600 081" onChange={handleChange} autoComplete="off" ref={cityPincode} />
+					<label htmlFor="address">Address</label>
+					<input type="text" name="address" placeholder="Enter address" value={inputVal.address} onChange={handleChange} autoComplete="off" />
 				</div>
 				<div>
 					<label htmlFor="contactNo">Contact Number</label>
@@ -434,9 +309,9 @@ const AddEntry = () => {
 					<select id="metal" onChange={updateMetal} value={metal} className="metal-type" ref={metalType}>
 						<option value="GOLD" selected>GOLD</option>
 						<option value="SILVER">SILVER</option>
-					</select>
+						</select>
 				</div>
-				<div>
+				<div style={{"display":"block", "float":"none"}}>
 					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>
 					<button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button>
 					<div id="addArticle">
@@ -452,6 +327,7 @@ const AddEntry = () => {
 				</div>
 			</form>
 			<div ref={el => (billPrint = el)} id="pledgeBill">
+				{/* Print 2 copies of bill, original and duplicate */}
 				<PledgeBill test={formVal} billType="Original Bill" />
 				<PledgeBill test={formVal} billType="Duplicate Bill" />
 			</div>

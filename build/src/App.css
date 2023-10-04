@@ -1,8 +1,7 @@
 body {
 	margin: 0 auto;
 	font-family: arial, sans-serif;
-	padding: 0 20px 0 20px;
-	min-height: 100vh;
+	padding: 20px;
 }
 
 .addAccount {
@@ -88,14 +87,11 @@ button,
 }
 
 .navbar {
-	margin: 0 -20px 25px -20px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 25px;
 	display: flex;
 	align-items: center;
-	background:  linear-gradient(90deg, rgba(25,116,210,1) 24%, rgba(72,149,239,1) 46%, rgba(76,201,240,1) 69%);
-	padding-right: 10px;
 }
-
-.navbar > div, .navbar a { color: #fff;}
 
 .navbar.hide {
 	display: none;
@@ -115,15 +111,15 @@ button,
 	border-bottom: 5px solid transparent;
 	text-align: center;
 	font-size: 14px;
-	border-top: 1px solid rgba(25,116,210,1);
 }
 
-.tabs > li > a {color: #fff;}
-
 .tabs>li.active {
-	background: #fff;
+	background: #d5d5d5;
 color: #000;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
 text-align: center;
+
 }
 .tabs>li.active a { color: #000;}
 
@@ -146,10 +142,6 @@ text-align: center;
 	vertical-align: middle;
 	text-transform: uppercase;
 	vertical-align: middle;
-}
-
-.table-body>li  {
-	font-size: 12px;
 }
 
 .table-header>li,
@@ -230,7 +222,7 @@ a {
 	background-size: contain;
 	display: inline-block;
 	cursor: pointer;
-	margin: 5px 8px;
+	margin: 5px 15px;
 	border: 0;
 	vertical-align: middle;
 }
@@ -403,12 +395,12 @@ input[type=number] {
 	width: 100%;
 	border-spacing: 0;
 	table-layout: fixed;
-	border-right: 1px solid #000;
+	border-right: 1px solid #ccc;
 	font-size: 14px;
 }
 
 .pledge-details tr td {
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	height: 30px;
 	vertical-align: middle;
 	padding: 0 0 0 10px;
@@ -417,7 +409,7 @@ input[type=number] {
 }
 
 .pledge-details tr:nth-child(1) td {
-	border-top: 1px solid #000;
+	border-top: 1px solid #ccc;
 }
 
 .empty-child td:nth-child(2) {
@@ -434,14 +426,14 @@ input[type=number] {
 }
 
 .articles-table {
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	border-spacing: 0;
 	width: 100%;
 }
 
 .articles-table-header td {
 	text-align: center;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	border-top: 0;
 	height: 30px;
 	vertical-align: middle;
@@ -452,7 +444,7 @@ input[type=number] {
 .articles-table-body td {
 	text-align: center;
 	padding: 10px 0;
-	border-right: 1px solid #000;
+	border-right: 1px solid #ccc;
 }
 
 .articles-table-body td:last-child {
@@ -485,87 +477,7 @@ input[type=number] {
 }
 
 @media print {
-	.bill-header {
-		border-bottom: 1px solid #000;
-	}
-	.pledge-details {
-		width: 100%;
-		border-spacing: 0;
-		table-layout: fixed;
-		border-right: 1px solid #000;
-		font-size: 14px;
-	}
-	
-	.pledge-details tr td {
-		border: 1px solid #000;
-		height: 30px;
-		vertical-align: middle;
-		padding: 0 0 0 10px;
-		border-top: 0;
-		border-right: 0;
-	}
-	
-	.pledge-details tr:nth-child(1) td {
-		border-top: 1px solid #000;
-	}
-	
-	.empty-child td:nth-child(2) {
-		border-right: 0;
-	}
-	
-	.empty-child td:nth-child(3) {
-		border-left: 0;
-		border-right: 0;
-	}
-	
-	.empty-child td:nth-child(4) {
-		border-left: 0;
-	}
-	.bill-footer {
-		border-top: 1px solid #000;
-	}
-	.redeemed-pi table {
-		border: 1px solid #000;
-		border-spacing: 0;
-		width: 100%;
-		border-right: 0;
-	}
-	
-	.redeemed-pi td {
-		border-right: 1px solid #000;
-		border-bottom: 1px solid #000;
-		padding: 5px;
-	}
-	
-	.redeemed-pi tr td {
-		padding: 5px 5px;
-	}
-	
-	.articles-table {
-		border: 1px solid #000;
-		border-spacing: 0;
-		width: 100%;
-	}
-	
-	.articles-table-header td {
-		text-align: center;
-		border: 1px solid #000;
-		border-top: 0;
-		height: 30px;
-		vertical-align: middle;
-		font-weight: bold;
-		text-transform: uppercase;
-	}
-	
-	.articles-table-body td {
-		text-align: center;
-		padding: 10px 0;
-		border-right: 1px solid #000;
-	}
-	
-	.articles-table-body td:last-child {
-		border-right: 0;
-	}
+
 	.pledge-entries .table-header>li,
 	.pledge-entries .table-body>li {
 		font-size: 12px;
@@ -607,6 +519,7 @@ input[type=number] {
 	.hidePledge #pledgeBill {
 		display: block !important;
 	}
+
 	.showPledge #pledgeBill,
 	.actions,
 	.remarks {
@@ -651,20 +564,20 @@ input[type=number] {
 }
 
 .redeemed-pi table {
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	border-spacing: 0;
 	width: 100%;
 	border-right: 0;
 }
 
 .redeemed-pi td {
-	border-right: 1px solid #000;
-	border-bottom: 1px solid #000;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 	padding: 5px;
 }
 
 .redeemed-pi tr td {
-	padding: 5px 5px;
+	padding: 10px 5px;
 }
 
 .logo {
@@ -679,22 +592,21 @@ input[type=number] {
 }
 
 .bill-header {
-	border-bottom: 1px solid #000;
-	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
 	margin-bottom: 10px;
-	position: relative;
 }
 
 .bill-footer {
 	width: 100%;
 	position: absolute;
-	top: calc(100% - 15px);
-	border-top: 1px solid #000;
+	bottom: 0;
+	border-top: 1px solid #ccc;
 	display: flex;
 }
 
 .bill-footer>div {
-	padding: 10px 0 0 0;
+	padding: 10px 0;
 }
 
 .bill-footer>div:last-child {
@@ -767,39 +679,3 @@ input[type=number] {
 	font-weight: bold;
 }
 .bold {font-weight: bold;}
-
-.relative {
-	position: relative;
-}
-.suggestion-list {
-	position: absolute;
-	margin: 0;
-	padding: 0;
-	background-color: white;
-	width: calc(100% - 12px);
-	list-style: none;
-	border-radius: 5px;
-	display: none;
-}
-.suggestion-list > li {
-	padding: 5px;
-	border: 1px solid #ccc;
-	border-bottom: 0;
-}
-.suggestion-list > li:last-child {
-	border-bottom: 1px solid #ccc;
-}
-
-.suggestion.active + .suggestion-list {
-	display: block;
-}
-.suggestion + .suggestion-list {
-	display: none;
-}
-.suggestion-name.highlight {
-	background: pink;
-}
-.actions {padding: 0 5px !important;}
-.principleDetails {width: 100%; border-spacing: 0;margin-top: 15px;}
-.principleDetails thead {font-weight: bold;;}
-.principleDetails td {border: 1px solid #333; border-bottom: 1px solid #333;font-size: 12px;padding: 3px 5px;text-align: center;}

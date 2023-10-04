@@ -4,32 +4,26 @@ import './App.css';
 import { User } from './userContext.js';
 
 
-const NavBar = (props) => {
+const NavBar = () => {
   let value = useContext(User);
 
   return (
     <div className="navbar" >
           <ul className="tabs" id="page-tabs">
-            <li className={`${props.page=="addEntry" ? "active" : ""}`}>
+            <li>
               <Link to="/addEntry">Add Entry</Link>
             </li>
-            <li className={`${props.page=="unreedemed" ? "active" : ""}`}>
+            <li>
               <Link to="/unredeemed">Unredeemed Entries</Link>
             </li>
-            <li className={`${props.page=="redeemed" ? "active" : ""}`}>
+            <li>
               <Link to="/redeemed"> Redeemed Entries</Link>
             </li>
-            <li className={`${props.page=="interestCalc" ? "active" : ""}`}>
+            <li>
               <Link to="/InterestCalculator"> Interest Calculator</Link>
             </li>
-            <li className={`${props.page=="pledge" ? "active" : ""}`}>
+            <li>
               <Link to="/pledge"> Pledge</Link>
-            </li>   
-            <li className={`${props.page=="notice" ? "active" : ""}`}>
-              <Link to="/Notice"> Notice Issue</Link>
-            </li>   
-            <li className={`${props.page=="dform" ? "active" : ""}`}>
-              <Link to="/FormD"> Form D</Link>
             </li>            
           </ul>
           <div style={{"marginLeft": "auto"}}>

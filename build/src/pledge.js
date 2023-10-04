@@ -203,27 +203,18 @@ const AllUserEntries = (props, ref) => {
 		window.print();
 	}
 
-	function calculateInterest(date1, amount, redemDate) {
-			
-		let diffTime, interest;
-		if (redemDate == null || redemDate == undefined) {
-			diffTime = Math.abs(new Date() - new Date(date1));
-		}
-		else {
-			diffTime = Math.abs(new Date(redemDate) - new Date(date1));
-		}
-		console.log('in interest check', diffTime)
+	function calculateInterest(date1, amount) {
+		const diffTime = Math.abs(new Date() - new Date(date1));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		let months = Math.ceil(diffDays / 30);
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
+		let interest = (amount * (months) * 1.33) / 100;
+		// Check if its valid number, because sometimes date is not defined
+		if (Number.isInteger(interest)) {
+			return interest;
 		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
-		// setInterestVal(interest);
-		return interest;
+		else {
+			return 0;
+		}
 
 	}
 
@@ -242,21 +233,20 @@ const AllUserEntries = (props, ref) => {
 
 	// pagination logic
 	const [currentPage, setCurrentPage] = useState(1);
-	const [isSearch, setIsSearching] = useState(false);
 	const currentTableData = useMemo(() => {
 		const firstPageIndex = (currentPage - 1) * PageSize;
 		const lastPageIndex = firstPageIndex + PageSize;
-		console.log(entries);
 		return entries.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, entries, isSearch]);
+	}, [currentPage, filterUnredeemed]);
 
 	// Default page state with pagination
 	const RenderTableData = () => {
+		console.log('1');
 		let data = currentTableData.map(function (data, idx) {
+
 			return (
 				<ul className="table-body" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
-					<li></li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 						{data.address}
 						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
@@ -264,57 +254,19 @@ const AllUserEntries = (props, ref) => {
 					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
 					<li>{data.billNumber}</li>
 					<li>{data.amount}</li>
-					<li>
-						{ data.redemptionDate ? parseInt(data.amount + calculateInterest(data.date, data.amount, data.redemptionDate)) : " " }
-						</li>
 					<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "12px" }}>
 					{data.articleName.map((item, index) => {
 						return <span>{item},</span>
 					})}
 					</div>
 					</li>
-					<li>{data.metal}</li>
 					<li> {data.gram}.{data.mg} </li>
-					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
+					<li className="">
+					</li>
 				</ul>
 			);
 
 		});
-		return data
-	}
-	// Show only search result
-	const RenderSearchData = () => {
-		let data = entries.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
-			
-				return (
-					<ul className="table-body" key={data.billNumber}>
-						<li>{data.cName}</li>
-						<li></li>
-						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-							{data.address} {data.cityPincode}
-							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
-						</li>
-						<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
-						<li>{data.billNumber}</li>
-						<li>{data.amount}</li>
-						<li>
-						{ data.redemptionDate ? parseInt(data.amount + calculateInterest(data.date, data.amount, data.redemptionDate)) : " " }
-						</li>
-						<li>
-							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-								<ul className="all-articles">
-									{renderArticleList(data.articleName)}
-								</ul>
-							</div>
-						</li>
-						<li>{data.metal}</li>
-						<li> {data.gram}.{data.mg} </li>
-						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
-											</ul>
-				);
-		});
-		// fetchUserEntries(data);
-		console.log(data);
 		return data
 	}
 
@@ -324,7 +276,7 @@ const AllUserEntries = (props, ref) => {
 	const [search, setSearchVal] = useState();
 	const [closeModal, setCloseModal] = useState();
 	// State for checking if search is clicked by user
-	
+	const [isSearch, setIsSearching] = useState(false);
 	const [searchText, setSearchText] = useState();
 
 	let filteredEntry;
@@ -366,16 +318,38 @@ const AllUserEntries = (props, ref) => {
 
 	return (
 		<>
-		 <NavBar page="pledge" />
+		 <div className="navbar" >
+          <ul className="tabs" id="page-tabs">
+            <li>
+              <Link to="/addEntry">Add Entry</Link>
+            </li>
+            <li>
+              <Link to="/unredeemed">Unredeemed Entries</Link>
+            </li>
+            <li>
+              <Link to="/redeemed"> Redeemed Entries</Link>
+            </li>
+            <li>
+              <Link to="/InterestCalculator"> Interest Calculator</Link>
+            </li>
+            <li className='active'>
+              <Link to="/pledge"> Pledge</Link>
+            </li>            
+          </ul>
+          <div style={{"marginLeft": "auto"}}>
+            <h5 style={{"margin": "0"}}>Welcome {value.data.userName} !</h5>
+            <div style={{"textAlign": "right", "fontSize":"12px"}}>
+            <Link to="/"> Logout </Link>
+            </div>
+          </div>
+        </div>
 			<div>
 				<div className='hide-on-print'>
-					<div style={{ "display": "flex", "alignItems": "end", "marginBottom":"15px" }}>
-						<div>
-						<div style={{"marginBottom":"15px"}}> Total Amount: <strong>{diffAmount} </strong></div>
-						 <FilterEntries parentCallback={callbackFunction} /> </div>
+					<div style={{ "display": "flex", "alignItems": "center" }}>
+						<div> Total Amount: <strong>{diffAmount} </strong></div>
 						<div style={{"marginLeft": "auto", "display": "flex", "alignItems": "center"}}>
 						{/* Show pagination, when there are more entries */}
-						{entries.length >= PageSize && !isSearch 	? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end", "marginLeft": "auto" }}>
+						{entries.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end", "marginLeft": "auto" }}>
 							<input type="number" className="jumpPage" onChange={handleChange} onKeyPress={(e) => {
 								if (e.key === "Enter") {
 									setCurrentPage(Number(jumpNo));
@@ -400,25 +374,22 @@ const AllUserEntries = (props, ref) => {
 					<div style={{ "marginBottom": "2px", "fontSize": "14px", "paddingLeft": "10px" }}> PLEDGE BOOk - NAKODA Pawn Broker  Plot No.9, V.O.C. Nagar, Market Lane,  Tondiarpet, Chennai- 600 081 </div>
 					<div style={{ "display": "flex" }}>
 						<div style={{ "padding": "5px 0 5px 15px", "fontSize": "14px" }}> FORM E Section 10[1] (a) &amp; Rule 7</div>
-						<div style={{ "padding": "5px 0 5px 0", "fontSize": "14px", "marginLeft": "auto" }}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}>{value.data.license}</span></div>
+						<div style={{ "padding": "5px 0 5px 0", "fontSize": "14px", "marginLeft": "auto" }}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}></span></div>
 					</div>
 				</div>
-				{entries && entries.length ?
+				{allEntries && allEntries.length ?
 					<div style={{ "display": "table", "width": "100%", "marginTop": "5px" }} className="pledge-entries">
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
 							<li>Name</li>
-							<li style={{ "width": "7%" }}>DLY Receipt #</li>
 							<li style={{ "width": "20%" }}>Address</li>
 							<li style={{ "width": "9%" }}>Date</li>
 							<li style={{ "width": "7%" }}>Bill No.</li>
 							<li style={{ "width": "7%" }}>Amount</li>
-							<li style={{ "width": "7%" }}>Redemption Amount</li>
 							<li>Article Name</li>
-							<li>Metal</li>
 							<li style={{ "width": "6%" }}> Weight </li>
 							<li style={{ "width": "9%" }}>Redemption Date</li>
 						</ul>
-						{isSearch ? <RenderSearchData /> : <RenderTableData />}
+						<RenderTableData />
 					</div> :
 					<h3> Loading.. please wait </h3>}
 

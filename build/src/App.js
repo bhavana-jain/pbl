@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
@@ -9,9 +9,7 @@ import AllUserEntries from './entryTable.js';
 import RedeemedEntries from './redeemedEntries.js';
 import PledgeBill from './pledgeBill.js';
 import InterestCalculator from './interestCalculator.js';
-import AllPledge from './pledge.js'; 
-import NoticeIssue from './noticeIssue.js'; 
-import FormD from './formD.js';
+import AllPledge from './pledge.js';
 import { User } from './userContext.js';
 import NavBar from './navBar';
 
@@ -43,8 +41,7 @@ const App = () => {
           <Route  path='/pledgeBill' element={< PledgeBill />}></Route>
           <Route  path='/interestCalculator' element={< InterestCalculator />}></Route>
           <Route path='/pledge' element={< AllPledge />}></Route>
-          <Route path='/notice' element={< NoticeIssue />}></Route>
-          <Route path="/formD" element={<FormD/>}></Route>
+          
         </Routes>
        </div>
 

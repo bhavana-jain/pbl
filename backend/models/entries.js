@@ -29,6 +29,13 @@ let customerSchema = new Schema({
 	articleName: {
 		type: Array
 	},
+	principle: [
+		new Schema({
+			principleAmount: {type: Number},
+			interest: {type: Number},
+			date: {type: Date}
+		})
+],
 	metal: {
 		type: String
 	},
@@ -63,7 +70,7 @@ let customerSchema = new Schema({
 		type: String
 	}
 }, {
-	collection: 'entries'
+	collection: 'customerList'
 })
 
 module.exports = mongoose.model('Customers', customerSchema)

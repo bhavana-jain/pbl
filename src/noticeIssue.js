@@ -662,34 +662,7 @@ const NoticeIssue = (props, ref) => {
 
 	return (
 		<>
-			<div className="navbar" >
-				<ul className="tabs" id="page-tabs">
-					<li>
-						<Link to="/addEntry">Add Entry</Link>
-					</li>
-					<li>
-						<Link to="/unredeemed">Unredeemed Entries</Link>
-					</li>
-					<li>
-						<Link to="/redeemed"> Redeemed Entries</Link>
-					</li>
-					<li>
-						<Link to="/InterestCalculator"> Interest Calculator</Link>
-					</li>
-					<li>
-						<Link to="/pledge"> Pledge</Link>
-					</li>
-					<li className='active'>
-						<Link to="/notice">Notice Issue</Link>
-					</li>
-				</ul>
-				<div style={{ "marginLeft": "auto" }}>
-					<h5 style={{ "margin": "0" }}>Welcome {value.data.userName} !</h5>
-					<div style={{ "textAlign": "right", "fontSize": "12px" }}>
-						<Link to="/"> Logout </Link>
-					</div>
-				</div>
-			</div>
+			<NavBar page="notice" />
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">

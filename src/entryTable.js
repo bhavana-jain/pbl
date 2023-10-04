@@ -28,6 +28,9 @@ const AllUserEntries = (props, ref) => {
 	let value = useContext(User);
 
 	const redemDate = useRef(moment(new Date()).format('YYYY-MM-DD'));
+	const principleAmount = useRef();
+	const interest = useRef();
+	const date= useRef();
 
 	// Jump to page in pagination
 	let jumpNo;
@@ -42,9 +45,35 @@ const AllUserEntries = (props, ref) => {
 	let componentRef = useRef();
 	const billPrint = useRef({});
 	const note = useRef({});
+
 	const updateRedemptionDate = (e) => {
 		setRedemptionDate({ [e.target.name]: e.target.value })
 	};
+
+	const [inputVal, setInputValue] = useState();
+	const [principleInterest, setPrincipleInterest] = useState(false);
+	const[principleDetails, setPrincipleDetails] = useState();
+	const [newPrinciple, setNewPrinciple] = useState();
+
+	function handleChange(e) {
+		const val = e.target.value;
+		setNewPrinciple({...newPrinciple, [e.target.name]: val});
+		setPrincipleDetails(current => [...current, newPrinciple]);
+		
+	}
+
+	const updatePrinciple = (data) => {
+		setPrincipleInterest(true);
+		setInputValue(data);
+		setPrincipleDetails(data.principle)
+	}
+
+	const savePrincipleDetails = async(e) => {
+		e.preventDefault();
+		await axios.put('http://localhost:4000/customers/update-student/' + inputVal._id, {"principle": principleDetails}, { headers: { 'Content-Type': 'application/json' } })
+			.then(res => console.log(res.data));
+			setPrincipleInterest(false);
+	}
 
 	const getLists = () => {
 		axios.get("http://localhost:4000/customers/get-result", { params: { createdBy: value.data.userName } })
@@ -208,6 +237,7 @@ const AllUserEntries = (props, ref) => {
 	const cancelDelete = () => {
 		isDeleteModal(false);
 		setToRedeemed(false);
+		setPrincipleInterest(false);
 		setDelId('');
 	}
 
@@ -568,7 +598,7 @@ const AllUserEntries = (props, ref) => {
 							<button onClick={() => editData(data._id)} className="edit-icon"></button>
 							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
 							<button onClick={() => printBill(data)} className="print-icon"></button>
-							<button onClick={() => printBill(data)} className="" style={{"background":"transparent", "border":"0px","height":"auto", "lineHeight":"16px"}}>P&amp;I</button>
+							<button onClick={() => updatePrinciple(data)} className="" style={{"background":"transparent", "border":"0px","height":"auto", "lineHeight":"16px"}}>P&amp;I</button>
 						</li>
 					</ul>
 				);
@@ -674,31 +704,7 @@ const AllUserEntries = (props, ref) => {
 
 	return (
 		<>
-			<div className="navbar" >
-				<ul className="tabs" id="page-tabs">
-					<li>
-						<Link to="/addEntry">Add Entry</Link>
-					</li>
-					<li className='active'>
-						<Link to="/unredeemed">Unredeemed Entries</Link>
-					</li>
-					<li>
-						<Link to="/redeemed"> Redeemed Entries</Link>
-					</li>
-					<li>
-						<Link to="/InterestCalculator"> Interest Calculator</Link>
-					</li>
-					<li>
-						<Link to="/pledge"> Pledge</Link>
-					</li>
-				</ul>
-				<div style={{ "marginLeft": "auto" }}>
-					<h5 style={{ "margin": "0" }}>Welcome {value.data.userName} !</h5>
-					<div style={{ "textAlign": "right", "fontSize": "12px" }}>
-						<Link to="/"> Logout </Link>
-					</div>
-				</div>
-			</div>
+			<NavBar page="unreedemed" />
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
@@ -769,8 +775,56 @@ const AllUserEntries = (props, ref) => {
 							<button className="close-modal" onClick={cancelDelete} ></button>
 							<p> Are you sure you want to delete entry with Bill No: <strong> {delId} </strong> </p>
 							<button onClick={() => confirmDeletion(true)}> Yes </button>
-							<button onClick={cancelDelete}> No </button>
+\							<button onClick={cancelDelete}> No </button>
 						</div>
+					</>
+					: ''}
+
+{principleInterest ?
+					<>
+						<div className="page-overlay"></div>
+						<div className="delete-modal">
+							<button className="close-modal" onClick={cancelDelete} ></button>
+							<form className='entry-form' 
+							style={{"padding":"0px"}}
+							onSubmit={(e) => {e.preventDefault()}}
+			onKeyDown={(e) => {if(e.keyCode == 13) {e.preventDefault()}}}>
+							<div>
+					<label htmlFor="principleAmount">Principle</label>
+					<input type="text" name="principleAmount"  placeholder="Enter principle" onChange={handleChange}  ref={principleAmount}/>
+				</div>
+				<div>
+					<label htmlFor="interest">Interest</label>
+					<input type="text" name="interest"  placeholder="Enter interest" onChange={handleChange} ref={interest}/>
+				</div>
+				<div>
+					<label htmlFor="date">Date</label>
+					<input type="date" name="date" placeholder="Enter city and pincode"  onChange={handleChange}  ref={date} />
+				</div>
+				<button onClick={savePrincipleDetails}>Save</button>
+								</form>
+								{principleDetails.length ? 
+							<table className="principleDetails">
+								<thead>
+									<td>No.</td>
+									<td>Principle Amount</td>
+									<td>Interest Month</td>
+									<td>Date</td>
+								</thead>
+								{principleDetails.map((item, index) => {
+											return (
+											<tr>
+												<td>{index+1}</td>
+												<td>{item.principleAmount}</td>
+												<td>{item.interest}</td>
+												<td>{moment(new Date(item.date)).format('DD/MM/YYYY') }</td>
+											</tr>
+												)
+										})}
+							</table> : ''
+							}
+						
+						</div>	
 					</>
 					: ''}
 

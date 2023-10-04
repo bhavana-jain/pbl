@@ -12,7 +12,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { User } from './userContext.js';
   
-const InterestCalculator = (props, ref) => {
+const FormD = (props, ref) => {
 	const [entries, fetchUserEntries] = useState();
 	const [allEntries, saveAllEntries] = useState();
 	const [editId, setEditModalId] = useState();
@@ -117,6 +117,49 @@ const [billId, getBillNumber] = useState();
 		SetFilteredEntries(filteredEntry);
 		}
 	}
+	const FormDContent = () => {
+		return (
+			<div id="pledgeBill" style={{"position":"relative"}}>
+				<h4>FORM D</h4>
+				<h5>See Section 8 [6] and Rules 6 [1]</h5>
+				<h5>Declaration by Pawner of Lease Or Destruction of Pawn Ticket</h5>
+				<div style={{ "fontSize": "14px" }} className="page-a4">
+					<div className="bill-header" id="header">
+						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
+							<div className="logo" style={{ "display": "inline-block" }}></div>
+							<div style={{ "display": "inline-block" }}>
+								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
+								<div>{value.data.address} <br /> {value.data.area} </div>
+							</div>
+						</div>
+					</div>
+					<p>
+						Loan <span className='content-spacer'></span> Rs <span className='content-spacer'></span> Date <span className='content-spacer'></span>
+					</p>
+					<p>Name <span className='content-spacer'></span></p>
+					<p style={{"lineHeight":"24px"}}> I, <span className='content-spacer'></span> of <span className='content-spacer'></span> in pursuance of sub section [6] of section of Madras Pawn Brokers Act 1943 (Madras Act XXIII of 1943) do solemnly and sincerely declare that I pledge at the shop of <span className='content-spacer'></span> Pawn Brokers, the articles, articles described below bring my property and having received a pawn ticket bearing No. <span className='content-spacer'></span> date <span className='content-spacer'></span> (if known) for the same, which has since been of destroyed and the pawn ticket has not been sold, issued or transferred to any person by me to the best of knowledge and belief. </p>
+					<p>
+						The article/articles above referred to is / are of the following description:
+					</p>
+					<p>
+						<h3>ARTICLES:</h3>
+						<ul>
+							<li></li>
+						</ul>
+					</p> 
+					<p style={{"lineHeight":"24px"}}>
+						I, <span className='content-spacer'></span> or <span className='content-spacer'></span> in pursuance of sub-section 6 or 8 to the said Act do solemnly and sincerely declare that I know the person making the foregoing declaration to be
+					</p>
+					<div>
+						<div>Signature of Pawner</div>
+						<div>Designation</div>
+						<div>Address</div>
+						<div>Date</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
 	
 	const RenderTableData = () => {
 	 let data = entries.map(function(data, idx) {
@@ -171,7 +214,7 @@ return data
 
   return (
   <> 
-   <NavBar page="interestCalc" />
+   <NavBar page="dform" />
   <div style={{"display":"flex", "marginBottom":"15px"}}>
   <div> Total Amount: <strong>{diffAmount } </strong></div>
   </div>
@@ -202,11 +245,11 @@ return data
   <li>Interest</li>
   </ul> 
   { search != null || search != undefined ? <RenderTableData /> : '' }
-
   </div>
   : <h3 style={{"marginTop":"50px", "textAlign":"centre"}}> Loading... </h3>}  
+  <FormDContent />
   </>
 )
 }
 
-export default InterestCalculator;
+export default FormD;

@@ -26,9 +26,6 @@ const AllUserEntries = (props, ref) => {
 	const [delId, setDelId] = useState();
 	const [deleteEntry, confirmDeletion] = useState(false);
 
-	const [filterRedeemed, setFilterRedeemed] = useState([]);
-	const[filtering, setSearchFiltering] = useState([]);
-
 	let value = useContext(User);
 
 	let componentRef = useRef();
@@ -54,14 +51,8 @@ const AllUserEntries = (props, ref) => {
 			});
 	};
 
-	const setEntries = () => {
-		console.log("calling set entries fn");
-		setFilterRedeemed(entries.filter((entry) => entry.redemptionDate));
-	}
-
 	// filter only redeemed entries
-		 let filtered= entries.filter((entry) => entry.redemptionDate);
-	
+	let filterRedeemed = entries.filter((entry) => entry.redemptionDate);
 
 	let amount = [], tAmount = 0, redemptionAmount = [], reAmount = 0;
 	const [totalAmount, setTotal] = useState();
@@ -173,14 +164,7 @@ const AllUserEntries = (props, ref) => {
 		const diffTime = Math.abs(new Date() - new Date(date1));
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		let months = Math.ceil(diffDays / 30);
-		let interest;
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
-		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
+		let interest = (amount * (months) * 1.33) / 100;
 		return interest;
 	}
 
@@ -196,6 +180,15 @@ const AllUserEntries = (props, ref) => {
 		});
 		return list;
 	}
+
+	// pagination logic
+	const [currentPage, setCurrentPage] = useState(1);
+	const currentTableData = useMemo(() => {
+		const firstPageIndex = (currentPage - 1) * PageSize;
+		const lastPageIndex = firstPageIndex + PageSize;
+		console.log(filterRedeemed)
+		return filterRedeemed.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, entries]);
 
 	const [isDelivery, setIsDeliveryNote] = useState(false);
 
@@ -248,7 +241,7 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
-							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block","textTransform":"capitalize" }}> {value.data.companyName} </h2> </div>
+							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
 							<div> {value.data.address} <br /> {value.data.area} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
@@ -274,7 +267,7 @@ const AllUserEntries = (props, ref) => {
 								<td>Name of the pawner</td>
 								<td className='bold'>{billDetails.cName}</td>
 								<td>Address</td>
-								<td className='bold'>{billDetails.address} {billDetails.cityPincode}</td>
+								<td className='bold'>{billDetails.address}</td>
 								<td>Identity Proof</td>
 								<td className='bold'>{billDetails.idProof} </td>
 							</tr>
@@ -297,8 +290,8 @@ const AllUserEntries = (props, ref) => {
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
-								<td style={{ "padding": "0","border":"0px"}}>
-									<div style={{ "lineHeight": "21px" }}>Gross Wt</div>
+								<td style={{ "padding": "0" }}>
+									<div style={{ "lineHeight": "30px" }}>Gross Wt</div>
 									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #ccc" }}>
 										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "display": "inline-block", "width": "48%" }}>Gm</div>
 										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%" }}>Mg</div>
@@ -314,8 +307,8 @@ const AllUserEntries = (props, ref) => {
 								</ul>
 								</td>
 								<td style={{ "padding": "0" }}>
-									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
-									<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%","paddingTop":"15px"}} className='bold'>{billDetails.gram}</div>
+									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #ccc", "minHeight": "55px" }}>
+									<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "display": "inline-block", "width": "49.5%","paddingTop":"15px"}} className='bold'>{billDetails.gram}</div>
 										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%","paddingTop":"15px" }} className='bold'>{billDetails.mg}</div>
 									</div>
 								</td>
@@ -335,45 +328,16 @@ const AllUserEntries = (props, ref) => {
 						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
 					</div>
 					<div className="redeemed-pi">
-						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
+						<h4> RECEIVED PRINCIPLE &amp; INTEREST </h4>
 						<table>
-							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
-								<tr>
-									<td>No.</td>
-									<td>Principle Amt</td>
-									<td>RECEIVED TOTAL MONTH OF INT</td>
-									<td>Date</td>
-									<td>Signature</td>
-								</tr>
-							</thead>
 							<tbody>
 								<tr>
-									<td style={{ "textAlign":"center" }}>1</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>1. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>2. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
 								</tr>
 								<tr>
-									<td style={{ "textAlign":"center" }}> 2</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>3</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td style={{ "textAlign":"center" }}>4</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>3. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>months interest on</td>
+									<td>4. Received<span style={{ "width": "50px", "display": "inline-block" }}></span>       months interest on </td>
 								</tr>
 							</tbody>
 						</table>
@@ -443,14 +407,12 @@ const AllUserEntries = (props, ref) => {
 				</ul>
 			);
 		});
-				return data
+		return data
 	}
 
 	// Show only search result
-	
 	const RenderSearchData = () => {
-		
-		let data = filterRedeemed.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText || ele.address.toLowerCase().includes(searchText.toLowerCase())).map(function (data, idx) {
+		let data = filterRedeemed.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
 			return (
 				<ul className="table-body" key={data._id}>
 					<li>{data.cName}</li>
@@ -493,20 +455,14 @@ const AllUserEntries = (props, ref) => {
 	let filteredEntry;
 
 	function callbackFunction(childData) {
-		console.log('child Data', childData)
-		setSearchVal(childData);
-		// setFilterRedeemed(filtered);
+		setSearchVal(childData)
 		if (childData == "clear") {
 			setIsSearching(false);
 			getLists();
-			//setFilterRedeemed(filtered);
-			setSearchFiltering([]);
 		}
 		else {
 			setSearchText(childData.trim());
 			setIsSearching(true);
-			setFilterRedeemed(filterRedeemed.filter((ele) => ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData || ele.address.toLowerCase().includes(childData.toLowerCase())));
-			//setSearchFiltering(data);
 		}
 	}
 
@@ -530,29 +486,37 @@ const AllUserEntries = (props, ref) => {
 	}
 	useEffect(() => {
 		getLists();
-		// setEntries()
 	}, [data, closeModal]);
 
-	useEffect(() => {
-		if(entries){
-			setEntries()
-		}
-		
-	}, [entries]);
-	// pagination logic
-	const [currentPage, setCurrentPage] = useState(1);
-	const currentTableData = useMemo(() => {
-		console.log(isSearch);
-		const firstPageIndex = (currentPage - 1) * PageSize;
-		const lastPageIndex = firstPageIndex + PageSize;
-		console.log(filterRedeemed.length);
-		return filterRedeemed.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, filterRedeemed, isSearch]);
-	
- 
+
+
 	return (
 		<>
-		 <NavBar page="redeemed" />
+		 <div className="navbar" >
+          <ul className="tabs" id="page-tabs">
+            <li>
+              <Link to="/addEntry">Add Entry</Link>
+            </li>
+            <li>
+              <Link to="/unredeemed">Unredeemed Entries</Link>
+            </li>
+            <li className='active'>
+              <Link to="/redeemed"> Redeemed Entries</Link>
+            </li>
+            <li>
+              <Link to="/InterestCalculator"> Interest Calculator</Link>
+            </li>
+            <li>
+              <Link to="/pledge"> Pledge</Link>
+            </li>            
+          </ul>
+          <div style={{"marginLeft": "auto"}}>
+            <h5 style={{"margin": "0"}}>Welcome {value.data.userName} !</h5>
+            <div style={{"textAlign": "right", "fontSize":"12px"}}>
+            <Link to="/"> Logout </Link>
+            </div>
+          </div>
+        </div>
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
@@ -566,7 +530,7 @@ const AllUserEntries = (props, ref) => {
 						/>
 					</div>
 				</div>
-				{filterRedeemed.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end" ,"marginTop":"15px"}}>
+				{filterRedeemed.length >= PageSize ? <div style={{ "display": "flex", "alignItems": "center", "justifyContent": "end" }}>
 					<input type="number" className="jumpPage" onChange={handleChange} onKeyPress={(e) => {
 						if (e.key === "Enter") {
 							setCurrentPage(Number(jumpNo));
@@ -581,7 +545,7 @@ const AllUserEntries = (props, ref) => {
 					/>
 				</div> : '' }
 				{entries && entries.length ?
-					<div style={{ "display": "table", "width": "100%", "marginTop":"15px" }} ref={el => (componentRef = el)} >
+					<div style={{ "display": "table", "width": "100%", "marginTop":"25px" }} ref={el => (componentRef = el)} >
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
 							<li>Name</li>
 							<li>Address</li>
@@ -594,8 +558,7 @@ const AllUserEntries = (props, ref) => {
 							<li>Remark</li>
 							<li className="actions">Actions</li>
 						</ul>
-						<RenderTableData />
-						{/* {isSearch ? <RenderSearchData /> : <RenderTableData />} */}
+						{isSearch ? <RenderSearchData /> : <RenderTableData />}
 					</div>
 					: <h3 style={{ "marginTop": "50px", "textAlign": "centre" }}> Loading... </h3>}
 				{editModal && closeModal == "open" ? <EditEntryModal toEdit={editId} delivery={isDelivery} parentModalCallBack={setModalStatus} /> : ''}
