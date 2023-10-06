@@ -43,11 +43,11 @@ useEffect(() => {
 
 	
   return (
-  <> 
+  <div className='hide-on-print'> 
   <input type="text" placeholder="Search Name, Address, Bill" name="search"  value={search} onChange={handleChange} style={{"height":"33px" }} onKeyPress={handleKeyPress}/>
   <button onClick={filterEntries} style={{marginLeft:"15px"}}> Search </button>
   <button onClick={clearFilter} style={{marginLeft:"15px"}}> Clear </button>
-  </>
+  </div>
 )
 }
 

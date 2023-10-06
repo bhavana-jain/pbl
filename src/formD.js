@@ -109,7 +109,7 @@ const [billId, getBillNumber] = useState();
 		}
 		else {
 			 filteredEntry = allEntries.filter(function(ele) {
-			if(ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData) {
+			if((ele.billNumber) == childData) {
 				return ele
 			}
 		});
@@ -117,13 +117,23 @@ const [billId, getBillNumber] = useState();
 		SetFilteredEntries(filteredEntry);
 		}
 	}
+
+	const [formD, setFormDData] = useState();
+	const printFormD = (cont) => {
+		setFormDData(cont);
+		setTimeout(function(){
+			window.print();
+		}, 100);
+	}
 	const FormDContent = () => {
 		return (
-			<div id="pledgeBill" style={{"position":"relative"}}>
-				<h4>FORM D</h4>
-				<h5>See Section 8 [6] and Rules 6 [1]</h5>
-				<h5>Declaration by Pawner of Lease Or Destruction of Pawn Ticket</h5>
-				<div style={{ "fontSize": "14px" }} className="page-a4">
+			<div id="pledgeBill" style={{"position":"relative"}} className="page-a4">
+				<div className='text-centre'>
+				<h4 style={{"margin":"5px 0px 5px 0px"}}>FORM D</h4>
+				<h5 style={{"margin":"5px 0px 5px 0px"}}>See Section 8 [6] and Rules 6 [1]</h5>
+				<h5 style={{"margin":"5px 0px 15px 0px"}}>Declaration by Pawner of Lease Or Destruction of Pawn Ticket</h5>
+				</div>
+				<div style={{ "fontSize": "14px" }}>
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
@@ -134,9 +144,9 @@ const [billId, getBillNumber] = useState();
 						</div>
 					</div>
 					<p>
-						Loan <span className='content-spacer'></span> Rs <span className='content-spacer'></span> Date <span className='content-spacer'></span>
+						Loan <span className='content-spacer'></span> Rs <span className='content-spacer'></span> Date <span className='content-spacer'>{formD.date}</span>
 					</p>
-					<p>Name <span className='content-spacer'></span></p>
+					<p>Name <span className='content-spacer'>{formD.cName}</span></p>
 					<p style={{"lineHeight":"24px"}}> I, <span className='content-spacer'></span> of <span className='content-spacer'></span> in pursuance of sub section [6] of section of Madras Pawn Brokers Act 1943 (Madras Act XXIII of 1943) do solemnly and sincerely declare that I pledge at the shop of <span className='content-spacer'></span> Pawn Brokers, the articles, articles described below bring my property and having received a pawn ticket bearing No. <span className='content-spacer'></span> date <span className='content-spacer'></span> (if known) for the same, which has since been of destroyed and the pawn ticket has not been sold, issued or transferred to any person by me to the best of knowledge and belief. </p>
 					<p>
 						The article/articles above referred to is / are of the following description:
@@ -163,7 +173,7 @@ const [billId, getBillNumber] = useState();
 	
 	const RenderTableData = () => {
 	 let data = entries.map(function(data, idx) {
-		 if(data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+		
 		   return (
 			   <ul className="table-body" key={data._id}>
 			  <li>{data.cName}</li>
@@ -185,12 +195,11 @@ const [billId, getBillNumber] = useState();
 			  </li>
 			  <li> {data.gram}.{data.mg} </li>
 			  <li>{calculateInterest(data.date, data.amount)}</li>
+			  <li className='actions'>
+			  <button onClick={() => printFormD(data)} className="print-icon"></button>
+			  </li>
 			  </ul> 
 		   );
-		 }
-		 else {
-			 return false;
-		 }
 });
 return data
  }
@@ -215,25 +224,11 @@ return data
   return (
   <> 
    <NavBar page="dform" />
-  <div style={{"display":"flex", "marginBottom":"15px"}}>
-  <div> Total Amount: <strong>{diffAmount } </strong></div>
-  </div>
   <div style={{"display":"flex"}}>
   <FilterEntries parentCallback={callbackFunction} />
-  <div style={{"marginLeft":"auto"}}>
-      <select value={perValue} onChange={handleChange} style={{"height":"40px", "fontSize":"16px"}}>
-        <option value="1.33">1.33%</option>
-		<option value="1.5">1.5%</option>
-        <option value="2">2%</option>
-        <option value="2.5">2.5%</option>
-		<option value="3">3%</option>
-		<option value="4">4%</option>
-		<option value="5">5%</option>
-      </select>
-      </div>
   </div>
   {entries && entries.length ? 
-  <div style={{"display":"table", "width":"100%", "marginTop":"25px"}} ref={el => (componentRef = el)} >
+  <div style={{"display":"table", "width":"100%", "marginTop":"25px"}} className='hide-on-print'>
   <ul className="table-header" style={{"fontWeight":"bold"}}>
   <li>Name</li>
   <li>Address</li>
@@ -243,11 +238,12 @@ return data
   <li>Article Name</li>
   <li> Weight </li>
   <li>Interest</li>
+  <li>Form D</li>
   </ul> 
   { search != null || search != undefined ? <RenderTableData /> : '' }
   </div>
   : <h3 style={{"marginTop":"50px", "textAlign":"centre"}}> Loading... </h3>}  
-  <FormDContent />
+  {formD ? <FormDContent /> : '' }
   </>
 )
 }

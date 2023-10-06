@@ -21,6 +21,9 @@ let accountSchema = new Schema({
 	area: {
 		type: String
 	},
+	contactNo: {
+type: Number
+	},
 	pincode: {
 		type: String
 	},

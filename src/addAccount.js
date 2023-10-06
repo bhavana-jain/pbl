@@ -97,6 +97,9 @@ const Account = () => {
         <label htmlFor="area">Address Line 2</label>
         <input type="text" name="area" placeholder="Area" onChange={handleChange} />
 
+        <label htmlFor="contactNo">Contact No.</label>
+        <input type="number" name="contactNo" placeholder="Contact No" onChange={handleChange} />
+
         {/* <label htmlFor="pincode">Pin Code</label>
         <input type="text" name="pincode" placeholder="Pin Code" onChange={handleChange} /> */}
 

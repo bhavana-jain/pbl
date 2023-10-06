@@ -485,6 +485,7 @@ input[type=number] {
 }
 
 @media print {
+	.hide-on-print { display: none; }
 	.bill-header {
 		border-bottom: 1px solid #000;
 	}
