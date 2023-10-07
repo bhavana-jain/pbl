@@ -143,28 +143,38 @@ const [billId, getBillNumber] = useState();
 							</div>
 						</div>
 					</div>
-					<p>
-						Loan <span className='content-spacer'></span> Rs <span className='content-spacer'></span> Date <span className='content-spacer'>{formD.date}</span>
-					</p>
-					<p>Name <span className='content-spacer'>{formD.cName}</span></p>
-					<p style={{"lineHeight":"24px"}}> I, <span className='content-spacer'></span> of <span className='content-spacer'></span> in pursuance of sub section [6] of section of Madras Pawn Brokers Act 1943 (Madras Act XXIII of 1943) do solemnly and sincerely declare that I pledge at the shop of <span className='content-spacer'></span> Pawn Brokers, the articles, articles described below bring my property and having received a pawn ticket bearing No. <span className='content-spacer'></span> date <span className='content-spacer'></span> (if known) for the same, which has since been of destroyed and the pawn ticket has not been sold, issued or transferred to any person by me to the best of knowledge and belief. </p>
+					<table style={{"width":"100%","borderSpacing":"7px"}}>
+						<tr>
+							<td><strong style={{"paddingRight":"10px"}}>Loan</strong> {formD.amount}</td>
+							<td><strong style={{"paddingRight":"10px"}}>Rs</strong></td>
+							<td><strong style={{"paddingRight":"10px"}}>Date</strong> {moment(formD.date).format('DD/MM/YYYY')}</td>
+						</tr>
+						<tr>
+							<td><strong style={{"paddingRight":"10px"}}>Name</strong> {formD.cName}</td>
+							<td><strong style={{"paddingRight":"10px"}}>Address</strong>{formD.address}</td>
+							<td></td>
+						</tr>
+					</table>
+					
+					<p style={{"lineHeight":"24px"}}> I, <span className='content-spacer bold'>{formD.cName}</span> of <span className='content-spacer'></span> in pursuance of sub section [6] of section of Madras Pawn Brokers Act 1943 (Madras Act XXIII of 1943) do solemnly and sincerely declare that I pledge at the shop of <span className='bold'>{value.data.companyName}</span> Pawn Brokers, the articles, articles described below bring my property and having received a pawn ticket bearing No. <span className='content-spacer bold'>{formD.billNumber}</span> date <span className='content-spacer'>{moment(formD.date).format('DD/MM/YYYY')}</span> (if known) for the same, which has since been of destroyed and the pawn ticket has not been sold, issued or transferred to any person by me to the best of knowledge and belief. </p>
 					<p>
 						The article/articles above referred to is / are of the following description:
 					</p>
-					<p>
+					<p style={{"marginBottom":"20px"}}>
 						<h3>ARTICLES:</h3>
 						<ul>
-							<li></li>
+						{(formD.articleName).map((item, key) => {
+								return <li><stong>{item}</stong></li>
+							})
+							}
 						</ul>
 					</p> 
 					<p style={{"lineHeight":"24px"}}>
 						I, <span className='content-spacer'></span> or <span className='content-spacer'></span> in pursuance of sub-section 6 or 8 to the said Act do solemnly and sincerely declare that I know the person making the foregoing declaration to be
 					</p>
-					<div>
-						<div>Signature of Pawner</div>
-						<div>Designation</div>
-						<div>Address</div>
-						<div>Date</div>
+					<div style={{"lineHeight":"25px", "float":"right"}}>
+						<div>Signature of Pawner:</div>
+						<div>Date: <strong>{moment(new Date()).format('DD/MM/YYYY')}</strong></div>
 					</div>
 				</div>
 			</div>
