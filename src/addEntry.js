@@ -6,6 +6,7 @@ import moment from 'moment';
 import ReactToPrint from "react-to-print";
 import PledgeBill from './pledgeBill.js';
 import ListExample from './listFunction.js';
+import FilterEntries from './searchEntry.js';
 import { User } from './userContext.js';
 import NavBar from './navBar.js';
 
@@ -69,7 +70,10 @@ const AddEntry = () => {
 
 
 	useEffect(() => {
-		setBillNumber();
+		console.log('1');
+		setTimeout(function(){
+			setBillNumber();
+		}, 100);
 		fetchNameAddress();
 	}, [entries]);
 	useEffect(() => {
@@ -78,14 +82,17 @@ const AddEntry = () => {
 
 	// Get last bill number, after data is fetched
 	useEffect(() => {
+		console.log('2');
 		if (isFirstRender.current) {
 			isFirstRender.current = false;
 			return
 		}
 		else if (entries.length) {
-			setBillNumber();
+			setTimeout(function(){
+				setBillNumber();
+			}, 100);
 		}
-	}, [loading]);
+	}, [loading, entries]);
 
 	const [inputVal, setInputValue] = useState(
 		{
@@ -122,6 +129,23 @@ const AddEntry = () => {
 			value = e.target.value;
 		}
 		setInputValue({ ...inputVal, [e.target.name]: value, "articleName": article, "billNumber": updatedBillNum });
+	}
+
+	const [oldBill, setOldBill] = useState();
+	function setBillDetails(e){
+		setInputValue({ ...inputVal, [e.target.name]: e.target.value });
+		setOldBill(e.target.value);
+	}
+
+	const fetchBillDetails = async () => {
+		let filteredEntry = entries.filter(function(ele) {
+			if((ele.billNumber) == oldBill) {
+				return ele
+			}
+		});
+		console.log(filteredEntry);
+		const response = await axios.get("http://localhost:4000/customers/update-student/" + filteredEntry[0]._id);
+		setInputValue(response.data);
 	}
 
 	const [nameSuggestion, showNameSuggestion] = useState("");
@@ -392,7 +416,10 @@ const AddEntry = () => {
 				<div>
 					<label htmlFor="oldBillNumber">Old Bill Number</label>
 					<input type="text" name="oldBillNumber" placeholder="Bill Number"
-						value={inputVal.oldBillNumber} onChange={handleChange} />
+						value={inputVal.oldBillNumber} 
+						onChange={setBillDetails} 
+						onKeyDown={(e) => {if(e.keyCode == 13) {fetchBillDetails()}}}
+						/>
 				</div>
 				<div>
 					<label htmlFor="amount">Amount</label>
