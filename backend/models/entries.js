@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+let principle = new Schema({
+principleAmount: Number,
+interest: Number,
+date: Date
+});
 
 let customerSchema = new Schema({
 	cName: {
@@ -30,12 +35,8 @@ let customerSchema = new Schema({
 		type: Array
 	},
 	principle: [
-		new Schema({
-			principleAmount: {type: Number},
-			interest: {type: Number},
-			date: {type: Date}
-		})
-],
+		principle
+	],
 	metal: {
 		type: String
 	},

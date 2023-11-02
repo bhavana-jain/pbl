@@ -42,8 +42,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 	checkIfProps();
 	return (
 		<div ref={ref}>
-				<div style={{ "fontSize": "13px", "padding": "10px 10px 0 10px", "position":"relative"}} className="page-a4">
-				<h4 style={{"textAlign":"center", "position":"absolute", "top":"10px", "left":"0px","bottom":"0px", "right":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<div style={{ "fontSize": "13px", "padding": "10px 10px 0 10px", "position":"relative"}} className="page-a4"><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>

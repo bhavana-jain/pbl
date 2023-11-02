@@ -75,7 +75,16 @@ router
 		}
 	}
 	);
-});
+})
+
+.patch((req, res, next) => {
+	let id = req.params.id;
+	let principleDetails = req.body.principle;
+  
+	customerSchema.findByIdAndUpdate(id, { $set: { principle: principleDetails } }, { new: true }).then(updatedUser => {
+	  res.send(updatedUser);
+	});
+  });
 
 // Delete Student
 router.delete("/delete-student/:id",

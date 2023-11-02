@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "emailjs": "^4.0.2",
-    "firebase": "^9.6.10",
+    "firebase": "^9.23.0",
     "js-file-download": "^0.4.12",
     "json-server": "^0.17.0",
     "lodash": "^4.17.21",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
@@ -12,6 +12,8 @@ import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 import NavBar from './navBar.js';
+import BookDataService from "./services/entries.services.js";
+
 let PageSize = 30;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
@@ -55,25 +57,34 @@ const AllUserEntries = (props, ref) => {
 	const[principleDetails, setPrincipleDetails] = useState();
 	const [newPrinciple, setNewPrinciple] = useState();
 
-	function handleChange(e) {
+	const handlePrincipleChange = (e)  => {
 		const val = e.target.value;
-		setNewPrinciple({...newPrinciple, [e.target.name]: val});
-		setPrincipleDetails(current => [...current, newPrinciple]);
+		const updated = {...newPrinciple, [e.target.name]: val}
+		setNewPrinciple(updated);
 		
 	}
 
+
 	const updatePrinciple = (data) => {
+		console.log(data.principle);
 		setPrincipleInterest(true);
 		setInputValue(data);
-		setPrincipleDetails(data.principle)
+		setPrincipleDetails(data.principle);
+		
 	}
 
-	const savePrincipleDetails = async(e) => {
+	const savePrincipleDetails = useCallback (async(e) => {
+		const updated = [...principleDetails, newPrinciple];
+		console.log('principleDetails', updated, newPrinciple);
 		e.preventDefault();
-		await axios.put('http://localhost:4000/customers/update-student/' + inputVal._id, {"principle": principleDetails}, { headers: { 'Content-Type': 'application/json' } })
-			.then(res => console.log(res.data));
+		await axios.patch('http://localhost:4000/customers/update-student/' + inputVal._id, {"principle": updated}, { headers: { 'Content-Type': 'application/json' } })
+			.then(res => {
+				console.log(res.data);
+				setPrincipleDetails(updated);
+			});
+			getLists();
 			setPrincipleInterest(false);
-	}
+	}, [newPrinciple]);
 
 	const getLists = () => {
 		axios.get("http://localhost:4000/customers/get-result", { params: { createdBy: value.data.userName } })
@@ -359,6 +370,7 @@ const AllUserEntries = (props, ref) => {
 	const DeliveryNote = () => {
 		return (
 			<div id="delivery-note" className="page-a4">
+				<h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 				<h2 className="text-centre"> DELIVERY NOTE </h2>
 				<div className="bill-header" id="header">
 					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
@@ -402,7 +414,7 @@ const AllUserEntries = (props, ref) => {
 	const PledgeBill = () => {
 		return (
 			<div id="pledgeBill" style={{"position":"relative"}}>
-				<h4 style={{"textAlign":"center", "position":"absolute", "top":"0px", "left":"0px","bottom":"0px", "right":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 				<div style={{ "fontSize": "14px" }} className="page-a4">
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
@@ -696,6 +708,20 @@ const AllUserEntries = (props, ref) => {
 		document.body.removeChild(link);
 
 	}
+
+	const downloadtoFirebase = async () => {
+		const fileName = "entriesCopy";
+		const json = JSON.stringify(allEntries);
+
+		try {
+			await BookDataService.addBooks(json);
+			 console.log("added");
+		  } catch (err) {
+			console.log(err.message);
+		  }
+
+	}
+
 	useEffect(() => {
 		getLists();
 	}, [data, closeModal]);
@@ -715,6 +741,7 @@ const AllUserEntries = (props, ref) => {
 					<FilterEntries parentCallback={callbackFunction} />
 					<div style={{ "marginLeft": "auto" }}>
 						<button onClick={downloadData} style={{ "marginRight": "15px" }}> Download </button>
+					
 						<ReactToPrint
 							trigger={() => <button>Print</button>}
 							content={() => componentRef}
@@ -791,19 +818,19 @@ const AllUserEntries = (props, ref) => {
 			onKeyDown={(e) => {if(e.keyCode == 13) {e.preventDefault()}}}>
 							<div>
 					<label htmlFor="principleAmount">Principle</label>
-					<input type="text" name="principleAmount"  placeholder="Enter principle" onChange={handleChange}  ref={principleAmount}/>
+					<input type="text" name="principleAmount"  placeholder="Enter principle" onChange={handlePrincipleChange}  ref={principleAmount}/>
 				</div>
 				<div>
 					<label htmlFor="interest">Interest</label>
-					<input type="text" name="interest"  placeholder="Enter interest" onChange={handleChange} ref={interest}/>
+					<input type="text" name="interest"  placeholder="Enter interest" onChange={handlePrincipleChange} ref={interest}/>
 				</div>
 				<div>
 					<label htmlFor="date">Date</label>
-					<input type="date" name="date" placeholder="Enter city and pincode"  onChange={handleChange}  ref={date} />
+					<input type="date" name="date" placeholder="Enter city and pincode"  onChange={handlePrincipleChange}  ref={date} />
 				</div>
 				<button onClick={savePrincipleDetails}>Save</button>
 								</form>
-								{principleDetails.length ? 
+								{principleDetails && principleDetails.length  ? 
 							<table className="principleDetails">
 								<thead>
 									<td>No.</td>
@@ -815,9 +842,9 @@ const AllUserEntries = (props, ref) => {
 											return (
 											<tr>
 												<td>{index+1}</td>
-												<td>{item.principleAmount}</td>
+												 <td>{item.principleAmount}</td>
 												<td>{item.interest}</td>
-												<td>{moment(new Date(item.date)).format('DD/MM/YYYY') }</td>
+												<td>{moment(new Date(item.date)).format('DD/MM/YYYY') }</td> 
 											</tr>
 												)
 										})}
