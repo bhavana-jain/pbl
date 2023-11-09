@@ -170,18 +170,29 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	function calculateInterest(date1, amount) {
-		const diffTime = Math.abs(new Date() - new Date(date1));
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		let months = Math.ceil(diffDays / 30);
+		const diffTime = new Date().getTime() - new Date(date1).getTime();
+		const diffDays = diffTime / (1000 * 60 * 60 * 24);
+		let months = parseInt(diffDays / 30);
 		let interest;
 		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
+		if (diffTime == 0) {
 			interest = (amount * 1.33) / 100;
 		}
-		 else {
+		// if current date is less or equal to the loan data, subtract a month
+		else if(new Date().getDate() <= new Date(date1).getDate()){
+			interest = (amount * (months - 1) * 1.33) / 100;
+		}
+		else {
 			interest = (amount * months * 1.33) / 100;
-		 }
-		return interest;
+		}
+		// Check if its valid number, because sometimes date is not defined
+		if (interest) {
+			return interest;
+		}
+		else {
+			return 0;
+		}
+
 	}
 
 	const [art, articleBox] = useState(false);
@@ -208,7 +219,7 @@ const AllUserEntries = (props, ref) => {
 					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
 					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
 					<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
 					</div>
 				</div>
 				<p> பெயர் <span className="content-spacer"> {deliveryNt.cName} </span> எண் <span className="content-spacer"> </span> </p>
@@ -249,7 +260,7 @@ const AllUserEntries = (props, ref) => {
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
 							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block","textTransform":"capitalize" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} </div>
+							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> DUPLICATE BILL</h4>

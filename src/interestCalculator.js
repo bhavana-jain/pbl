@@ -93,10 +93,19 @@ const [billId, getBillNumber] = useState();
 	 
 	 // Calculate Rate of interest
 	 const calculateInterest = (date1, amount) => {
-			const diffTime = Math.abs(new Date() - new Date(date1));
-			const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-			let months = 	Math.ceil(diffDays / 30);
-			let interest = (amount * (months-1) * perValue) / 100;
+		let interest;
+			const diffTime = new Date() - new Date(date1);
+			const diffDays = diffTime / (1000 * 60 * 60 * 24);
+			let months = 	parseInt(diffDays / 30);
+			if(new Date().getDate() <= new Date(date1).getDate()){
+				// interest = (amount * (months - 2) * perValue) / 100;
+				interest = (amount * (months - 1) * perValue) / 100;
+			}
+			else { 
+				//interest = (amount * (months-1) * perValue) / 100;
+				interest = (amount * (months) * perValue) / 100;
+			
+			}
 			finalAmount = amount + interest;
 			return interest;
 	}	

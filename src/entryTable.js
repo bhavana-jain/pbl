@@ -64,7 +64,6 @@ const AllUserEntries = (props, ref) => {
 		
 	}
 
-
 	const updatePrinciple = (data) => {
 		console.log(data.principle);
 		setPrincipleInterest(true);
@@ -76,7 +75,7 @@ const AllUserEntries = (props, ref) => {
 	const savePrincipleDetails = useCallback (async(e) => {
 		const updated = [...principleDetails, newPrinciple];
 		console.log('principleDetails', updated, newPrinciple);
-		e.preventDefault();
+		// e.preventDefault();
 		await axios.patch('http://localhost:4000/customers/update-student/' + inputVal._id, {"principle": updated}, { headers: { 'Content-Type': 'application/json' } })
 			.then(res => {
 				console.log(res.data);
@@ -103,8 +102,11 @@ const AllUserEntries = (props, ref) => {
 		// Remove duplicates from array, sort in ascending order and filter to remove null &undefined values from array
 		let lastNumber = [...new Set(allDelivery)].sort(function(a, b){return a - b}).filter(item => !!item)	
 			let arrlen = (lastNumber[lastNumber.length - 1]);
-			console.log(lastNumber, parseInt(arrlen) + 1);
-		setDeliveryNumber(parseInt(arrlen) + 1);
+			// If there is existing delivery Receipt Number, add 1 to generate new delivery number, else set as 1
+			if(arrlen){
+				setDeliveryNumber(parseInt(arrlen) + 1);;
+			}
+		else { setDeliveryNumber(1); }
 	}
 
 	const [filterUnredeemed, setfilterUnredeemed] = useState([]);
@@ -325,23 +327,27 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	function calculateInterest(date1, amount) {
-		const diffTime = Math.abs(new Date() - new Date(date1));
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		let months = Math.ceil(diffDays / 30);
+		const diffTime = new Date().getTime() - new Date(date1).getTime();
+		const diffDays = diffTime / (1000 * 60 * 60 * 24);
+		let months = parseInt(diffDays / 30);
 		let interest;
 		// If pledge and redemption date are same, set month as 1 (get one months interest)
 		if (diffTime == 0) {
 			interest = (amount * 1.33) / 100;
 		}
+		// if current date is less or equal to the loan data, subtract a month
+		else if(new Date().getDate() <= new Date(date1).getDate()){
+			interest = (amount * (months - 1) * 1.33) / 100;
+		}
 		else {
 			interest = (amount * months * 1.33) / 100;
 		}
 		// Check if its valid number, because sometimes date is not defined
-		if (interest == NaN) {
-			return 0;
+		if (interest) {
+			return interest;
 		}
 		else {
-			return interest;
+			return 0;
 		}
 
 	}
@@ -376,7 +382,7 @@ const AllUserEntries = (props, ref) => {
 					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
 					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
 						<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2></div>
-						<div>{value.data.address} <br /> {value.data.area} </div>
+						<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
 					</div>
 
 				</div>
@@ -413,15 +419,15 @@ const AllUserEntries = (props, ref) => {
 	}
 	const PledgeBill = () => {
 		return (
-			<div id="pledgeBill" style={{"position":"relative"}}>
+			<div id="pledgeBill">
 				<h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
-				<div style={{ "fontSize": "14px" }} className="page-a4">
+				<div style={{ "fontSize": "14px", "position":"relative"}}  className="page-a4">
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
 								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
-								<div>{value.data.address} <br /> {value.data.area} </div>
+								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> DUPLICATE BILL</h4>
@@ -479,11 +485,11 @@ const AllUserEntries = (props, ref) => {
 							</tr>
 							<tr className="articles-table-body">
 								<td style={{ "width": "80%" }}>
-									<ul className='article-lists'>
+									{ <ul className='article-lists'>
 										{billDetails.articleName.map((item, index) => {
 											return <li>{item} - {billDetails.metal} </li>
 										})}
-									</ul>
+									</ul> }
 								</td>
 								<td style={{ "padding": "0" }}>
 									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
@@ -709,19 +715,6 @@ const AllUserEntries = (props, ref) => {
 
 	}
 
-	const downloadtoFirebase = async () => {
-		const fileName = "entriesCopy";
-		const json = JSON.stringify(allEntries);
-
-		try {
-			await BookDataService.addBooks(json);
-			 console.log("added");
-		  } catch (err) {
-			console.log(err.message);
-		  }
-
-	}
-
 	useEffect(() => {
 		getLists();
 	}, [data, closeModal]);
@@ -802,7 +795,7 @@ const AllUserEntries = (props, ref) => {
 							<button className="close-modal" onClick={cancelDelete} ></button>
 							<p> Are you sure you want to delete entry with Bill No: <strong> {delId} </strong> </p>
 							<button onClick={() => confirmDeletion(true)}> Yes </button>
-\							<button onClick={cancelDelete}> No </button>
+							<button onClick={cancelDelete}> No </button>
 						</div>
 					</>
 					: ''}
@@ -812,8 +805,17 @@ const AllUserEntries = (props, ref) => {
 						<div className="page-overlay"></div>
 						<div className="delete-modal">
 							<button className="close-modal" onClick={cancelDelete} ></button>
-							<form className='entry-form' 
-							style={{"padding":"0px"}}
+<div className='entry-form'>
+<div>
+				<label htmlFor="cName">Customer Name</label>
+				<input type="text" name="cName"  value ={inputVal.cName} />
+				</div>
+				<div>
+				<label htmlFor="billNumber">Bill Number</label>
+				<input type="text" name="billNumber" value ={inputVal.billNumber} />
+				</div>
+</div>
+							<form className='entry-form'
 							onSubmit={(e) => {e.preventDefault()}}
 			onKeyDown={(e) => {if(e.keyCode == 13) {e.preventDefault()}}}>
 							<div>
@@ -828,7 +830,9 @@ const AllUserEntries = (props, ref) => {
 					<label htmlFor="date">Date</label>
 					<input type="date" name="date" placeholder="Enter city and pincode"  onChange={handlePrincipleChange}  ref={date} />
 				</div>
-				<button onClick={savePrincipleDetails}>Save</button>
+				<button onClick={savePrincipleDetails}
+				onKeyDown={(e) => {if(e.keyCode == 13) {savePrincipleDetails()}}}
+				>Save</button>
 								</form>
 								{principleDetails && principleDetails.length  ? 
 							<table className="principleDetails">

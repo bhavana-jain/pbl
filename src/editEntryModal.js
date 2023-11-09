@@ -8,10 +8,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import ReactToPrint from "react-to-print";
 import DeliveryNote from './deliveryNote.js';
+import { parseInt } from 'lodash';
 
 const EditEntryModal = (props) => {
 	// console.log('delivery', props.delivery);
-	console.log(props.toEdit);
 	const toDeliver = props.delivery;
 	const [inputVal, setInputValue] = useState();
 	const [editData, getEditedData] = useState();
@@ -27,7 +27,6 @@ const EditEntryModal = (props) => {
 		setInputValue({ ...inputVal, [e.target.name]: value });
 	}
 	const getData = async () => {
-		console.log('fata updated');
 		const response = await axios.get("http://localhost:4000/customers/update-student/" + props.toEdit);
 		setInputValue(response.data);
 		// setInputValue({...inputVal, "redemptionDate" : moment(response.data.redemptionDate).format('YYYY-MM-DD').toString()});
@@ -61,20 +60,23 @@ const EditEntryModal = (props) => {
 	}
 
 	function calculateInterest(date1, amount, redemDate) {
-		
-		let diffTime, interest;
+		let diffTime, interest, redeemDate, diffDays;
 		if (redemDate == null || redemDate == undefined) {
-			diffTime = Math.abs(new Date() - new Date(date1));
+			redeemDate = new Date();
 		}
 		else {
-			diffTime = Math.abs(new Date(redemDate) - new Date(date1));
+			redeemDate = new Date(redemDate)
 		}
-		console.log('in interest check', diffTime)
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		let months = Math.ceil(diffDays / 30);
+		diffTime = new Date(redeemDate) - new Date(date1);
+		diffDays = diffTime / (1000 * 60 * 60 * 24);
+		let months = parseInt(diffDays / 30);
 		// If pledge and redemption date are same, set month as 1 (get one months interest)
 		if(diffTime == 0){
 			interest = (amount * 1.33) / 100;
+		}
+		// if current date is less or equal to the loan data, subtract a month
+		else if(new Date().getDate() <= new Date(date1).getDate()){
+			interest = (amount * (months - 1) * 1.33) / 100;
 		}
 		 else {
 			interest = (amount * months * 1.33) / 100;
@@ -181,7 +183,7 @@ const EditEntryModal = (props) => {
 						</div>
 						<div>
 							<label htmlFor="deliveryRecNum">Delivery Receipt Number</label>
-							<input type="text" name="deliveryRecNum" placeholder="Identity Proof" onChange={handleChange} value={inputVal.deliveryRecNum} autoComplete="off" />
+							<input type="text" name="deliveryRecNum" placeholder="Delivery Receipt Number" onChange={handleChange} value={inputVal.deliveryRecNum} autoComplete="off" />
 						</div>
 						
 						<div style={{ "clear": "both", "paddingLeft": "0px", "width":"100%" }}>

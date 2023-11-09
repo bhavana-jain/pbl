@@ -1,0 +1,9 @@
+1. Make sure to remove all _id before uploading data
+2. pbl.nakoda@gmail.com needs to be signed in always
+3. ordering_hemanth & order.html to sort data
+
+mongoimport --db dbname --collection collectionName --file filename (in json format) --jsonArray --maintainInsertionOrder
+
+mongosh
+switch dbName
+db.collectionName.drop()

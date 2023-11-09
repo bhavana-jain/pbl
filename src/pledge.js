@@ -346,16 +346,20 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	const downloadData = async () => {
-		const fileName = "entriesCopy";
-		const json = JSON.stringify(entries);
-		const blob = new Blob([json], { type: 'application/json' });
-		const href = await URL.createObjectURL(blob);
-		const link = document.createElement('a');
-		link.href = href;
-		link.download = fileName + ".json";
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+		// const fileName = "entriesCopy";
+		// const json = JSON.stringify(entries);
+		// const blob = new Blob([json], { type: 'application/json' });
+		// const href = await URL.createObjectURL(blob);
+		// const link = document.createElement('a');
+		// link.href = href;
+		// link.download = fileName + ".json";
+		// document.body.appendChild(link);
+		// link.click();
+		// document.body.removeChild(link);
+		axios.get("http://localhost:4000/customers/download", { params: { createdBy: value.data.userName } })
+			.then(response => {
+				console.log("data backed up");
+			});
 
 	}
 	useEffect(() => {

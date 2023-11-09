@@ -1,3 +1,19 @@
 (node:8780) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 Cast to embedded failed for value "[null,{"principleAmount":1,"_id":"653fea0483bc391d16553cb0"},{"principleAmount":10,"_id":"653fea0483bc391d16553cb1"},{"principleAmount":100,"_id":"653fea0483bc391d16553cb2"},{"principleAmount":100,"interest":3,"_id":"653fea0483bc391d16553cb3"},{"principleAmount":100,"interest":30,"_id":"653fea0483bc391d16553cb4"},{"principleAmount":100,"interest":30,"date":"0002-12-22T00:00:00.000Z","_id":"653fea0483bc391d16553cb5"},{"principleAmount":100,"interest":30,"date":"0020-12-22T00:00:00.000Z","_id":"653fea0483bc391d16553cb6"},{"principleAmount":100,"interest":30,"date":"0202-12-22T00:00:00.000Z","_id":"653fea0483bc391d16553cb7"},null,{"principleAmount":"9"},{"principleAmount":"90"},{"principleAmount":"900"},{"principleAmount":"900","interest":"7"},{"principleAmount":"900","interest":"70"},{"principleAmount":"900","interest":"700"},{"principleAmount":"900","interest":"700","date":"0002-11-11"},{"principleAmount":"900","interest":"700","date":"0020-11-11"},{"principleAmount":"900","interest":"700","date":"0201-11-11"},{"principleAmount":"900","interest":"700","date":"2012-11-11"},{"principleAmount":"900","interest":"700","date":"20122-11-11"},{"principleAmount":"900","interest":"700","date":""},{"principleAmount":"900","interest":"700","date":"0002-11-11"},{"principleAmount":"900","interest":"700","date":"0020-11-11"},{"principleAmount":"900","interest":"700","date":"0202-11-11"}]" (type string) at path "principle" because of "ObjectParameterError"
+(node:4276) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4228) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[Error: ENOENT: no such file or directory, open 'C:\pbl\data\nakoda.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\pbl\\data\\nakoda.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\pbl\data\nakoda.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\pbl\\data\\nakoda.json'
+}

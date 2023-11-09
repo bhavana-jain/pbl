@@ -59,6 +59,9 @@ const AddEntry = () => {
 			if (arrlen.split('/').length > 1 && currentYear == arrlen.split('/')[1]) {
 				newBill = parseInt((arrlen.split('/')[0])) + 1;
 			}
+			else {
+				newBill = 1;
+			}
 		}
 
 		else {

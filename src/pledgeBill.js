@@ -48,7 +48,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
 								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
-								<div>{value.data.address} <br /> {value.data.area} </div>
+								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> {props.billType}</h4>

@@ -1,6 +1,7 @@
 let mongoose = require("mongoose"),
 express = require("express"),
 router = express.Router();
+const fs = require('fs');
 
 // Student Model
 let customerSchema = require("../models/entries");
@@ -28,6 +29,7 @@ customerSchema.find((error, data) => {
 });
 });
 
+// get All entries by user Name 
 router.get("/get-result", (req, res, next) => {
 	const filters = req.query.createdBy;
 	console.log(filters);
@@ -39,6 +41,27 @@ router.get("/get-result", (req, res, next) => {
 				 return user["createdBy"] == filters
 			})
 			 res.json(filteredUser);
+		}
+	});
+});
+
+router.get("/download", (req, res, next) => {
+	const filters = req.query.createdBy;
+	console.log(filters);
+	customerSchema.find((error, data) => {
+		if (error) {
+		return next(error);
+		} else {
+			const filteredUser = data.filter(user => {
+				 return user["createdBy"].trim() == filters.trim()
+			})
+			 res.json(filteredUser);
+			 fs.writeFile('./data/' +filters+ '.json', JSON.stringify(filteredUser), err => {
+				if (err) {
+				  console.error(err);
+				}
+				console.log("file written successfully");
+			  });
 		}
 	});
 });
