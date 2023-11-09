@@ -815,7 +815,7 @@ const AllUserEntries = (props, ref) => {
 				<input type="text" name="billNumber" value ={inputVal.billNumber} />
 				</div>
 </div>
-							<form className='entry-form'
+							<form className='entry-form' style={{"clear":"both"}}
 							onSubmit={(e) => {e.preventDefault()}}
 			onKeyDown={(e) => {if(e.keyCode == 13) {e.preventDefault()}}}>
 							<div>
