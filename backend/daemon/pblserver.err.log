@@ -17,3 +17,5 @@ Cast to embedded failed for value "[null,{"principleAmount":1,"_id":"653fea0483b
   syscall: 'open',
   path: 'C:\\pbl\\data\\nakoda.json'
 }
+(node:10120) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)

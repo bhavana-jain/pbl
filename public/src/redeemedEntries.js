@@ -160,12 +160,35 @@ const AllUserEntries = (props, ref) => {
 		window.print();
 	}
 
-	function calculateInterest(date1, amount) {
-		const diffTime = Math.abs(new Date() - new Date(date1));
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		let months = Math.ceil(diffDays / 30);
-		let interest = (amount * (months) * 1.33) / 100;
-		return interest;
+	function calculateInterest(date1, amount, redemDate) {
+		let diffTime, interest, redeemDate, diffDays;
+		if (redemDate == null || redemDate == undefined) {
+			redeemDate = new Date();
+		}
+		else {
+			redeemDate = new Date(redemDate)
+		}
+		diffTime = new Date(redeemDate) - new Date(date1);
+		diffDays = diffTime / (1000 * 60 * 60 * 24);
+		let months = parseInt(diffDays / 30);
+		console.log('months', months);
+		if(months <= 0) {
+		months = 1
+	}
+		// If pledge and redemption date are same, set month as 1 (get one months interest)
+		if(diffTime == 0){
+			interest = (amount * 1.33) / 100;
+		}
+		// if current date is less or equal to the loan data and months difference is greaters, subtract a month 
+		else if(new Date().getDate() <= new Date(date1).getDate() && months > 1){
+			interest = (amount * (months - 1) * 1.33) / 100;
+		}
+		 else {
+			interest = (amount * months * 1.33) / 100;
+		 }
+		// setInterestVal(interest);
+		return Math.abs(interest);
+
 	}
 
 	const [art, articleBox] = useState(false);
