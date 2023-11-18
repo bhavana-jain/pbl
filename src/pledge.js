@@ -356,7 +356,7 @@ const AllUserEntries = (props, ref) => {
 		// document.body.appendChild(link);
 		// link.click();
 		// document.body.removeChild(link);
-		axios.get("http://localhost:4000/customers/download", { params: { createdBy: value.data.userName } })
+		axios.get("http://localhost:4000/customers/download", { params: { createdBy: (value.data.userName).trim() } })
 			.then(response => {
 				console.log("data backed up");
 				alert("backup complete");

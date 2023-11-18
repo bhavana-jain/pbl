@@ -41,8 +41,8 @@ const PledgeBill = React.forwardRef((props, ref) => {
 
 	checkIfProps();
 	return (
-		<div ref={ref}>
-				<div style={{ "fontSize": "13px", "padding": "10px 10px 0 10px", "position":"relative"}} className="page-a4"><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+		<div ref={ref} className="page-a4">
+				<div style={{ "fontSize": "13px", "padding": "10px 10px 0 10px", "position":"relative"}} ><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
@@ -200,7 +200,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 						அடகு பொருளை வைத்தவர் கையெழுத்து ________________ <br />
 						பொருள் வாங்குபவரின் கையெழுத்து ______________ <br />
 					</p>
-					<div className="bill-footer">
+					<div className="bill-footer" style={{"paddingTop":"10px"}}>
 						<div> Working hours: 9:00 AM to 9:00 PM </div>
 						<div style={{"paddingRight": "10px"}}> Every Friday &amp; other important festival days </div>
 					</div>

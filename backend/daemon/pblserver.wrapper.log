@@ -1,50 +1,18 @@
-2023-10-30 22:37:24 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-10-30 22:37:24 - Started 4816
-2023-10-31 22:33:27 - Stopping pblserver.exe
-2023-10-31 22:33:27 - ProcessKill 4816
-2023-10-31 22:33:27 - Found child process: 8220 Name: conhost.exe
-2023-10-31 22:33:27 - Found child process: 8780 Name: node.exe
-2023-10-31 22:33:27 - Stopping process 8220
-2023-10-31 22:33:27 - Send SIGINT 8220
-2023-10-31 22:33:27 - SIGINT to 8220 failed - Killing as fallback
-2023-10-31 22:33:27 - Stopping process 8780
-2023-10-31 22:33:27 - Send SIGINT 8780
-2023-10-31 22:33:27 - SIGINT to 8780 failed - Killing as fallback
-2023-10-31 22:33:27 - Stopping process 4816
-2023-10-31 22:33:27 - Send SIGINT 4816
-2023-10-31 22:33:27 - SIGINT to 4816 failed - Killing as fallback
-2023-10-31 22:33:27 - Finished pblserver.exe
-2023-11-02 22:08:09 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-11-02 22:08:09 - Started 8260
-2023-11-09 15:57:32 - Stopping pblserver.exe
-2023-11-09 15:57:32 - ProcessKill 8260
-2023-11-09 15:57:32 - Found child process: 6032 Name: conhost.exe
-2023-11-09 15:57:32 - Found child process: 4276 Name: node.exe
-2023-11-09 15:57:32 - Stopping process 6032
-2023-11-09 15:57:32 - Send SIGINT 6032
-2023-11-09 15:57:32 - SIGINT to 6032 failed - Killing as fallback
-2023-11-09 15:57:33 - Stopping process 4276
-2023-11-09 15:57:33 - Send SIGINT 4276
-2023-11-09 15:57:33 - SIGINT to 4276 failed - Killing as fallback
-2023-11-09 15:57:33 - Stopping process 8260
-2023-11-09 15:57:33 - Send SIGINT 8260
-2023-11-09 15:57:33 - SIGINT to 8260 failed - Killing as fallback
-2023-11-09 15:57:33 - Finished pblserver.exe
-2023-11-09 22:01:44 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-11-09 22:01:44 - Started 3880
-2023-11-09 22:17:34 - Stopping pblserver.exe
-2023-11-09 22:17:34 - ProcessKill 3880
-2023-11-09 22:17:34 - Found child process: 3916 Name: conhost.exe
-2023-11-09 22:17:34 - Found child process: 4228 Name: node.exe
-2023-11-09 22:17:35 - Stopping process 3916
-2023-11-09 22:17:35 - Send SIGINT 3916
-2023-11-09 22:17:35 - SIGINT to 3916 failed - Killing as fallback
-2023-11-09 22:17:35 - Stopping process 4228
-2023-11-09 22:17:35 - Send SIGINT 4228
-2023-11-09 22:17:35 - SIGINT to 4228 failed - Killing as fallback
-2023-11-09 22:17:35 - Stopping process 3880
-2023-11-09 22:17:35 - Send SIGINT 3880
-2023-11-09 22:17:35 - SIGINT to 3880 failed - Killing as fallback
-2023-11-09 22:17:35 - Finished pblserver.exe
-2023-11-09 22:36:41 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-11-09 22:36:41 - Started 6568
+2023-11-13 15:32:29 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2023-11-13 15:32:29 - Started 7684
+2023-11-17 11:33:20 - Stopping pblserver.exe
+2023-11-17 11:33:20 - ProcessKill 7684
+2023-11-17 11:33:21 - Shutdown exception
+Message:A system shutdown is in progress.
+
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2023-11-17 11:33:56 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2023-11-17 11:33:56 - Started 4288

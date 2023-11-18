@@ -56,7 +56,7 @@ router.get("/download", (req, res, next) => {
 				 return user["createdBy"].trim() == filters.trim()
 			})
 			 res.json(filteredUser);
-			 fs.writeFile('./data/' +filters+ '.json', JSON.stringify(filteredUser), err => {
+			 fs.writeFile( 'C:\\pbl\\backend\\data\\' +filters+ '.json', JSON.stringify(filteredUser), err => {
 				if (err) {
 				  console.error(err);
 				}
