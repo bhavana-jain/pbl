@@ -1,21 +1,738 @@
 Connected to port 4000
 Connected to Mongo! Database name: "nakoda"
-nakoda
+nakoda string
+file written successfully
+bhavana string
+file written successfully
+function
+function
+hemanth string
 file written successfully
 hemanth
+hemanth
+hemanth
+Connected to port 4000
+Connected to Mongo! Database name: "nakoda"
+{
+  userName: 'test2',
+  accountDetails: [],
+  _id: new ObjectId("655f825dc1051097568ef3e6"),
+  __v: 0
+}
+test2
+{
+  userName: 'test4',
+  accountDetails: [],
+  companyName: 'xbnbxnbmn',
+  address: 'xbmnxbmnb',
+  area: 'xabxmnB',
+  contactNo: 98979,
+  license: 'gxgjhzxgb',
+  _id: new ObjectId("655f827bc1051097568ef3e9"),
+  __v: 0
+}
+test4
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth string
 file written successfully
 hemanth 
 hemanth 
 hemanth 
 hemanth 
-nakoda
-nakoda
-nakoda
+hemanth 
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
 hemanth 
 hemanth 
-hemanth 
-hemanth 
-undefined
-hemanth 
-hemanth 
-hemanth 
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth

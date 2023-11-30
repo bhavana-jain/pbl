@@ -630,7 +630,7 @@ const AllUserEntries = (props, ref) => {
 
 	// Show only search result
 	const RenderSearchData = () => {
-		let data =  entries.filter((ele) => ele.address.toLowerCase().includes(searchText.toLowerCase()) || ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText ).map(function (data, idx) {
+		let data =  allEntries.filter((ele) => ele.address.toLowerCase().includes(searchText.toLowerCase()) || ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText ).map(function (data, idx) {
 			/* Show only unrdeeemed entries */
 			if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
 				return (

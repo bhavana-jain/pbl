@@ -256,7 +256,7 @@ const AllUserEntries = (props, ref) => {
 			return (
 				<ul className="table-body" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
-					<li></li>
+					<li>{data.deliveryRecNum}</li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 						{data.address}
 						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
@@ -289,7 +289,7 @@ const AllUserEntries = (props, ref) => {
 				return (
 					<ul className="table-body" key={data.billNumber}>
 						<li>{data.cName}</li>
-						<li></li>
+						<li>{data.deliveryRecNum}</li>
 						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 							{data.address} {data.cityPincode}
 							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}

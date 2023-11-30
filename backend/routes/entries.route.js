@@ -46,14 +46,14 @@ router.get("/get-result", (req, res, next) => {
 });
 
 router.get("/download", (req, res, next) => {
-	const filters = req.query.createdBy;
-	console.log(filters);
+	let filters = req.query.createdBy;
+	console.log(filters, typeof filters);
 	customerSchema.find((error, data) => {
 		if (error) {
 		return next(error);
 		} else {
-			const filteredUser = data.filter(user => {
-				 return user["createdBy"].trim() == filters.trim()
+			let filteredUser = data.filter(user => {
+				 return user["createdBy"] == filters
 			})
 			 res.json(filteredUser);
 			 fs.writeFile( 'C:\\pbl\\backend\\data\\' +filters+ '.json', JSON.stringify(filteredUser), err => {
