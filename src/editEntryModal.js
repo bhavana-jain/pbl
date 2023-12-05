@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import ReactToPrint from "react-to-print";
 import DeliveryNote from './deliveryNote.js';
-import { parseInt } from 'lodash';
+import { isInteger, parseInt } from 'lodash';
 
 const EditEntryModal = (props) => {
 	// console.log('delivery', props.delivery);
@@ -67,26 +67,33 @@ const EditEntryModal = (props) => {
 		else {
 			redeemDate = new Date(redemDate)
 		}
-		diffTime = new Date(redeemDate) - new Date(date1);
-		diffDays = diffTime / (1000 * 60 * 60 * 24);
-		let months = parseInt(diffDays / 30);
-		console.log('months', months);
-		if(months <= 0) {
-		months = 1
-	}
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
-		}
-		// if current date is less or equal to the loan data and months difference is greaters, subtract a month 
-		else if(new Date().getDate() <= new Date(date1).getDate() && months > 1){
-			interest = (amount * (months - 1) * 1.33) / 100;
-		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
-		// setInterestVal(interest);
-		return Math.abs(interest);
+		let pledgeMonth = new Date(date1).getMonth() + 1;
+		let redeemedMonth = new Date(redeemDate).getMonth() + 1;
+		console.log('months', redeemedMonth - pledgeMonth);
+		let months = redeemedMonth - pledgeMonth;
+
+		let pledgeDate = new Date(date1).getDate();
+		let redeemedDate = new Date(redeemDate).getDate();
+
+		console.log('months', pledgeDate, redeemedDate);
+
+		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
+if(redeemedDate <= pledgeDate && months > 1) {
+months = months - 1;
+}
+
+// If pledge and redemption date are same, give 1 months interest
+else if(redeemedMonth == pledgeMonth){
+	months = 1;
+}
+
+interest = (amount * months * 1.33) / 100;
+
+	// 	if(months <= 0) {
+	// 	months = 1
+	// }
+		
+		return Math.abs(interest).toFixed(2);
 
 	}
 

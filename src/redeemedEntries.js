@@ -14,7 +14,7 @@ import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 import NavBar from './navBar.js';
-let PageSize = 30;
+let PageSize = 30, finalAmount;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
@@ -169,32 +169,39 @@ const AllUserEntries = (props, ref) => {
 		window.print();
 	}
 
-	function calculateInterest(date1, amount) {
-		const diffTime = new Date().getTime() - new Date(date1).getTime();
-		const diffDays = diffTime / (1000 * 60 * 60 * 24);
-		let months = parseInt(diffDays / 30);
-		let interest;
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if (diffTime == 0) {
-			interest = (amount * 1.33) / 100;
-		}
-		// if current date is less or equal to the loan data, subtract a month
-		else if(new Date().getDate() <= new Date(date1).getDate()){
-			interest = (amount * (months - 1) * 1.33) / 100;
+	function calculateInterest(date1, amount, redemDate) {
+		let diffTime, interest, redeemDate, diffDays;
+		if (redemDate == null || redemDate == undefined) {
+			redeemDate = new Date();
 		}
 		else {
-			interest = (amount * months * 1.33) / 100;
+			redeemDate = new Date(redemDate)
 		}
-		// Check if its valid number, because sometimes date is not defined
-		if (interest) {
-			return interest;
-		}
-		else {
-			return 0;
-		}
+		let pledgeMonth = new Date(date1).getMonth() + 1;
+		let redeemedMonth = new Date(redeemDate).getMonth() + 1;
+		console.log('months', redeemedMonth - pledgeMonth);
+		let months = redeemedMonth - pledgeMonth;
+
+		let pledgeDate = new Date(date1).getDate();
+		let redeemedDate = new Date(redeemDate).getDate();
+
+		console.log('months', pledgeDate, redeemedDate);
+
+		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
+if(redeemedDate <= pledgeDate && months > 1) {
+months = months - 1;
+}
+
+// If pledge and redemption date are same, give 1 months interest
+else if(redeemedMonth == pledgeMonth){
+	months = 1;
+}
+
+interest = (amount * months * 1.33) / 100;
+finalAmount = amount + interest;
+		 return Math.abs(interest).toFixed(2);
 
 	}
-
 	const [art, articleBox] = useState(false);
 	function showArticleList() {
 		articleBox(true);
@@ -243,7 +250,7 @@ const AllUserEntries = (props, ref) => {
 						<div> Date: <span className="content-spacer"> {today} </span> </div>
 						<div style={{ "paddingTop": "15px" }}> Delivery Receipt No: <span className="content-spacer"> </span> </div>
 					</div>
-					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> {deliveryNt.amount + calculateInterest(deliveryNt.date, deliveryNt.amount)} </span> </div>
+					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> {finalAmount} </span> </div>
 				</div>
 				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
 					<div style={{ "marginLeft": "auto" }}> Signature or Thumb Impression of the Pawner </div>
