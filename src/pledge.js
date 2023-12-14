@@ -212,7 +212,6 @@ const AllUserEntries = (props, ref) => {
 		else {
 			diffTime = Math.abs(new Date(redemDate) - new Date(date1));
 		}
-		console.log('in interest check', diffTime)
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 		let months = Math.ceil(diffDays / 30);
 		// If pledge and redemption date are same, set month as 1 (get one months interest)
@@ -253,6 +252,7 @@ const AllUserEntries = (props, ref) => {
 	// Default page state with pagination
 	const RenderTableData = () => {
 		let data = currentTableData.map(function (data, idx) {
+			
 			return (
 				<ul className="table-body" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>

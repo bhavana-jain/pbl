@@ -2227,3 +2227,2305 @@ hemanth
 hemanth
 hemanth string
 file written successfully
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth string
+file written successfully
+nakoda
+nakoda
+nakoda
+nakoda string
+file written successfully
+hemanth
+hemanth
+hemanth
+{
+  cName: 'REVATHI',
+  address: '82 MADHA KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1035/2023',
+  amount: 2100,
+  articleName: [ '1P BABY GULES ', '1P LEG THANDA' ],
+  metal: 'SILVER',
+  gram: 50,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a823c1051097568eff79"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+{
+  cName: 'KIRTHIKA',
+  address: '845/37 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1036/2023',
+  amount: 700,
+  articleName: [ '1P GUNDU DISCKO KAMAL' ],
+  metal: 'SILVER',
+  gram: 0,
+  mg: 150,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a8d7c1051097568eff7f"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'VASANTHAKUMAR',
+  address: '266 NAVALLAR NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1037/2023',
+  oldBillNumber: '',
+  amount: 40600,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: 15,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a916c1051097568eff81"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+{
+  cName: 'THENARASU',
+  address: '931/49 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1038/2023',
+  amount: 10000,
+  articleName: [ '1N GENTS RING' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a97fc1051097568eff8b"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'NIVEDA',
+  address: '541/9 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1039/2023',
+  oldBillNumber: '',
+  amount: 10000,
+  articleName: [ '1N ROUND RING', '1N BABY RING' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 500,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a9b7c1051097568eff8d"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'VENILLA',
+  address: '1518/AF VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-11-30',
+  contactNo: null,
+  billNumber: '1040/2023',
+  oldBillNumber: '',
+  amount: 4150,
+  articleName: [ '1N GUNDU TT TOPES' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572a9e1c1051097568eff90"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'SONIYA',
+  address: '747/30 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-01',
+  contactNo: null,
+  billNumber: '1041/2023',
+  oldBillNumber: '',
+  amount: 3000,
+  articleName: [ '1N ENAMEL RING' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aa12c1051097568eff93"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'NAGLAXMI',
+  address: 'NO.83 MADHA KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-01',
+  contactNo: null,
+  billNumber: '1042/2023',
+  oldBillNumber: '',
+  amount: 1100,
+  articleName: [ '1P MUTHU METHI' ],
+  metal: 'SILVER',
+  gram: 11,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aa45c1051097568eff96"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'SHANTHA',
+  address: '829/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1043/2023',
+  oldBillNumber: '',
+  amount: 1550,
+  articleName: [ '1P TT DISCKO KAMAL' ],
+  metal: 'SILVER',
+  gram: 0,
+  mg: 250,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aa7ac1051097568eff99"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+{
+  cName: 'JYOTHI',
+  address: '1443/AC VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1044/2023',
+  amount: 6500,
+  articleName: [ '1N THALLI' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 600,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aac6c1051097568eff9e"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SURESHKUMAR',
+  address: '832/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1045/2023',
+  oldBillNumber: '',
+  amount: 2000,
+  articleName: [ '1P GULES (JSP)' ],
+  metal: 'SILVER',
+  gram: 100,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aaf6c1051097568effa1"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'IBHRAHIM',
+  address: '435/1 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1046/2023',
+  oldBillNumber: '',
+  amount: 100000,
+  articleName: [ '1N GULZAR' ],
+  metal: 'GOLD',
+  gram: 35,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ab42c1051097568effa5"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'JYOTHI',
+  address: '1443/AC VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1047/2023',
+  oldBillNumber: '',
+  amount: 200,
+  articleName: [ '1N W/S MOOGTHI' ],
+  metal: 'SILVER',
+  gram: 0,
+  mg: 50,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ab6bc1051097568effa7"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'KUPU',
+  address: '829/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1048/2023',
+  oldBillNumber: '',
+  amount: 450,
+  articleName: [ '1N W/S R/S SRIDEVI MOOGTHI' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 100,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ab9bc1051097568effaa"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'VASANTHAKUMAR',
+  address: '266 NAVALLAR NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1049/2023',
+  amount: 50600,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: 15,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ac0ec1051097568effb4"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SHIVA',
+  address: '13/B SELLIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1050/2023',
+  oldBillNumber: '',
+  amount: 9000,
+  articleName: [ '1N RING' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ac40c1051097568effb6"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'YUVARANI',
+  address: '1170/69 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-02',
+  contactNo: null,
+  billNumber: '1051/2023',
+  oldBillNumber: '',
+  amount: 10000,
+  articleName: [ '1P TT KAMAL' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ac74c1051097568effb9"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'YUVARANI',
+  address: '19A SELIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1052/2023',
+  oldBillNumber: '',
+  amount: 1600,
+  articleName: [ '2P SPRING METHI' ],
+  metal: 'SILVER',
+  gram: 20,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 2000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572acb5c1051097568effbc"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'NAGRAJ',
+  address: '93/L VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1053/2023',
+  oldBillNumber: '',
+  amount: 1700,
+  articleName: [ '1N R/S BESSAR' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 300,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 2000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aceac1051097568effbf"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'ANDAAL',
+  address: '806/34 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1054/2023',
+  oldBillNumber: '933/2023',
+  amount: 3000,
+  articleName: [ '1N RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 6000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ad14c1051097568effc3"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'KAUSALYA',
+  address: '1408/AB VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1055/2023',
+  oldBillNumber: '',
+  amount: 12000,
+  articleName: [ '1P W/P TOTES' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ad43c1051097568effc5"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'AADHILAXMI',
+  address: '291/A VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1056/2023',
+  oldBillNumber: '',
+  amount: 3000,
+  articleName: [ '1P FANCY GULES (JSP)' ],
+  metal: 'SILVER',
+  gram: 50,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ad6dc1051097568effc8"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'MAIRY',
+  address: 'NO 7 MADHA KOIL ST',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-03',
+  contactNo: null,
+  billNumber: '1057/2023',
+  oldBillNumber: '',
+  amount: 3500,
+  articleName: [ '1N URTH ANNAKAR' ],
+  metal: 'SILVER',
+  gram: 60,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ada2c1051097568effcb"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'VINOTH',
+  address: '838/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1058/2023',
+  oldBillNumber: '',
+  amount: 13260,
+  articleName: [ '1N BABY BRACELET', '1N BABY RING', '1N BROKEN 1/4 KAALKASH' ],
+  metal: 'SILVER',
+  gram: 3,
+  mg: 500,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ade3c1051097568effce"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'VINOTH',
+  address: '838/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1059/2023',
+  oldBillNumber: '',
+  amount: 5000,
+  articleName: [ '2N BABY RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 200,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 6000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ae08c1051097568effd1"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'ELSIE',
+  address: '683/22 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1060/2023',
+  oldBillNumber: '',
+  amount: 15000,
+  articleName: [ '1P GUNDU TT TOPES', '1N ROUND RING (DAMAGE)', '' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 900,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 17000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ae42c1051097568effd4"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'IMITIHAS',
+  address: '535/9 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1061/2023',
+  oldBillNumber: '',
+  amount: 20000,
+  articleName: [ '1P SIDE MATTAL' ],
+  metal: 'GOLD',
+  gram: 8,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 30000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ae73c1051097568effd7"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SHANTHI',
+  address: '831/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1062/2023',
+  oldBillNumber: '',
+  amount: 8000,
+  articleName: [ '1N ENAMEL RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 9000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572ae97c1051097568effdb"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'BHARATHI',
+  address: 'NO 29 SELLIAMAN KOIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-07',
+  contactNo: null,
+  billNumber: '1063/2023',
+  oldBillNumber: '',
+  amount: 12000,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572aed3c1051097568effdd"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'teest',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1064/2023',
+  amount: 200,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572b157c1051097568f0003"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+undefined
+undefined
+undefined
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'MALATHI',
+  address: '827/35 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1064/2023',
+  amount: 3500,
+  articleName: [ '1P KUPU KAAD' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 800,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572c8ebc1051097568f00ab"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572cca0c1051097568f00cb"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572cd34c1051097568f00db"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 200,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572cdb8c1051097568f00e8"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572d4bac1051097568f0127"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572d505c1051097568f0137"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test4',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572d567c1051097568f0146"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test5',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-08',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: null,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '100',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6572d619c1051097568f0156"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test9',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("657446a2c1051097568f0169"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test5',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574473bc1051097568f0176"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'test5',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574482dc1051097568f0183"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'bhvana',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1066/2023',
+  amount: 50,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65747052c1051097568f020a"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'hemanth',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("657471b0c1051097568f0223"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'hello',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 50,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574723ac1051097568f0239"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'SIVA',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 89080,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574729fc1051097568f0250"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'BHAVANA',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: null,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("657473a8c1051097568f0268"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'hello',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1066/2023',
+  amount: null,
+  articleName: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65749494c1051097568f0286"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'BHAVANA',
+  address: '',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1067/2023',
+  amount: null,
+  articleName: [],
+  principle: [],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: 'nope',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574a269c1051097568f02a9"),
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'final test',
+  address: '1239/80 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 100,
+  articleName: [ 'chain' ],
+  metal: 'GOLD',
+  gram: 7,
+  mg: 90,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574a2bfc1051097568f02b9"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'final test working',
+  address: '1239/80 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1066/2023',
+  amount: 100,
+  articleName: [],
+  principle: [],
+  metal: 'GOLD',
+  gram: 7,
+  mg: 90,
+  redemptionDate: 2023-12-09T00:00:00.000Z,
+  redemptionAmount: 100,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6574a2eac1051097568f02c4"),
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Connected to port 4000
+Connected to Mongo! Database name: "nakoda"
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Connected to port 4000
+Connected to Mongo! Database name: "nakoda"
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'PRAMILA',
+  address: '62/T VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1065/2023',
+  amount: 18000,
+  articleName: [ '1P EAR RING', '1N BROKEN RING', '1N BROKEN PIECE' ],
+  metal: 'GOLD',
+  gram: 4,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 20000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798ca450c3cd99960c2aa1"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'RABAIKA',
+  address: '524/8 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1066/2023',
+  oldBillNumber: '',
+  amount: 4000,
+  articleName: [ '1P GULES (NCR)' ],
+  metal: 'SILVER',
+  gram: 80,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 5000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798cd550c3cd99960c2aa4"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'LAXMI',
+  address: '818/35 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1067/2023',
+  oldBillNumber: '',
+  amount: 450,
+  articleName: [ '2N RING' ],
+  metal: 'SILVER',
+  gram: 6,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 500,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798cfa50c3cd99960c2aa7"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'DHANASEKHAR',
+  address: '7/54 PILLAYAR KOVIL STREET ',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1068/2023',
+  oldBillNumber: '',
+  amount: 9000,
+  articleName: [ '1N THALLI', '2N PATTA GUNDU', '1P R/S DISCKO KAMAL' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 300,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798d4050c3cd99960c2aaa"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'DEISINGH',
+  address: 'NO.154/36 HUTT VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-09',
+  contactNo: null,
+  billNumber: '1069/2023',
+  amount: 5000,
+  articleName: [ '1P DISCKO MATAL', '1P DISCKO KAMAL' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 200,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 6000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798d7d50c3cd99960c2aaf"),
+  principle: [],
+  __v: 0
+}
+{
+  cName: 'SARASWATHI',
+  address: 'NO.17 SELLIAMA KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-10',
+  contactNo: null,
+  billNumber: '1070/2023',
+  oldBillNumber: '',
+  amount: 3500,
+  articleName: [ '1P GULES (DRS)', '', '' ],
+  metal: 'SILVER',
+  gram: 60,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798db450c3cd99960c2ab2"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+{
+  cName: 'HARIPRIYA',
+  address: '845/37 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-10',
+  contactNo: null,
+  billNumber: '1071/2023',
+  oldBillNumber: '',
+  amount: 1000,
+  articleName: [ '1P TT DISCKO KAMAL' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 300,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 1100,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798dee50c3cd99960c2ab5"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'BHARATHI',
+  address: 'NO.29 SELLIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-10',
+  contactNo: null,
+  billNumber: '1072/2023',
+  oldBillNumber: '',
+  amount: 13500,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798e1950c3cd99960c2ab8"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'PARMESWARI',
+  address: 'NO.36 BLOCK HUTT VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1073/2023',
+  oldBillNumber: '',
+  amount: 9600,
+  articleName: [ '1P MUTHU GULES (TR)', '' ],
+  metal: 'SILVER',
+  gram: 200,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798e6850c3cd99960c2abb"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+{
+  cName: 'YUVARANI',
+  address: 'NO.19A SELLIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1074/2023',
+  amount: 320,
+  articleName: [ '3N RING' ],
+  metal: 'SILVER',
+  gram: 3,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 500,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798f5150c3cd99960c2ac1"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'KUMARI',
+  address: '701/24 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1075/2023',
+  oldBillNumber: '',
+  amount: 12250,
+  articleName: [ '1N LADIES BRACELETT' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 900,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798f8550c3cd99960c2ac3"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'ANNAMALAI',
+  address: '348/B VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1076/2023',
+  oldBillNumber: '',
+  amount: 1500,
+  articleName: [ '1N BRACELETT' ],
+  metal: 'SILVER',
+  gram: 25,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 2000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798fa450c3cd99960c2ac6"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SUBRAMANI',
+  address: '602/14 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1077/2023',
+  oldBillNumber: '',
+  amount: 7000,
+  articleName: [ '1P ONLY JHUMKI' ],
+  metal: 'GOLD',
+  gram: 2,
+  mg: 300,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("65798fce50c3cd99960c2ac9"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'HARIPRIYA',
+  address: '845/37 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1078/2023',
+  oldBillNumber: '',
+  amount: 5500,
+  articleName: [ '1N ROUND RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 7000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6579900750c3cd99960c2acc"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SURESH KUMAR',
+  address: '832/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-11',
+  contactNo: null,
+  billNumber: '1079/2023',
+  oldBillNumber: '',
+  amount: 13000,
+  articleName: [ '1P ONLY R/S TT' ],
+  metal: 'GOLD',
+  gram: 7,
+  mg: 300,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 30000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6579903550c3cd99960c2acf"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SHIVA',
+  address: '13/B SELLIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-13',
+  contactNo: null,
+  billNumber: '1080/2023',
+  oldBillNumber: '',
+  amount: 13000,
+  articleName: [ '1P STUD' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6579905c50c3cd99960c2ad2"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'RAMESH',
+  address: '5/4 SENIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-12',
+  contactNo: null,
+  billNumber: '1081/2023',
+  oldBillNumber: '',
+  amount: 7500,
+  articleName: [ '1P GULES (JSP)' ],
+  metal: 'SILVER',
+  gram: 150,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6579909050c3cd99960c2ad5"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+{
+  cName: 'VASANTHAKUMAR',
+  address: '266 NAVALLAR NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-12',
+  contactNo: null,
+  billNumber: '1082/2023',
+  amount: 8000,
+  articleName: [ '1N ROUND RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("657990cd50c3cd99960c2ade"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'GOPI',
+  address: '831/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-12',
+  contactNo: null,
+  billNumber: '1083/2023',
+  oldBillNumber: '',
+  amount: 7500,
+  articleName: [ '1N ROUND RING' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 10000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("657990e750c3cd99960c2ae2"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'DEVAKI',
+  address: '71/T VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-13',
+  contactNo: null,
+  billNumber: '1084/2023',
+  oldBillNumber: '',
+  amount: 6000,
+  articleName: [ '1N W/S PENDANT', '1N W/S SANIA MOOGTHI' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 600,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 8000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6579911350c3cd99960c2ae4"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+{
+  cName: 'BHAVANI',
+  address: '828/35 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-13',
+  contactNo: null,
+  billNumber: '1/2023',
+  amount: 100000,
+  articleName: [ '1CHAIN', '1N RING', '1N ROUND RING', '1N BROKEN PIECE' ],
+  metal: 'GOLD',
+  gram: 7,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 110000,
+  idProof: '',
+  createdBy: 'nakoda',
+  _id: new ObjectId("657999d450c3cd99960c2b53"),
+  principle: [],
+  __v: 0
+}
+nakoda
+nakoda
+nakoda
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth

@@ -141,6 +141,7 @@ const AddEntry = () => {
 	}
 
 	const fetchBillDetails = async () => {
+		let existing;
 		let filteredEntry = entries.filter(function(ele) {
 			if((ele.billNumber) == oldBill) {
 				return ele
@@ -148,7 +149,9 @@ const AddEntry = () => {
 		});
 		console.log(filteredEntry);
 		const response = await axios.get("http://localhost:4000/customers/update-student/" + filteredEntry[0]._id);
-		setInputValue(response.data);
+		existing = response.data;
+		delete existing._id
+		setInputValue(existing);
 	}
 
 	const [nameSuggestion, showNameSuggestion] = useState("");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import AllUserEntries from './entryTable.js';
@@ -17,7 +17,7 @@ const EditEntryModal = (props) => {
 	const [editData, getEditedData] = useState();
 	const [closeModal, setCloseModal] = useState();
 	const note = useRef();
-	const redemptionDate = useRef();
+	const redDate = useRef();
 	const interest = useRef();
 	const redemptionAmt = useRef();
 	const [interestVal, setInterestVal] = useState();
@@ -26,10 +26,10 @@ const EditEntryModal = (props) => {
 		const value = e.target.value;
 		setInputValue({ ...inputVal, [e.target.name]: value });
 	}
+
 	const getData = async () => {
 		const response = await axios.get("http://localhost:4000/customers/update-student/" + props.toEdit);
 		setInputValue(response.data);
-		// setInputValue({...inputVal, "redemptionDate" : moment(response.data.redemptionDate).format('YYYY-MM-DD').toString()});
 	};
 
 	const postData = async (e) => {
@@ -43,55 +43,48 @@ const EditEntryModal = (props) => {
 		props.parentModalCallBack("close");
 		e.preventDefault();
 		await axios.put('http://localhost:4000/customers/update-student/' + props.toEdit, { ...inputVal }, { headers: { 'Content-Type': 'application/json' } })
-			.then(res => console.log(res.data));
+			.then(res => {
+				console.log(res.data)
+			
+			});
 	}
 
 	// Save to redeemed entry
 	const saveRedeemedEntry = async (e) => {
-		props.parentModalCallBack("close");
+		// updateData();
+		let rDate = redDate.current.value;
+		let rAmount = redemptionAmt.current.value;
+		console.log(inputVal);
 		e.preventDefault();
-		await axios.put('http://localhost:4000/customers/update-student/' + props.toEdit, { ...inputVal, "redemptionDate": redemptionDate.current.value, "redemptionAmount":redemptionAmt.current.value }, { headers: { 'Content-Type': 'application/json' } })
+		await axios.put('http://localhost:4000/customers/update-student/' + props.toEdit, {...inputVal, "redemptionDate":rDate , "redemptionAmount": rAmount}, { headers: { 'Content-Type': 'application/json' } })
 			.then(res => console.log(res.data));
+			props.parentModalCallBack("close");
+	};
 
-	}
 	const cancelUpdate = (e) => {
 		props.parentModalCallBack("close");
 		e.preventDefault();
 	}
 
 	function calculateInterest(date1, amount, redemDate) {
-		let diffTime, interest, redeemDate, diffDays;
+		let diffMonth, dateDiff, redeemDate, interest; 
 		if (redemDate == null || redemDate == undefined) {
 			redeemDate = new Date();
 		}
 		else {
 			redeemDate = new Date(redemDate)
 		}
-		let pledgeMonth = new Date(date1).getMonth() + 1;
-		let redeemedMonth = new Date(redeemDate).getMonth() + 1;
-		console.log('months', redeemedMonth - pledgeMonth);
-		let months = redeemedMonth - pledgeMonth;
+		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
+		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
+	  
+		if (redeemDate.getDate() < new Date(date1).getDate()) {
+		dateDiff = 1;
+		}
+		else { dateDiff = 0}
 
-		let pledgeDate = new Date(date1).getDate();
-		let redeemedDate = new Date(redeemDate).getDate();
-
-		console.log('months', pledgeDate, redeemedDate);
-
-		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
-if(redeemedDate <= pledgeDate && months > 1) {
-months = months - 1;
-}
-
-// If pledge and redemption date are same, give 1 months interest
-else if(redeemedMonth == pledgeMonth){
-	months = 1;
-}
-
-interest = (amount * months * 1.33) / 100;
-
-	// 	if(months <= 0) {
-	// 	months = 1
-	// }
+		diffMonth = monthDiff + yearDiff * 12	
+		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
+		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100;
 		
 		return Math.abs(interest).toFixed(2);
 
@@ -100,6 +93,7 @@ interest = (amount * months * 1.33) / 100;
 	useEffect(() => {
 		getData();
 	}, []);
+
 
 	return (
 		<div>
@@ -176,7 +170,7 @@ interest = (amount * months * 1.33) / 100;
 						</div>
 						<div>
 							<label htmlFor="redemptionDate">Redemption Date</label>
-							<input type="date" name="redemptionDate" placeholder="Enter date" ref={redemptionDate}
+							<input type="date" name="redemptionDate" placeholder="Enter date" ref={redDate}
 								value={inputVal.redemptionDate ? moment(inputVal.redemptionDate).format('YYYY-MM-DD') : moment(new Date()).format('YYYY-MM-DD')}
 								onChange={handleChange} />
 						</div>

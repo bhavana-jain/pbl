@@ -129,18 +129,18 @@ const [billId, getBillNumber] = useState();
 		console.log('months', pledgeDate, redeemedDate);
 
 		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
-if(redeemedDate <= pledgeDate && months > 1) {
-months = months - 1;
-}
+		if(redeemedDate <= pledgeDate && months > 1) {
+		months = months - 1;
+		}
 
-// If pledge and redemption date are same, give 1 months interest
-else if(redeemedMonth == pledgeMonth){
-	months = 1;
-}
+		// If pledge and redemption date are same, give 1 months interest
+		else if(redeemedMonth == pledgeMonth){
+			months = 1;
+		}
 
-interest = (amount * months * perValue) / 100;
-finalAmount = amount + interest;
-		 return Math.abs(interest).toFixed(2);
+		interest = (amount * months * perValue) / 100;
+		finalAmount = amount + interest;
+		return Math.abs(interest).toFixed(2);
 
 	}
 	
@@ -162,8 +162,7 @@ finalAmount = amount + interest;
 	}
 	
 	const RenderTableData = () => {
-	 let data = entries.map(function(data, idx) {
-		 if(data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
+	 let data = fEntries.map(function(data, idx) {
 		   return (
 			   <ul className="table-body" key={data._id}>
 			  <li>{data.cName}</li>
@@ -187,10 +186,6 @@ finalAmount = amount + interest;
 			  <li>{calculateInterest(data.date, data.amount)}</li>
 			  </ul> 
 		   );
-		 }
-		 else {
-			 return false;
-		 }
 });
 return data
  }

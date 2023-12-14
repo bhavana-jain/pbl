@@ -54,9 +54,11 @@ const AllUserEntries = (props, ref) => {
 			});
 	};
 
+	const[filterAllRedeemed, setFilterAllRedeemed] = useState();
 	const setEntries = () => {
 		console.log("calling set entries fn");
 		setFilterRedeemed(entries.filter((entry) => entry.redemptionDate));
+		setFilterAllRedeemed(entries.filter((entry) => entry.redemptionDate));
 	}
 
 	// filter only redeemed entries
@@ -170,38 +172,29 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	function calculateInterest(date1, amount, redemDate) {
-		let diffTime, interest, redeemDate, diffDays;
+		let diffMonth, dateDiff, redeemDate, interest; 
 		if (redemDate == null || redemDate == undefined) {
 			redeemDate = new Date();
 		}
 		else {
 			redeemDate = new Date(redemDate)
 		}
-		let pledgeMonth = new Date(date1).getMonth() + 1;
-		let redeemedMonth = new Date(redeemDate).getMonth() + 1;
-		console.log('months', redeemedMonth - pledgeMonth);
-		let months = redeemedMonth - pledgeMonth;
+		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
+		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
+	  
+		if (redeemDate.getDate() < new Date(date1).getDate()) {
+		dateDiff = 1;
+		}
+		else { dateDiff = 0}
 
-		let pledgeDate = new Date(date1).getDate();
-		let redeemedDate = new Date(redeemDate).getDate();
-
-		console.log('months', pledgeDate, redeemedDate);
-
-		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
-if(redeemedDate <= pledgeDate && months > 1) {
-months = months - 1;
-}
-
-// If pledge and redemption date are same, give 1 months interest
-else if(redeemedMonth == pledgeMonth){
-	months = 1;
-}
-
-interest = (amount * months * 1.33) / 100;
-finalAmount = amount + interest;
-		 return Math.abs(interest).toFixed(2);
+		diffMonth = monthDiff + yearDiff * 12	
+		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
+		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100;
+		finalAmount = amount + interest;
+		return Math.abs(interest).toFixed(2);
 
 	}
+
 	const [art, articleBox] = useState(false);
 	function showArticleList() {
 		articleBox(true);
@@ -430,6 +423,7 @@ finalAmount = amount + interest;
 	// Default page state with pagination
 	const RenderTableData = () => {
 		let data = currentTableData.map(function (data, idx) {
+			
 			return (
 				<ul className="table-body" key={data._id}>
 					<li>{data.cName}</li>
@@ -508,6 +502,7 @@ finalAmount = amount + interest;
 	// State for checking if search is clicked by user
 	const [isSearch, setIsSearching] = useState(false);
 	const [searchText, setSearchText] = useState();
+
 	let filteredEntry;
 
 	function callbackFunction(childData) {
@@ -523,7 +518,7 @@ finalAmount = amount + interest;
 		else {
 			setSearchText(childData.trim());
 			setIsSearching(true);
-			setFilterRedeemed(filterRedeemed.filter((ele) => ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData || ele.address.toLowerCase().includes(childData.toLowerCase())));
+			setFilterRedeemed(filterAllRedeemed.filter((ele) => ele.cName.toLowerCase() == childData.toLowerCase() || ele.billNumber == childData || ele.address.toLowerCase().includes(childData.toLowerCase())));
 			//setSearchFiltering(data);
 		}
 	}

@@ -36,3 +36,16 @@ E11000 duplicate key error collection: nakoda.user index: userName_1 dup key: { 
 E11000 duplicate key error collection: nakoda.user index: userName_1 dup key: { userName: "hemanth" }
 (node:3612) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
 (Use `node --trace-deprecation ...` to show where the warning was created)
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('6572a916c1051097568eff81') }
+Cast to date failed for value "22/12/2023" (type string) at path "redemptionDate"
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('657473a8c1051097568f0268') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('657473a8c1051097568f0268') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('6572c8ebc1051097568f00ab') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('65749494c1051097568f0286') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('65749494c1051097568f0286') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('65749494c1051097568f0286') }
+E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: { _id: ObjectId('6572c8ebc1051097568f00ab') }
+(node:4264) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:4668) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)
