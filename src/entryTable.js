@@ -361,15 +361,17 @@ const AllUserEntries = (props, ref) => {
 		}
 		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
 		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
+
+		console.log('month diff', monthDiff);
 	  
 		if (redeemDate.getDate() < new Date(date1).getDate()) {
 		dateDiff = 1;
 		}
 		else { dateDiff = 0}
 
-		diffMonth = monthDiff + yearDiff * 12	
+		diffMonth = (monthDiff +1) + yearDiff * 12	
 		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
-		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100;
+		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100; 
 		finalAmount = amount + interest;
 		return Math.abs(interest).toFixed(2);
 
@@ -443,9 +445,9 @@ const AllUserEntries = (props, ref) => {
 	}
 	const PledgeBill = () => {
 		return (
-			<div id="pledgeBill">
-				<h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
-				<div style={{ "fontSize": "14px", "position":"relative"}}  className="page-a4">
+			<div id="pledgeBill" className="page-a4">
+				<h4 style={{"textAlign":"center", "margin":"0px", "fontSize":"10px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<div style={{ "fontSize": "14px", "position":"relative"}} >
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>

@@ -4529,3 +4529,172 @@ hemanth
 hemanth
 hemanth
 hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+{
+  cName: 'testing name',
+  address: '845/37 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-15',
+  contactNo: null,
+  billNumber: '1/2023',
+  amount: 3500,
+  articleName: [ '1N BROKEN RING', '1P DISCKO KAMAL' ],
+  metal: 'GOLD',
+  gram: 10,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'nakoda',
+  _id: new ObjectId("657bf2ca50c3cd99960c2c08"),
+  principle: [],
+  __v: 0
+}
+nakoda
+{
+  cName: 'test 4',
+  address: '845/37 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-15',
+  contactNo: null,
+  billNumber: '2/2023',
+  oldBillNumber: '',
+  amount: null,
+  articleName: [ '1N LADIES BRACELETT', '1N ROUND RING`', '1N BABY RING' ],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  createdBy: 'nakoda',
+  _id: new ObjectId("657bf34350c3cd99960c2c0b"),
+  principle: [],
+  __v: 0
+}
+nakoda
+nakoda
+nakoda

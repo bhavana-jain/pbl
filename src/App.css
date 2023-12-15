@@ -496,7 +496,7 @@ input[type=number] {
 		border-spacing: 0;
 		table-layout: fixed;
 		border-right: 1px solid #000;
-		font-size: 14px;
+		font-size: 12px;
 	}
 	
 	.pledge-details tr td {
@@ -548,6 +548,7 @@ input[type=number] {
 		border: 1px solid #000;
 		border-spacing: 0;
 		width: 100%;
+		font-size: 12px;
 	}
 	
 	.articles-table-header td {
@@ -668,7 +669,8 @@ input[type=number] {
 }
 
 .redeemed-pi tr td {
-	padding: 5px 5px;
+	padding: 0px 5px;
+	line-height: 21px;
 }
 
 .logo {
@@ -692,13 +694,15 @@ input[type=number] {
 .bill-footer {
 	width: 100%;
 	position: absolute;
-	top: calc(100% - 15px);
+	top: 100%;
 	border-top: 1px solid #000;
 	display: flex;
+	width: calc(100% - 20px);
+	margin-top: 8px;
 }
 
 .bill-footer>div {
-	padding: 10px 0 0 0;
+	padding: 5px 0 0 0;
 }
 
 .bill-footer>div:last-child {

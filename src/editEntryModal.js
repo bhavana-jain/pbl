@@ -76,13 +76,15 @@ const EditEntryModal = (props) => {
 		}
 		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
 		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
+
+		console.log('month diff', monthDiff);
 	  
 		if (redeemDate.getDate() < new Date(date1).getDate()) {
 		dateDiff = 1;
 		}
 		else { dateDiff = 0}
 
-		diffMonth = monthDiff + yearDiff * 12	
+		diffMonth = (monthDiff +1) + yearDiff * 12	
 		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
 		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100;
 		

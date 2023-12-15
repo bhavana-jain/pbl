@@ -487,7 +487,7 @@ const AddEntry = () => {
 			<div ref={el => (billPrint = el)} id="pledgeBill">
 				<PledgeBill test={formVal} billType="Original Bill" />
 				<PledgeBill test={formVal} billType="Duplicate Bill" />
-			</div>
+			</div> 
 		</div>
 	);
 }

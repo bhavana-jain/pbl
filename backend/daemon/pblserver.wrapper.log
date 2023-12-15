@@ -48,3 +48,19 @@ Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInter
    at winsw.WrapperService.OnShutdown()
 2023-12-13 13:41:26 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2023-12-13 13:41:26 - Started 3724
+2023-12-15 12:10:12 - Stopping pblserver.exe
+2023-12-15 12:10:12 - ProcessKill 3724
+2023-12-15 12:10:13 - Shutdown exception
+Message:A system shutdown is in progress.
+
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2023-12-15 12:16:06 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\pbl\node_modules\node-windows\lib\wrapper.js --file C:\pbl\backend\server.js --scriptoptions= --log "PBL Server wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2023-12-15 12:16:06 - Started 3696

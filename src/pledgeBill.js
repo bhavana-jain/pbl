@@ -42,13 +42,13 @@ const PledgeBill = React.forwardRef((props, ref) => {
 	checkIfProps();
 	return (
 		<div ref={ref} className="page-a4">
-				<div style={{ "fontSize": "13px", "padding": "10px 10px 0 10px", "position":"relative"}} ><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<div style={{ "fontSize": "11px", "padding": "10px 10px 0 10px", "position":"relative"}} ><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
 								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
-								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
+								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo ? value.data.contactNo : "9003223661"} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> {props.billType}</h4>
@@ -59,7 +59,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 					<p> The following articles are pawned with me: </p>
-					<table className="pledge-details">
+					<table className="pledge-details" style={{"fontSize":"12px"}}>
 						<tbody>
 							<tr>
 								<td>Bill No</td>
@@ -68,13 +68,14 @@ const PledgeBill = React.forwardRef((props, ref) => {
 								<td className='bold'>{val.date == "" || val.date == undefined || val.date == null || val.date == "Invalid date" ? '' : moment(val.date).format('DD/MM/YYYY')}</td>
 								<td>Mobile</td>
 								<td className='bold'> {val.contactNo}</td>
+								
 							</tr>
 							<tr>
-								<td>Name of the pawner</td>
+								<td>Pawner's Name</td>
 								<td className='bold'>{val.cName}</td>
 								<td>Address</td>
 								<td className='bold'>{val.address} {val.cityPincode} </td>
-								<td>Identity Proof</td>
+								<td>ID Proof</td>
 								<td className='bold'> {val.idProof}</td>
 							</tr>
 							<tr className="empty-child">
@@ -92,7 +93,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 					<p>
 						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year. கடைசி தவணை 1 வருடம் 7 நாள் )
 					</p>
-					<table className="articles-table">
+					<table className="articles-table" style={{"fontSize":"12px"}}>
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
@@ -113,8 +114,8 @@ const PledgeBill = React.forwardRef((props, ref) => {
 									</ul>
 								</td>
 								<td style={{ "padding": "0" }}>
-									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
-										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%", "paddingTop": "15px" }} className='bold'>{val.gram}</div>
+									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "35px" }}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.6%", "paddingTop": "15px" }} className='bold'>{val.gram}</div>
 										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%", "paddingTop": "15px" }} className='bold'>{val.mg}</div>
 									</div>
 								</td>
@@ -135,7 +136,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 					</div>
 					<div className="redeemed-pi">
 						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
-						<table style={{"borderBottom":"0px"}}>
+						<table style={{"borderBottom":"0px", "fontSize":"12px"}}>
 							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
 								<tr>
 									<td>No.</td>
@@ -200,9 +201,9 @@ const PledgeBill = React.forwardRef((props, ref) => {
 						அடகு பொருளை வைத்தவர் கையெழுத்து ________________ <br />
 						பொருள் வாங்குபவரின் கையெழுத்து ______________ <br />
 					</p>
-					<div className="bill-footer" style={{"paddingTop":"10px"}}>
+					<div className="bill-footer">
 						<div> Working hours: 9:00 AM to 9:00 PM </div>
-						<div style={{"paddingRight": "10px"}}> Every Friday &amp; other important festival days </div>
+						<div> Every Friday &amp; other important festival days </div>
 					</div>
 				</div>
 		</div>
