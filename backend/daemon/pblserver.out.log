@@ -4741,3 +4741,143 @@ hemanth
 }
 hemanth
 hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+undefined
+hemanth
+undefined
+hemanth
+undefined
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'HEPSIBHA',
+  address: '566/11 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-19',
+  contactNo: null,
+  billNumber: '1085/2023',
+  amount: 150000,
+  articleName: [ '1N BROKEN PIECE', '1N ROUND RING' ],
+  metal: 'GOLD',
+  gram: 10,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6581d4db6ae6bef41f2de89a"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'MACHANGANDHI',
+  address: '7/54 PILLAYAR KOVIL STREET ',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-19',
+  contactNo: null,
+  billNumber: '1085/2023',
+  amount: 150000,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: null,
+  mg: null,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6581d5756ae6bef41f2de8a8"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth

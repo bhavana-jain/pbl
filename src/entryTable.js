@@ -755,7 +755,6 @@ const AllUserEntries = (props, ref) => {
 	return (
 		<>
 			<NavBar page="unreedemed" />
-			<PledgeBill />
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
