@@ -336,9 +336,9 @@ const AllUserEntries = (props, ref) => {
 							<tr className="articles-table-body">
 								<td style={{ "width": "80%" }}>
 									{ <ul className='article-lists'>
-										{/* {billDetails.articleName.map((item, index) => {
+										 {billDetails.articleName.map((item, index) => {
 											return <li>{item} - {billDetails.metal} </li>
-										})} */}
+										})} 
 									</ul> }
 								</td>
 								<td style={{ "padding": "0" }}>
