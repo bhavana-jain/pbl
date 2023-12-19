@@ -216,12 +216,13 @@ const AllUserEntries = (props, ref) => {
 	const DeliveryNote = () => {
 		return (
 			<div id="delivery-note">
+				<h4 style={{"textAlign":"center", "margin":"0px", "fontSize":"11pt"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 				<h2 className="text-centre"> DELIVERY NOTE </h2>
 				<div className="bill-header" id="header">
 					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
 					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
 					<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
+							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo ? value.data.contactNo : "9003223661"} </div>
 					</div>
 				</div>
 				<p> பெயர் <span className="content-spacer"> {deliveryNt.cName} </span> எண் <span className="content-spacer"> </span> </p>
@@ -255,14 +256,15 @@ const AllUserEntries = (props, ref) => {
 	}
 	const PledgeBill = () => {
 		return (
-			<div id="pledgeBill">
-				<div style={{ "fontSize": "14px" }} className="page-a4">
+			<div id="pledgeBill" className="page-a4">
+				<h4 style={{"textAlign":"center", "margin":"0px", "fontSize":"11pt", "lineHeight":"14px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<div >
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
-							<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block","textTransform":"capitalize" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo} </div>
+								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
+								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo ? value.data.contactNo : "9003223661"} </div>
 							</div>
 							<div style={{ "marginLeft": "auto", "lineHeight": "18px" }}>
 								<h4 style={{ "marginBottom": "0px", "fontWeight": "bold" }}> DUPLICATE BILL</h4>
@@ -272,84 +274,97 @@ const AllUserEntries = (props, ref) => {
 							</div>
 						</div>
 					</div>
-					<p> The following articles are pawned with me: </p>
-					<table className="pledge-details">
+					 <p> The following articles are pawned with me: </p> 
+					{/* <div style={{"display":"flex", "marginBottom":"10px", "width":"100%"}}>
+						Bill No. <strong>{billDetails.billNumber} </strong> &nbsp; | &nbsp;  Pledge Date: <strong> {billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')} </strong> 
+						</div> */}
+					<table className="pledge-details" style={{"fontSize":"12pt"}}>
 						<tbody>
-							<tr>
-								<td>Bill No</td>
+						<tr>
+								<td>Bill No.</td>
 								<td className='bold'>{billDetails.billNumber}</td>
+								<td>Pledge Date</td>
+								<td className='bold'> {billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')} </td>
+								<td>Old Bill No.</td>
+								<td className='bold'> {billDetails.oldBillNumber}</td>
+							</tr>
+							{/* <tr>
 								<td>Pledge Date</td>
 								<td className='bold'>{billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')}</td>
 								<td>Mobile</td>
 								<td className='bold'> {billDetails.contactNo}</td>
-							</tr>
+								
+							</tr> */}
 							<tr>
-								<td>Name of the pawner</td>
+								<td>Pawner's Name</td>
 								<td className='bold'>{billDetails.cName}</td>
 								<td>Address</td>
-								<td className='bold'>{billDetails.address} {billDetails.cityPincode}</td>
-								<td>Identity Proof</td>
-								<td className='bold'>{billDetails.idProof} </td>
+								<td className='bold' colSpan={3}>{billDetails.address} {billDetails.cityPincode} </td>
 							</tr>
+														
 							<tr className="empty-child">
-								<td>Principle of the loan amount</td>
+							<td>Principle of the loan amount</td>
 								<td className='bold'>{billDetails.amount}</td>
-								<td style={{ "borderLeft": "1px solid #ccc" }} >Rupees in words</td>
-								<td className='bold' style={{ "borderLeft": "1px solid #ccc" }}>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
-								<td>Old Bill No.</td>
-								<td className='bold'> {billDetails.oldBillNumber}</td>
+								<td style={{ "borderLeft": "1px solid #000" }}>Rupees in words</td>
+								<td style={{ "borderLeft": "1px solid #000" }} colSpan={3} className='bold'>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
+								
 							</tr>
 							<tr>
+								<td>Mobile No.</td>
+								<td className='bold'>{billDetails.contactNo}</td>
+								<td>Identity Proof</td>
+								<td className='bold' colSpan={3}> {billDetails.idProof}</td>
+								
 							</tr>
 						</tbody>
 					</table>
 					<p>
-						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year கடைசி தவணை 1 வருடம் 7 நாள்)
+						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year. கடைசி தவணை 1 வருடம் 7 நாள் )
 					</p>
-					<table className="articles-table">
+					<table className="articles-table" style={{"fontSize":"12pt"}}>
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
-								<td style={{ "padding": "0","border":"0px"}}>
+								<td style={{ "padding": "0", "border":"0px" }}>
 									<div style={{ "lineHeight": "21px" }}>Gross Wt</div>
-									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #ccc" }}>
-										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #ccc", "display": "inline-block", "width": "48%" }}>Gm</div>
+									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #000" }}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "48%" }}>Gm</div>
 										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%" }}>Mg</div>
 									</div>
 								</td>
 							</tr>
 							<tr className="articles-table-body">
 								<td style={{ "width": "80%" }}>
-									<ul className='article-lists'>
-									{billDetails.articleName.map((item, index) => {
-										return <li>{item} - {billDetails.metal} </li>
-									})}
-								</ul>
+									{ <ul className='article-lists'>
+										{/* {billDetails.articleName.map((item, index) => {
+											return <li>{item} - {billDetails.metal} </li>
+										})} */}
+									</ul> }
 								</td>
 								<td style={{ "padding": "0" }}>
 									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "minHeight": "55px" }}>
-									<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%","paddingTop":"15px"}} className='bold'>{billDetails.gram}</div>
-										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%","paddingTop":"15px" }} className='bold'>{billDetails.mg}</div>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%", "paddingTop": "15px" }} className='bold'>{billDetails.gram}</div>
+										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%", "paddingTop": "15px" }} className='bold'>{billDetails.mg}</div>
 									</div>
 								</td>
 							</tr>
 							<tr className="articles-table-body">
 								<td></td>
-								<td style={{ "borderTop": "1px solid #ccc", "paddingBottom": "15px" }}><b>PRESENT VALUE</b></td>
+								<td style={{ "borderTop": "1px solid #000", "paddingBottom": "5px" }}><b>PRESENT VALUE</b></td>
 							</tr>
 							<tr className="articles-table-body">
 								<td></td>
-								<td style={{ "paddingBottom": "15px" }} className='bold'>{billDetails.presentValue}</td>
+								<td style={{ "paddingBottom": "5px" }} className='bold'>{billDetails.presentValue}</td>
 							</tr>
 						</tbody>
 					</table>
-					<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
+					<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "borderBottom":"1px solid #000" }}>
 						<div> Signature of pawn broker </div>
 						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
 					</div>
 					<div className="redeemed-pi">
 						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
-						<table>
+						<table style={{"borderBottom":"0px", "fontSize":"12pt"}}>
 							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
 								<tr>
 									<td>No.</td>

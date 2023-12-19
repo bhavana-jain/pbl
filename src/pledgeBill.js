@@ -42,7 +42,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 	checkIfProps();
 	return (
 		<div ref={ref} className="page-a4">
-				<div style={{ "fontSize": "11px", "padding": "10px 10px 0 10px", "position":"relative"}} ><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+				<div style={{ "fontSize": "11pt", "padding": "10px 10px 0 10px", "position":"relative"}} ><h4 style={{"textAlign":"center", "margin":"0px"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
 					<div className="bill-header" id="header">
 						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
@@ -59,41 +59,44 @@ const PledgeBill = React.forwardRef((props, ref) => {
 						</div>
 					</div>
 					<p> The following articles are pawned with me: </p>
-					<table className="pledge-details" style={{"fontSize":"12px"}}>
+					<table className="pledge-details" style={{"fontSize":"12pt"}}>
 						<tbody>
 							<tr>
 								<td>Bill No</td>
 								<td className='bold'>{val.billNumber}</td>
 								<td>Pledge Date</td>
 								<td className='bold'>{val.date == "" || val.date == undefined || val.date == null || val.date == "Invalid date" ? '' : moment(val.date).format('DD/MM/YYYY')}</td>
-								<td>Mobile</td>
-								<td className='bold'> {val.contactNo}</td>
+								<td>Old Bill No.</td>
+								<td className='bold'> {val.oldBillNumber}</td>
+								
 								
 							</tr>
 							<tr>
 								<td>Pawner's Name</td>
 								<td className='bold'>{val.cName}</td>
 								<td>Address</td>
-								<td className='bold'>{val.address} {val.cityPincode} </td>
-								<td>ID Proof</td>
-								<td className='bold'> {val.idProof}</td>
+								<td className='bold' colSpan={3}>{val.address} {val.cityPincode} </td>
+								
 							</tr>
 							<tr className="empty-child">
 								<td>Principle of the loan amount</td>
 								<td className='bold'>{val.amount}</td>
 								<td style={{ "borderLeft": "1px solid #000" }}>Rupees in words</td>
-								<td style={{ "borderLeft": "1px solid #000" }} className='bold'>{val.amount ? toWords.convert(parseInt(val.amount), { currency: true }) : ""} </td>
-								<td>Old Bill No.</td>
-								<td className='bold'> {val.oldBillNumber}</td>
+								<td style={{ "borderLeft": "1px solid #000" }} className='bold' colSpan={3}>{val.amount ? toWords.convert(parseInt(val.amount), { currency: true }) : ""} </td>
+								
 							</tr>
 							<tr>
+							<td>Mobile</td>
+								<td className='bold'> {val.contactNo}</td>
+								<td>ID Proof</td>
+								<td className='bold' colSpan={3}> {val.idProof}</td>
 							</tr>
 						</tbody>
 					</table>
 					<p>
 						( Rate of interest charged at 16% per annum. The time agreed upon for redemption of the article is 1 year. கடைசி தவணை 1 வருடம் 7 நாள் )
 					</p>
-					<table className="articles-table" style={{"fontSize":"12px"}}>
+					<table className="articles-table" style={{"fontSize":"12pt"}}>
 						<tbody>
 							<tr className="articles-table-header">
 								<td style={{ "width": "80%" }}>Particulars of the pledge</td>
@@ -136,7 +139,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 					</div>
 					<div className="redeemed-pi">
 						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
-						<table style={{"borderBottom":"0px", "fontSize":"12px"}}>
+						<table style={{"borderBottom":"0px", "fontSize":"12pt"}}>
 							<thead style={{ "textAlign":"center","textTransform":"uppercase","fontWeight":"bold" }}> 
 								<tr>
 									<td>No.</td>

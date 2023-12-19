@@ -4698,3 +4698,46 @@ nakoda
 nakoda
 nakoda
 nakoda
+Connected to port 4000
+Connected to Mongo! Database name: "nakoda"
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'MACHANGANDHI',
+  address: '54/45 AMANI AMAN GARDEN STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-15',
+  contactNo: null,
+  billNumber: '1085/2023',
+  amount: 4900,
+  articleName: [ '1N LADIES BRACELETT', '1N BABY RING', '1N RING' ],
+  metal: 'GOLD',
+  gram: 10,
+  mg: 5,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: null,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("657c8b556ae6bef41f2de840"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
