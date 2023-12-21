@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "./static/css/main.78c60630.css",
+    "main.js": "./static/js/main.8ed47572.js",
+    "static/js/787.73bb0cbe.chunk.js": "./static/js/787.73bb0cbe.chunk.js",
+    "static/media/jainism.png": "./static/media/jainism.17490022e809c5e01d3b.png",
+    "static/media/logo.svg": "./static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "./index.html",
+    "main.78c60630.css.map": "./static/css/main.78c60630.css.map",
+    "main.8ed47572.js.map": "./static/js/main.8ed47572.js.map",
+    "787.73bb0cbe.chunk.js.map": "./static/js/787.73bb0cbe.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.78c60630.css",
+    "static/js/main.8ed47572.js"
+  ]
+}

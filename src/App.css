@@ -649,6 +649,7 @@ input[type=number] {
 
 .tos {
 	padding-left: 15px;
+	margin-top: 0px;
 }
 
 .tos>li {
@@ -671,13 +672,13 @@ input[type=number] {
 
 .redeemed-pi tr td {
 	padding: 0px 5px;
-	line-height: 21px;
+	line-height: 18px;
 }
 
 .logo {
 	background: url('./images/jainism.png') no-repeat;
-	width: 60px;
-	height: 100px;
+	width: 50px;
+	height: 90px;
 	cursor: pointer;
 	background-size: contain;
 	display: inline-block;
@@ -695,7 +696,7 @@ input[type=number] {
 .bill-footer {
 	width: 100%;
 	position: absolute;
-	top: calc(100% - 15px);
+	bottom: 8px;
 	border-top: 1px solid #000;
 	display: flex;
 	width: calc(100% - 20px);
@@ -765,15 +766,19 @@ input[type=number] {
 	font-size: 14px;
 }
 .article-lists {
-	display: inline-block;
-	margin:0;
+	margin:0 0 0 15px ;
 	padding: 0;
+	list-style-type: disc;
+	list-style-position: outside;
+	padding-left: 15px;
 }
 .article-lists > li {
-	display: inline-block;
+	float: left;
 	margin-right: 5px;
 	line-height: 20px;
 	font-weight: bold;
+	width: 49%;
+	text-align: left;
 }
 .bold {font-weight: bold;}
 
@@ -812,3 +817,4 @@ input[type=number] {
 .principleDetails {width: 100%; border-spacing: 0;margin-top: 15px;}
 .principleDetails thead {font-weight: bold;;}
 .principleDetails td {border: 1px solid #333; border-bottom: 1px solid #333;font-size: 12px;padding: 3px 5px;text-align: center;}
+.capitalize { text-transform: uppercase;}

@@ -258,7 +258,7 @@ const AllUserEntries = (props, ref) => {
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
 					<li>{data.deliveryRecNum}</li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
-						{data.address}
+						{data.address} {data.cityPincode ? data.cityPincode : "chennai 600-081"}
 						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
 					</li>
 					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
@@ -412,16 +412,16 @@ const AllUserEntries = (props, ref) => {
 					<div style={{ "display": "table", "width": "100%", "marginTop": "5px" }} className="pledge-entries">
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
 							<li>Name</li>
-							<li style={{ "width": "7%" }}>DLY Receipt #</li>
+							<li style={{ "width": "5%" }}>DLY Receipt #</li>
 							<li style={{ "width": "20%" }}>Address</li>
-							<li style={{ "width": "9%" }}>Date</li>
+							<li style={{ "width": "4%" }}>Date</li>
 							<li style={{ "width": "7%" }}>Bill No.</li>
 							<li style={{ "width": "7%" }}>Amount</li>
 							<li style={{ "width": "7%" }}>Redemption Amount</li>
 							<li>Article Name</li>
-							<li>Metal</li>
-							<li style={{ "width": "6%" }}> Weight </li>
-							<li style={{ "width": "9%" }}>Redemption Date</li>
+							<li style={{ "width": "6%" }}>Metal</li>
+							<li style={{ "width": "4%" }}> Weight </li>
+							<li style={{ "width": "6%" }}>Redemption Date</li>
 						</ul>
 						{isSearch ? <RenderSearchData /> : <RenderTableData />}
 					</div> :
