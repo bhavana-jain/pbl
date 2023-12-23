@@ -53,6 +53,21 @@ const AllUserEntries = (props, ref) => {
 				saveAllEntries(response.data);
 			});
 	};
+	const [deliveryNumber, setDeliveryNumber] = useState();
+	let len, allDelivery = [];
+	const setDeliveryReceiptNumber = () => {
+		entries.map(function (ele, i) {
+			allDelivery.push(ele.deliveryRecNum);
+		})
+		// Remove duplicates from array, sort in ascending order and filter to remove null &undefined values from array
+		let lastNumber = [...new Set(allDelivery)].sort(function(a, b){return a - b}).filter(item => !!item)	
+			let arrlen = (lastNumber[lastNumber.length - 1]);
+			// If there is existing delivery Receipt Number, add 1 to generate new delivery number, else set as 1
+			if(arrlen){
+				setDeliveryNumber(parseInt(arrlen) + 1);;
+			}
+		else { setDeliveryNumber(1); }
+	}
 
 	const[filterAllRedeemed, setFilterAllRedeemed] = useState();
 	const setEntries = () => {
@@ -215,23 +230,60 @@ const AllUserEntries = (props, ref) => {
 
 	const DeliveryNote = () => {
 		return (
-			<div id="delivery-note">
-				<h4 style={{"textAlign":"center", "margin":"0px", "fontSize":"11pt"}}> || SHRI NAKODA BHAIRAVAYA NAMAHA || </h4>
+			<div id="delivery-note" className="page-a4">
 				<h2 className="text-centre"> DELIVERY NOTE </h2>
 				<div className="bill-header" id="header">
-					<div className="logo" style={{ "display": "inline-block", "verticalAlign": "middle" }}></div>
-					<div style={{ "display": "inline-block", "verticalAlign": "middle" }}>
-					<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block" }}> {value.data.companyName} </h2> </div>
-							<div> {value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo ? value.data.contactNo : "9003223661"} </div>
+						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center", "fontSize": "10pt", "alignItems":"start"}}>
+							<div className="logo" style={{ "display": "inline-block" }}></div>
+							<div style={{ "display": "inline-block" }}>
+								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
+								<div>{value.data.address} <br /> {value.data.area} <br/> Mobile: {value.data.contactNo ? value.data.contactNo : "9003223661"} </div>
+							</div>
+							<div style={{ "marginLeft": "auto", "lineHeight": "16px" }}>
+								<div> L.No. {value.data.license} </div>
+							</div>
+						</div>
 					</div>
-				</div>
 				<p> பெயர் <span className="content-spacer"> {deliveryNt.cName} </span> எண் <span className="content-spacer"> </span> </p>
 				<p> ரசீது எண் <span className="content-spacer"> {deliveryNt.billNumber} </span> வைத்த  தேதி <span className="content-spacer"> </span>
 					இந்த ரசீதில் கண்ட பொருள்களை ரசீது இல்லாமல் பூராவும் பெற்று கொண்டேன் </p>
-				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
-					<div style={{ "marginLeft": "auto" }}>
-						இப்படிக்கு <br /> <br /> <br />  <br />  <br />
-						கையொப்பம் </div>
+				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "alignItems":"end" }}>
+					<div style={{"width":"80%"}}> 
+				<table className="articles-table" style={{"fontSize":"10pt"}}>
+						<tbody>
+							<tr className="articles-table-header">
+								<td style={{ "width": "80%","borderLeft":"0px" }}>Particulars of the pledge</td>
+								<td style={{ "padding": "0", "border":"0px" }}>
+									<div style={{ "lineHeight": "21px" }}>Gross Wt</div>
+									<div style={{ "width": "100%", "display": "table", "borderTop": "1px solid #000" }}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "48%" }}>Gm</div>
+										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%" }}>Mg</div>
+									</div>
+								</td>
+							</tr>
+							<tr className="articles-table-body">
+								<td style={{ "width": "80%", "position":"relative" }}>
+									<ul className='article-lists'  style={{"fontSize":"10pt"}}>
+										 {deliveryNt && deliveryNt.articleName.length> 0 ?deliveryNt.articleName.map((item, index) => {
+											return <li>{item} - {deliveryNt.metal} </li>
+										}) : ""} 
+										
+									</ul>
+								</td>
+								<td style={{ "padding": "0","position":"relative" }}>
+									
+									<div style={{ "width": "100%", "display": "flex", "borderTop": "1px solid #000", "position": "absolute", "top":"0px", "height":"100%"}}>
+										<div style={{ "padding": "0", "border": "0", "borderRight": "1px solid #000", "display": "inline-block", "width": "49.5%", "paddingTop": "15px" ,"flex":"1"}} className='bold'>{deliveryNt.gram}</div>
+										<div style={{ "padding": "0", "border": "0", "display": "inline-block", "width": "48%", "paddingTop": "15px", "flex":"1"}} className='bold'>{deliveryNt.mg}</div>
+									</div>
+								</td>
+							</tr>
+													</tbody>
+					</table>
+					</div>
+					<div style={{ "marginLeft": "auto" , "textAlign":"right"}}>
+						 <span>இப்படிக்கு</span>
+						<span style={{"display":"inline-block", "paddingTop":"50px"}}>கையொப்பம்</span> </div>
 				</div>
 				<p style={{ "lineHeight": "27px" }}>
 					THE AMOUNT OF EVERY PAYMENT RECEIVED TOWARDS LOAN DATE
@@ -241,12 +293,17 @@ const AllUserEntries = (props, ref) => {
 				<p style={{ "lineHeight": "27px" }}> I HAVE THIS DAY PAID RS <span className="content-spacer"> {deliveryNt.amount} </span>
 					TOWARDS PRINCIPLE &amp; RS <span className="content-spacer"> {calculateInterest(deliveryNt.date, deliveryNt.amount)} </span> TOWARDS INTEREST &amp; RECEIVED THE ARTICLE MENTIONED OVER LEAF WITH FULL
 					MANUFACTION </p>
+				
+
 				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "alignItems": "center" }}>
 					<div>
 						<div> Date: <span className="content-spacer"> {today} </span> </div>
-						<div style={{ "paddingTop": "15px" }}> Delivery Receipt No: <span className="content-spacer"> </span> </div>
+						<div style={{ "paddingTop": "15px" }}> Delivery Receipt No: <span className="content-spacer">
+							{deliveryNumber}
+							 </span> </div>
 					</div>
-					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> {finalAmount} </span> </div>
+					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> 
+					{finalAmount} </span> </div>
 				</div>
 				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
 					<div style={{ "marginLeft": "auto" }}> Signature or Thumb Impression of the Pawner </div>
@@ -357,6 +414,30 @@ const AllUserEntries = (props, ref) => {
 						<div> Signature of pawn broker </div>
 						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
 					</div>
+					
+					<p style={{ "fontWeight": "bold", "textAlign": "center", "fontSize": "16px", "margin":"7px 0px" }}>Terms &amp; Conditions</p>
+					<ol className="tos">
+						<li> The rate of interest on any pledge shall be 16% per annum simple interest that is to say one paise per one rupees per mensum simple interest. </li>
+						<li> Every pledge shall be redeemable within a period of one year of such longer period ass may be provided in the contract between the parties from the day of powing (exclusive of that day) and shall continue to be redeemable during seven days of
+							grace following the said period. A pledge shall further continue to be redeemable until it is disposed of as provided in tha Act althrough the period of
+							redemption and says of grace have expired. </li>
+						<li> A pawn may be in addition to the cost of revenue stamp demand and take from the pawner sum not exceeding 25 paise for any loan not exceeding rupees 250 and 50 paise
+							for and loan exceeding Rs. 250 for incidental expenses connected with the advances of such loan. </li>
+						<li> The pawn broker empowered to reledge the jewels with any bank or bankers. </li>
+						<li> The pawner shall communicate his change of address in writing and the article will be delivered the next day of payment. </li>
+						<li>The pawner should pay the interest once in 3 months. Failure to pay interest once in 3 months will fall in compund interest for every three months failure.</li>
+					</ol>
+					<p style={{ "fontSize": "12px", "lineHeight": "18px" }} >
+						3 மாதத்திற்கு ஒரு முறை தவறாமல் வட்டி கட்ட வேண்டும். இன்று பணம் காட்டினாள் மறு நாள் பொருள் கொடுக்கப்படும்.
+						நகை மீட்க வரும் போது இந்த ரசீதை கொண்டு வரவும். வீடு மாறினாலும், ரசித்து தவறினாலும் எங்களுக்கு தெரிவிக்க வேண்டும் .
+						தவறினால் நாங்கள் ஜவாப்தரியல்ல. கடைசி தவணை 1 வருடம் 7 நாட்கள். பிரதி வெள்ளிக்கிழமை விடுமுறை.
+					</p>
+					<p style={{ "fontSize": "12px", "lineHeight": "18px" }}>
+						இந்த ரசீது கொண்டு வரும் நபர் ______________ <br />
+						வசம் முன்னாள் கண்ட பொருளை / பொருட்களை தயவு செய்து கொடுத்து விடும்படி கேட்டுக்கொள்கிறேன். <br />
+						அடகு பொருளை வைத்தவர் கையெழுத்து ________________ <br />
+						பொருள் வாங்குபவரின் கையெழுத்து ______________ <br />
+					</p>
 					<div className="redeemed-pi">
 						<h4 style={{"margin": "7px 0px"}}> RECEIVED PRINCIPLE &amp; INTEREST </h4>
 						<table style={{"borderBottom":"0px", "fontSize":"10pt"}}>
@@ -415,29 +496,6 @@ const AllUserEntries = (props, ref) => {
 							</tbody>
 						</table>
 					</div>
-					<p style={{ "fontWeight": "bold", "textAlign": "center", "fontSize": "16px", "margin":"7px 0px" }}>Terms &amp; Conditions</p>
-					<ol className="tos">
-						<li> The rate of interest on any pledge shall be 16% per annum simple interest that is to say one paise per one rupees per mensum simple interest. </li>
-						<li> Every pledge shall be redeemable within a period of one year of such longer period ass may be provided in the contract between the parties from the day of powing (exclusive of that day) and shall continue to be redeemable during seven days of
-							grace following the said period. A pledge shall further continue to be redeemable until it is disposed of as provided in tha Act althrough the period of
-							redemption and says of grace have expired. </li>
-						<li> A pawn may be in addition to the cost of revenue stamp demand and take from the pawner sum not exceeding 25 paise for any loan not exceeding rupees 250 and 50 paise
-							for and loan exceeding Rs. 250 for incidental expenses connected with the advances of such loan. </li>
-						<li> The pawn broker empowered to reledge the jewels with any bank or bankers. </li>
-						<li> The pawner shall communicate his change of address in writing and the article will be delivered the next day of payment. </li>
-						<li>The pawner should pay the interest once in 3 months. Failure to pay interest once in 3 months will fall in compund interest for every three months failure.</li>
-					</ol>
-					<p style={{ "fontSize": "12px", "lineHeight": "18px" }} >
-						3 மாதத்திற்கு ஒரு முறை தவறாமல் வட்டி கட்ட வேண்டும். இன்று பணம் காட்டினாள் மறு நாள் பொருள் கொடுக்கப்படும்.
-						நகை மீட்க வரும் போது இந்த ரசீதை கொண்டு வரவும். வீடு மாறினாலும், ரசித்து தவறினாலும் எங்களுக்கு தெரிவிக்க வேண்டும் .
-						தவறினால் நாங்கள் ஜவாப்தரியல்ல. கடைசி தவணை 1 வருடம் 7 நாட்கள். பிரதி வெள்ளிக்கிழமை விடுமுறை.
-					</p>
-					<p style={{ "fontSize": "12px", "lineHeight": "18px" }}>
-						இந்த ரசீது கொண்டு வரும் நபர் ______________ <br />
-						வசம் முன்னாள் கண்ட பொருளை / பொருட்களை தயவு செய்து கொடுத்து விடும்படி கேட்டுக்கொள்கிறேன். <br />
-						அடகு பொருளை வைத்தவர் கையெழுத்து ________________ <br />
-						பொருள் வாங்குபவரின் கையெழுத்து ______________ <br />
-					</p>
 					<div className="bill-footer">
 						<div> Working hours: 9:00 AM to 9:00 PM </div>
 						<div> Every Friday &amp; other important festival days </div>

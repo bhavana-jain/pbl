@@ -476,6 +476,8 @@ input[type=number] {
 	float: none;
 }
 
+#delivery-note {font-size: 10pt !important;}
+
 .pledge-entries {
 	table-layout: fixed;
 }
@@ -696,7 +698,7 @@ input[type=number] {
 .bill-footer {
 	width: 100%;
 	position: absolute;
-	bottom: 8px;
+	bottom: 0px;
 	border-top: 1px solid #000;
 	display: flex;
 	width: calc(100% - 20px);
@@ -777,7 +779,7 @@ input[type=number] {
 	margin-right: 5px;
 	line-height: 20px;
 	font-weight: bold;
-	width: 49%;
+	width: 48%;
 	text-align: left;
 }
 .bold {font-weight: bold;}
