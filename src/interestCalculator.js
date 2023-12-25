@@ -91,54 +91,28 @@ const [billId, getBillNumber] = useState();
 	const[fEntries, SetFilteredEntries] = useState();
 	 let filteredEntry, finalAmount;
 	 
-	//  // Calculate Rate of interest
-	//  const calculateInterest = (date1, amount) => {
-	// 	let interest;
-	// 		const diffTime = new Date() - new Date(date1);
-	// 		const diffDays = diffTime / (1000 * 60 * 60 * 24);
-	// 		let months = 	parseInt(diffDays / 30);
-	// 		if(new Date().getDate() <= new Date(date1).getDate()){
-	// 			// interest = (amount * (months - 2) * perValue) / 100;
-	// 			interest = (amount * (months - 1) * perValue) / 100;
-	// 		}
-	// 		else { 
-	// 			//interest = (amount * (months-1) * perValue) / 100;
-	// 			interest = (amount * (months) * perValue) / 100;
-			
-	// 		}
-	// 		finalAmount = amount + interest;
-	// 		return interest;
-	// }	
-
-	function calculateInterest(date1, amount, redemDate) {
-		let diffTime, interest, redeemDate, diffDays;
+	
+	 function calculateInterest(date1, amount, redemDate) {
+		let diffMonth, dateDiff, redeemDate, interest; 
 		if (redemDate == null || redemDate == undefined) {
 			redeemDate = new Date();
 		}
 		else {
 			redeemDate = new Date(redemDate)
 		}
-		let pledgeMonth = new Date(date1).getMonth() + 1;
-		let redeemedMonth = new Date(redeemDate).getMonth() + 1;
-		console.log('months', redeemedMonth - pledgeMonth);
-		let months = redeemedMonth - pledgeMonth;
+		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
+		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
 
-		let pledgeDate = new Date(date1).getDate();
-		let redeemedDate = new Date(redeemDate).getDate();
-
-		console.log('months', pledgeDate, redeemedDate);
-
-		// If redemption date is lesser than pledge data, and months is more than 1, then subtract a month 
-		if(redeemedDate <= pledgeDate && months > 1) {
-		months = months - 1;
+		console.log('month diff', monthDiff);
+	  
+		if (redeemDate.getDate() < new Date(date1).getDate()) {
+		dateDiff = 1;
 		}
+		else { dateDiff = 0}
 
-		// If pledge and redemption date are same, give 1 months interest
-		else if(redeemedMonth == pledgeMonth){
-			months = 1;
-		}
-
-		interest = (amount * months * perValue) / 100;
+		diffMonth = (monthDiff +1) + yearDiff * 12	
+		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
+		interest = (amount * (diffMonth - dateDiff) * perValue) / 100; 
 		finalAmount = amount + interest;
 		return Math.abs(interest).toFixed(2);
 
