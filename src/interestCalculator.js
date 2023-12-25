@@ -112,7 +112,8 @@ const [billId, getBillNumber] = useState();
 
 		diffMonth = (monthDiff +1) + yearDiff * 12	
 		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
-		interest = (amount * (diffMonth - dateDiff) * perValue) / 100; 
+		// Interest needs to be shown one month lesser - ONLY IN THIS PAGE
+		interest = (amount * (diffMonth - dateDiff - 1) * perValue) / 100; 
 		finalAmount = amount + interest;
 		return Math.abs(interest).toFixed(2);
 

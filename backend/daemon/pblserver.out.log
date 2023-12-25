@@ -6160,3 +6160,537 @@ nakoda
 nakoda
 nakoda
 nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth 
+hemanth 
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth string
+file written successfully
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth 
+hemanth 
+hemanth 
+hemanth 
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'HASEENA',
+  address: '487/5 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-23',
+  contactNo: null,
+  billNumber: '1114/2023',
+  amount: 1000,
+  articleName: [ '1N KAPU' ],
+  metal: 'SILVER',
+  gram: 13,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 1100,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6586e1526ae6bef41f2dec32"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'HASEENA',
+  address: '487/5 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-23',
+  contactNo: null,
+  billNumber: '1115/2023',
+  oldBillNumber: '',
+  amount: 1000,
+  articleName: [ '1N CHAIN' ],
+  metal: 'SILVER',
+  gram: 13,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 1100,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6586e1666ae6bef41f2dec35"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+Student updated successfully !
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+{
+  cName: 'VIGNESH',
+  address: 'NO.24 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-23',
+  contactNo: null,
+  billNumber: '1116/2023',
+  amount: 3500,
+  articleName: [ '1N RING' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6586ec656ae6bef41f2dec64"),
+  principle: [],
+  __v: 0
+}
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'DEVAKI',
+  address: '71/T VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-24',
+  contactNo: null,
+  billNumber: '1117/2023',
+  amount: 3000,
+  articleName: [ '1N HEART PENDANT' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 4000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6587b78b6ae6bef41f2dec78"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'MOHANRAJ',
+  address: '591/13 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-24',
+  contactNo: null,
+  billNumber: '1118/2023',
+  oldBillNumber: '',
+  amount: 30000,
+  articleName: [ '1N CHAIN' ],
+  metal: 'GOLD',
+  gram: 7,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 35000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6587c0d36ae6bef41f2dec7b"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+{
+  cName: 'PUSHPA',
+  address: 'NO.29 SELLIAMAN KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-24',
+  contactNo: null,
+  billNumber: '1119/2023',
+  amount: 5000,
+  articleName: [ '6N M/C NAANKOLA' ],
+  metal: 'GOLD',
+  gram: 1,
+  mg: 600,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 8000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("6587de996ae6bef41f2dec8a"),
+  principle: [],
+  __v: 0
+}
+hemanth
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+Student updated successfully !
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'JAIKUMAR',
+  address: 'NO.51 MADHA KOIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-25',
+  contactNo: null,
+  billNumber: '1120/2023',
+  amount: 635,
+  articleName: [ '1N KAPU' ],
+  metal: 'SILVER',
+  gram: 10,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 700,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("65891e1e6ae6bef41f2decd7"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+{
+  cName: 'SHAKILA',
+  address: '825/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-25',
+  contactNo: null,
+  billNumber: '1121/2023',
+  amount: 170000,
+  articleName: [ '2N CHAIN', '1P W/S ENAMEL TT KAMAL' ],
+  metal: 'GOLD',
+  gram: 40,
+  mg: 500,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 200000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("658926e46ae6bef41f2decdc"),
+  principle: [],
+  __v: 0
+}
+hemanth
+{
+  cName: 'SHAKILA',
+  address: '825/36 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-25',
+  contactNo: null,
+  billNumber: '1122/2023',
+  oldBillNumber: '',
+  amount: 130000,
+  articleName: [ '1P BANGLE', '1P W/S G/S TT KAMAL' ],
+  metal: 'GOLD',
+  gram: 33,
+  mg: 0,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 150000,
+  createdBy: 'hemanth',
+  _id: new ObjectId("6589271d6ae6bef41f2dece0"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+{
+  cName: 'YUVASREE',
+  address: 'NO.61 MADHA KOVIL STREET',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-25',
+  contactNo: null,
+  billNumber: '1123/2023',
+  amount: 14500,
+  articleName: [ '1P TT KAMAL' ],
+  metal: 'GOLD',
+  gram: 3,
+  mg: 700,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 15000,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("658932366ae6bef41f2decee"),
+  principle: [],
+  __v: 0
+}
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth string
+file written successfully
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+Student updated successfully !
+hemanth
+Student updated successfully !
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+{
+  cName: 'MANI',
+  address: '561/10 VOC NAGAR',
+  cityPincode: 'Chennai - 600 081',
+  date: '2023-12-25',
+  contactNo: null,
+  billNumber: '1124/2023',
+  amount: 700,
+  articleName: [ '1N GUNDU MOOGTHI (DAMAGE)' ],
+  metal: 'GOLD',
+  gram: 0,
+  mg: 100,
+  redemptionDate: null,
+  redemptionAmount: null,
+  remark: '',
+  presentValue: 800,
+  idProof: '',
+  createdBy: 'hemanth',
+  _id: new ObjectId("658983e06ae6bef41f2ded1b"),
+  principle: [],
+  __v: 0
+}
+nakoda
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+nakoda
+hemanth
+nakoda
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
+hemanth
