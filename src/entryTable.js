@@ -745,7 +745,7 @@ const AllUserEntries = (props, ref) => {
 							<button onClick={() => editData(data._id)} className="edit-icon"></button>
 							<button onClick={() => deleteDataConfirmation(data._id)} className="delete-icon"></button>
 							<button onClick={() => printBill(data)} className="print-icon"></button>
-							<button onClick={() => printBill(data)} className="" style={{"background":"transparent", "border":"0px","height":"auto", "lineHeight":"16px"}}>P&amp;I</button>
+							<button onClick={() => updatePrinciple(data)}className="" style={{"background":"transparent", "border":"0px","height":"auto", "lineHeight":"16px"}}>P&amp;I</button>
 						</li>
 					</ul>
 				);
@@ -815,8 +815,8 @@ const AllUserEntries = (props, ref) => {
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
-				<div style={{ "display": "flex", "marginBottom": "15px" }}>
-					<div> Total Amount: <strong>{diffAmount} </strong></div>
+				<div style={{ "display": "flex"}}>
+					{/* <div> Total Amount: <strong>{diffAmount} </strong></div> */}
 				</div>
 				<div style={{ "display": "flex" }}>
 					<FilterEntries parentCallback={callbackFunction} />

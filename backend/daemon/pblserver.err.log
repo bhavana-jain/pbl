@@ -49,3 +49,5 @@ E11000 duplicate key error collection: nakoda.customerList index: _id_ dup key: 
 (Use `node --trace-deprecation ...` to show where the warning was created)
 (node:4668) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
 (Use `node --trace-deprecation ...` to show where the warning was created)
+(node:3180) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)

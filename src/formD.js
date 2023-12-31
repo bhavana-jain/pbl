@@ -134,12 +134,15 @@ const [billId, getBillNumber] = useState();
 				<h5 style={{"margin":"5px 0px 15px 0px"}}>Declaration by Pawner of Lease Or Destruction of Pawn Ticket</h5>
 				</div>
 				<div style={{ "fontSize": "14px" }}>
-					<div className="bill-header" id="header">
-						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center" }}>
+				<div className="bill-header" id="header">
+						<div style={{ "display": "flex", "justifyContent": "center", "alignItems": "center", "fontSize": "10pt", "alignItems":"center"}}>
 							<div className="logo" style={{ "display": "inline-block" }}></div>
 							<div style={{ "display": "inline-block" }}>
 								<div style={{ "marginBottom": "2px" }}><h2 style={{ "margin": "0px", "display": "inline-block", "textTransform":"capitalize" }}> {value.data.companyName} </h2></div>
 								<div>{value.data.address} <br /> {value.data.area} </div>
+							</div>
+							<div style={{ "marginLeft": "auto", "lineHeight": "16px" }}>
+								<div> L.No. {value.data.license} </div>
 							</div>
 						</div>
 					</div>

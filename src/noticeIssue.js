@@ -666,8 +666,8 @@ const NoticeIssue = (props, ref) => {
 			{printDelivery ? <DeliveryNote /> : ""}
 			{printPledge ? <PledgeBill /> : ""}
 			<div className="entry-content">
-				<div style={{ "display": "flex", "marginBottom": "15px" }}>
-					<div> Total Amount: <strong>{diffAmount} </strong></div>
+				<div style={{ "display": "flex"}}>
+					{/* <div> Total Amount: <strong>{diffAmount} </strong></div> */}
 				</div>
 				<div style={{ "display": "flex" }}>
 					<FilterEntries parentCallback={callbackFunction} />

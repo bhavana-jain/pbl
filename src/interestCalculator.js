@@ -138,6 +138,8 @@ const [billId, getBillNumber] = useState();
 	
 	const RenderTableData = () => {
 	 let data = fEntries.map(function(data, idx) {
+		/* Show only unrdeeemed entries */
+		if (data.redemptionDate == null || data.redemptionDate == "" || data.redemptionDate == undefined) {
 		   return (
 			   <ul className="table-body" key={data._id}>
 			  <li>{data.cName}</li>
@@ -160,7 +162,8 @@ const [billId, getBillNumber] = useState();
 			  <li> {data.gram}.{data.mg} </li>
 			  <li>{calculateInterest(data.date, data.amount)}</li>
 			  </ul> 
-		   );
+		   )
+		}
 });
 return data
  }
@@ -185,8 +188,8 @@ return data
   return (
   <> 
    <NavBar page="interestCalc" />
-  <div style={{"display":"flex", "marginBottom":"15px"}}>
-  <div> Total Amount: <strong>{diffAmount } </strong></div>
+  <div style={{"display":"flex"}}>
+  {/* <div> Total Amount: <strong>{diffAmount } </strong></div> */}
   </div>
   <div style={{"display":"flex"}}>
   <FilterEntries parentCallback={callbackFunction} />

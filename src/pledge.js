@@ -13,7 +13,7 @@ import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 
-let PageSize = 35;
+let PageSize = 35, finalAmount;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
@@ -204,25 +204,29 @@ const AllUserEntries = (props, ref) => {
 	}
 
 	function calculateInterest(date1, amount, redemDate) {
-			
-		let diffTime, interest;
+		let diffMonth, dateDiff, redeemDate, interest; 
 		if (redemDate == null || redemDate == undefined) {
-			diffTime = Math.abs(new Date() - new Date(date1));
+			redeemDate = new Date();
 		}
 		else {
-			diffTime = Math.abs(new Date(redemDate) - new Date(date1));
+			redeemDate = new Date(redemDate)
 		}
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		let months = Math.ceil(diffDays / 30);
-		// If pledge and redemption date are same, set month as 1 (get one months interest)
-		if(diffTime == 0){
-			interest = (amount * 1.33) / 100;
+		const monthDiff = redeemDate.getMonth() - new Date(date1).getMonth();
+		const yearDiff = redeemDate.getYear() - new Date(date1).getYear();
+
+		console.log('month diff', monthDiff);
+	  
+		if (redeemDate.getDate() < new Date(date1).getDate()) {
+		dateDiff = 1;
 		}
-		 else {
-			interest = (amount * months * 1.33) / 100;
-		 }
-		// setInterestVal(interest);
-		return interest;
+		else { dateDiff = 0}
+
+		diffMonth = (monthDiff +1) + yearDiff * 12	
+		diffMonth == 0 ? diffMonth = 1 : diffMonth = diffMonth;  
+		interest = (amount * (diffMonth - dateDiff) * 1.33) / 100; 
+		finalAmount = amount + interest;
+		// return Math.abs(interest).toFixed(2);
+		return finalAmount;
 
 	}
 
@@ -265,7 +269,7 @@ const AllUserEntries = (props, ref) => {
 					<li>{data.billNumber}</li>
 					<li>{data.amount}</li>
 					<li>
-						{ data.redemptionDate ? parseInt(data.amount + calculateInterest(data.date, data.amount, data.redemptionDate)) : " " }
+						{ data.redemptionDate ? calculateInterest(data.date, data.amount, data.redemptionDate) : " " }
 						</li>
 					<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "12px" }}>
 					{data.articleName.map((item, index) => {
@@ -376,7 +380,7 @@ const AllUserEntries = (props, ref) => {
 				<div className='hide-on-print'>
 					<div style={{ "display": "flex", "alignItems": "end", "marginBottom":"15px" }}>
 						<div>
-						<div style={{"marginBottom":"15px"}}> Total Amount: <strong>{diffAmount} </strong></div>
+						{/* <div style={{"marginBottom":"15px"}}> Total Amount: <strong>{diffAmount} </strong></div> */}
 						 <FilterEntries parentCallback={callbackFunction} /> </div>
 						<div style={{"marginLeft": "auto", "display": "flex", "alignItems": "center"}}>
 						{/* Show pagination, when there are more entries */}
@@ -414,7 +418,7 @@ const AllUserEntries = (props, ref) => {
 							<li>Name</li>
 							<li style={{ "width": "5%" }}>DLY Receipt #</li>
 							<li style={{ "width": "20%" }}>Address</li>
-							<li style={{ "width": "4%" }}>Date</li>
+							<li style={{ "width": "6%" }}>Date</li>
 							<li style={{ "width": "7%" }}>Bill No.</li>
 							<li style={{ "width": "7%" }}>Amount</li>
 							<li style={{ "width": "7%" }}>Redemption Amount</li>
