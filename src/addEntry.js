@@ -56,11 +56,13 @@ const AddEntry = () => {
 			len = entries.length;
 			let arrlen = (entries[len - 1].billNumber);
 			// Temp bill number check -- to be removed later
-			if (arrlen.split('/').length > 1 && currentYear == arrlen.split('/')[1]) {
+			
+			// if (arrlen.split('/').length > 1 && currentYear == arrlen.split('/')[1]) {
+				if (arrlen.split('/').length > 1) {
 				newBill = parseInt((arrlen.split('/')[0])) + 1;
 			}
 			else {
-				newBill = 1;
+				// newBill = 1;
 			}
 		}
 

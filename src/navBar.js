@@ -2,7 +2,7 @@ import React, { useContext} from 'react';
 import {Link } from 'react-router-dom';
 import './App.css';
 import { User } from './userContext.js';
-
+import GetAllTotal from './getTotals.js'
 
 const NavBar = (props) => {
   let value = useContext(User);
@@ -32,11 +32,15 @@ const NavBar = (props) => {
               <Link to="/FormD"> Form D</Link>
             </li>            
           </ul>
-          <div style={{"marginLeft": "auto"}}>
+          <div style={{"marginLeft": "auto", "display":"flex", "textAlign":"right", "flexDirection":"column", "alignItems":"flex-start"}}>
+            <div style={{"display":"flex"}}>
             <h5 style={{"margin": "0"}}>Welcome {value.data.userName} !</h5>
-            <div style={{"textAlign": "right", "fontSize":"12px"}}>
-            <Link to="/"> Logout </Link>
+            <div style={{"textAlign": "right", "fontSize":"12px"}}> 
+            <Link to="/" className='icon-exit'> </Link>
+              </div>
             </div>
+            
+            <div className='totals'><GetAllTotal/></div>
           </div>
         </div>
   )
