@@ -881,3 +881,8 @@ input[type=number] {
 .principleDetails td {border: 1px solid #333; border-bottom: 1px solid #333;font-size: 12px;padding: 3px 5px;text-align: center;}
 .capitalize { text-transform: uppercase;}
 .totals {color: #333; font-size: 12px;}
+.articles {list-style-type: none;margin:0 0 10px 0; padding: 0; display: flex;}
+.articles > li {background-color: #ccc;
+	border-radius: 15px;
+	padding: 7px;
+	font-size: 12px;margin-right: 7px;}

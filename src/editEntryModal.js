@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import AllUserEntries from './entryTable.js';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import ReactToPrint from "react-to-print";
 import DeliveryNote from './deliveryNote.js';
 import { isInteger, parseInt } from 'lodash';
+import { User } from './userContext.js';
 
 const EditEntryModal = (props) => {
 	// console.log('delivery', props.delivery);
@@ -21,6 +22,8 @@ const EditEntryModal = (props) => {
 	const interest = useRef();
 	const redemptionAmt = useRef();
 	const [interestVal, setInterestVal] = useState();
+
+	let value = useContext(User);
 
 	const handleChange = (e) => {
 		const value = e.target.value;
@@ -196,7 +199,8 @@ const EditEntryModal = (props) => {
 						
 						<div style={{ "clear": "both", "paddingLeft": "0px", "width":"100%" }}>
 							<button onClick={postUpdatedData}> Edit Entry </button>
-							<button onClick={saveRedeemedEntry} style={{ "marginLeft": "15px" }}> Redeem Entry </button>
+							{/* Hide Redeem entry button for Hemanth account only  */}
+							{value.data.userName=="hemanth" ? "" : <button onClick={saveRedeemedEntry} style={{ "marginLeft": "15px" }}> Redeem Entry </button> }
 							<button onClick={cancelUpdate} style={{ "marginLeft": "15px" }}> Cancel </button>
 						</div>
 					</form> : ''}

@@ -302,7 +302,7 @@ const AllUserEntries = (props, ref) => {
 						<li>{data.billNumber}</li>
 						<li>{data.amount}</li>
 						<li>
-						{ data.redemptionDate ? parseInt(data.amount + calculateInterest(data.date, data.amount, data.redemptionDate)) : " " }
+						{ data.redemptionDate ? calculateInterest(data.date, data.amount, data.redemptionDate) : " "  }
 						</li>
 						<li>
 							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
