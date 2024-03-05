@@ -22,7 +22,6 @@ const AddEntry = () => {
 	const metalType = useRef();
 	const page = useRef(null);
 
-
 	// Fetch entries to get last bill number
 	const getLists = () => {
 		isSetLoading(false);
@@ -126,6 +125,7 @@ const AddEntry = () => {
 	const [counter, inputCounter] = useState(0);
 
 	function handleChange(e) {
+		console.log('triggering');
 		let value;
 		if (e.target.name == "billNumber") {
 			setNewBillNum(e.target.value)
@@ -137,6 +137,8 @@ const AddEntry = () => {
 	}
 
 	const [oldBill, setOldBill] = useState();
+	const [existingArticle, setExistingArticles] = useState([]);
+
 	function setBillDetails(e){
 		setInputValue({ ...inputVal, [e.target.name]: e.target.value });
 		setOldBill(e.target.value);
@@ -154,8 +156,29 @@ const AddEntry = () => {
 		existing = response.data;
 		delete existing._id
 		setInputValue(existing);
+		
+		setExistingArticles(existing.articleName);
 	}
 
+	const [article, articleList] = useState([]);
+	const [newArticle, setNewArticle] = useState();
+
+	// Append articles to the list on top of article name input field
+const updateArticles = (e) => {
+	if(e.keyCode == 13) {
+		console.log(e.target.value);
+		articleList(article => article.concat(e.target.value));
+		setNewArticle('')
+	}
+}
+
+// Remove clicked article name 
+const removeArticle = (index) => {
+	articleList([
+    ...article.slice(0, index),
+    ...article.slice(index + 1, article.length)
+  ]);
+}
 	const [nameSuggestion, showNameSuggestion] = useState("");
 	const [addressSuggestion, setAddressSuggestion] = useState(false);
 	const [navigateList, setListNumber] = useState(0);
@@ -186,12 +209,17 @@ const AddEntry = () => {
 		setMetal(e.target.value);
 	}
 
+	
+	
 	function updateArticleName(e) {
-		const value = e.target.value;
-		articleList(article => article.concat(value));
+		let value = e.target.value;
+		articleList(article => {
+			article.concat(value);
+			
+		});
 	}
 
-	const [article, articleList] = useState([]);
+	
 	function appendInput(e) {
 		inputCounter(counter + 1);
 		let ele = document.createElement("input");
@@ -217,7 +245,7 @@ const AddEntry = () => {
 
 	useEffect((e) => {
 		// Add add article input dynamically 
-		appendInput();
+		// appendInput();
 	}, []);
 
 	useEffect((e) => {
@@ -252,6 +280,7 @@ const AddEntry = () => {
 	const postData = (e) => {
 		// e.preventDefault();
 		//console.log(article, 'after update');
+		console.log('articles', article)
 		axios.post('http://localhost:4000/customers/create-student', { ...inputVal, "date": date.current.value, "metal": metalType.current.value, "createdBy": value.data.userName, "cityPincode": cityPincode.current.value }, { headers: { 'Content-Type': 'application/json' } })
 			.then(res => {
 				console.log(res.data);
@@ -276,10 +305,10 @@ const AddEntry = () => {
 		getLists();
 		setBillNumber();
 		// Remove all article input field and append only one. Also clear the article array
-		articleList([]);
-		document.getElementById("addArticle").innerHTML = "";
-		document.getElementById("first-field").focus();
-		appendInput();
+		// articleList([]);
+		// document.getElementById("addArticle").innerHTML = "";
+		// document.getElementById("first-field").focus();
+		// appendInput();
 	}
 
 	const setData = (e) => {
@@ -456,10 +485,10 @@ const AddEntry = () => {
 					<label htmlFor="presentValue">Present Value</label>
 					<input type="text" name="presentValue" placeholder="Present Value" onChange={handleChange} value={inputVal.presentValue} autoComplete="off" />
 				</div>
-				<div>
+				{/* <div>
 					<label htmlFor="remark">Remarks</label>
 					<input type="text" name="remark" placeholder="Remark" onChange={handleChange} value={inputVal.remark} autoComplete="off" />
-				</div>
+				</div> */}
 				<div>
 					<label htmlFor="idProof">Identity Proof</label>
 					<input type="text" name="idProof" placeholder="Identity Proof" onChange={handleChange} value={inputVal.idProof} autoComplete="off" />
@@ -471,11 +500,21 @@ const AddEntry = () => {
 						<option value="SILVER">SILVER</option>
 					</select>
 				</div>
-				<div>
-					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>
-					<button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button>
-					<div id="addArticle">
-					</div>
+				<div style={{ "float": "none" }}> 
+				{/* <div>{existingArticle}</div> */}
+					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>				
+					{/* <button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button> */}
+					{article.length > 0 ? <ul className='articles'>{article.map(function (ele, i) {
+			return <li onClick={() => removeArticle(i)}>{ele} <span style={{ "display": "inline-block", "marginLeft":"5px"}}>X</span></li>
+		})}</ul> : ''} 
+					{/* <div id="addArticle">
+					</div> */}
+					<input type="text" name="articleName" placeholder="Article Name" 
+					 autoComplete="off"
+					 value={newArticle}
+					 onChange={(e) => setNewArticle(e.target.value)}
+					onKeyDown={(e) => { updateArticles(e); }}
+					/>
 				</div>
 				<div style={{ "clear": "both", "paddingLeft": "0px" }}>
 					<button onClick={postDataOnly} style={{ "marginRight": "10px" }}> Save </button>
