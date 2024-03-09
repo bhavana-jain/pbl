@@ -35,16 +35,22 @@ const AddEntry = () => {
 
 	const [names, setAllNames] = useState([]);
 	const [addresses, setAllAddress] = useState([]);
-	let allNames = [], allAddress = [];
+	const[items, setAllItems] = useState([]);
+	let allNames = [], allAddress = [], allItems = [];
 
 	const fetchNameAddress = () => {
 		entries.map(function (ele, i) {
+			let art = ele.articleName;
 			allNames.push(ele.cName);
 			allAddress.push(ele.address);
+			
+			allItems.push(...art);
 		})
-		//console.log(allNames, allAddress);
+		
+		// Remove duplicates from name, address and article name array
 		setAllNames([...new Set(allNames)]);
 		setAllAddress([...new Set(allAddress)]);
+		setAllItems([...new Set(allItems)]);
 	}
 
 	// Create and update new bill number
@@ -137,7 +143,6 @@ const AddEntry = () => {
 	}
 
 	const [oldBill, setOldBill] = useState();
-	const [existingArticle, setExistingArticles] = useState([]);
 
 	function setBillDetails(e){
 		setInputValue({ ...inputVal, [e.target.name]: e.target.value });
@@ -151,17 +156,15 @@ const AddEntry = () => {
 				return ele
 			}
 		});
-		console.log(filteredEntry);
 		const response = await axios.get("http://localhost:4000/customers/update-student/" + filteredEntry[0]._id);
 		existing = response.data;
 		delete existing._id
 		setInputValue(existing);
-		
-		setExistingArticles(existing.articleName);
+		articleList(article => article.concat(existing.articleName));
 	}
 
 	const [article, articleList] = useState([]);
-	const [newArticle, setNewArticle] = useState();
+	const [newArticle, setNewArticle] = useState('');
 
 	// Append articles to the list on top of article name input field
 const updateArticles = (e) => {
@@ -181,6 +184,7 @@ const removeArticle = (index) => {
 }
 	const [nameSuggestion, showNameSuggestion] = useState("");
 	const [addressSuggestion, setAddressSuggestion] = useState(false);
+	const[articleSuggestion, setArticleSuggestion] = useState(false);
 	const [navigateList, setListNumber] = useState(0);
 	let fieldvalue;
 
@@ -188,6 +192,7 @@ const removeArticle = (index) => {
 		if (!e.target.classList.contains('suggestion-name')) {
 			showNameSuggestion(false);
 			setAddressSuggestion(false);
+			setArticleSuggestion(false);
 		}
 
 	}
@@ -197,6 +202,10 @@ const removeArticle = (index) => {
 
 	function showAddress(e) {
 		setAddressSuggestion(true);
+	}
+
+	function showItems(e) {
+		setArticleSuggestion(true);
 	}
 
 	const updateInput = (name, refName) => {
@@ -339,6 +348,7 @@ const removeArticle = (index) => {
 								}
 								else {
 									setListNumber(navigateList + 1);
+									
 								}
 							}
 							else if (e.keyCode == 38 && navigateList >= 1) {
@@ -501,7 +511,6 @@ const removeArticle = (index) => {
 					</select>
 				</div>
 				<div style={{ "float": "none" }}> 
-				{/* <div>{existingArticle}</div> */}
 					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>				
 					{/* <button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button> */}
 					{article.length > 0 ? <ul className='articles'>{article.map(function (ele, i) {
@@ -512,9 +521,62 @@ const removeArticle = (index) => {
 					<input type="text" name="articleName" placeholder="Article Name" 
 					 autoComplete="off"
 					 value={newArticle}
-					 onChange={(e) => setNewArticle(e.target.value)}
-					onKeyDown={(e) => { updateArticles(e); }}
+					 className={`suggestion ${articleSuggestion ? "active" : ""}`}
+						onBlur={(e) => setArticleSuggestion(false)}
+					 onChange={(e) => {setNewArticle(e.target.value);setArticleSuggestion(true); setListNumber(0) }}
+					 onKeyDown={(e) => {
+						console.log(items);
+						let count = items.filter((ele) => ele.toLowerCase().includes(newArticle.toLowerCase()));
+						// setListNumber(navigateList+1);
+						if (e.keyCode == 40) {
+							console.log(navigateList, count.length)
+							if (navigateList == count.length - 1) {
+								console.log('equal equal');
+							}
+							else {
+								setListNumber(navigateList + 1);
+							}
+						}
+						else if (e.keyCode == 38 && navigateList >= 1) {
+							console.log(navigateList, count.length)
+
+							//	if(navigateList == 1){ return false} 
+							if (navigateList == 1) {
+								setListNumber(0);
+							}
+							else {
+								setListNumber(navigateList - 1);
+							}
+
+						}
+						else if (e.keyCode == 13) {
+							console.log('enter key pressed');
+							setNewArticle(count[navigateList]);
+							setInputValue({ ...inputVal, "articleName": article })
+							setListNumber(0);
+							articleList(article => article.concat(count[navigateList]));
+							setArticleSuggestion(false);
+							setNewArticle('');
+
+						}
+					}}
 					/>
+					<ul className="suggestion-list">
+						{items.filter((ele) => ele.toLowerCase().includes(newArticle.toLowerCase())).map(function (data, idx) {
+							return <li className={`suggestion-name ${navigateList == idx ? "highlight" : ""}`}
+								onClick={() => {
+									articleList(article => article.concat(data));
+									setInputValue({ ...inputVal, "articleName": article }); setArticleSuggestion(false);
+									setNewArticle(data);
+								}}
+								onMouseDown={(e) => e.preventDefault()} // Added to prevent the blur event trigger
+							>{data}
+
+								{/* Assigning highlighted value to the var fieldvalue, as using state here causes infinite re-render issue */}
+								<div style={{ "display": "none" }}>{navigateList == idx ? fieldvalue = data : ''}</div>
+							</li>
+						})}
+					</ul>
 				</div>
 				<div style={{ "clear": "both", "paddingLeft": "0px" }}>
 					<button onClick={postDataOnly} style={{ "marginRight": "10px" }}> Save </button>
@@ -526,8 +588,8 @@ const removeArticle = (index) => {
 				</div>
 			</form>
 			<div ref={el => (billPrint = el)} id="pledgeBill">
-				<PledgeBill test={formVal} billType="Original Bill" />
-				<PledgeBill test={formVal} billType="Duplicate Bill" />
+				 <PledgeBill test={formVal} billType="Original Bill" />
+				<PledgeBill test={formVal} billType="Duplicate Bill" /> 
 			</div> 
 		</div>
 	);
