@@ -13,7 +13,7 @@ import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 
-let PageSize = 35, finalAmount;
+let PageSize = 25, finalAmount;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
@@ -260,7 +260,6 @@ const AllUserEntries = (props, ref) => {
 			return (
 				<ul className="table-body" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
-					<li>{data.deliveryRecNum}</li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 						{data.address} {data.cityPincode ? data.cityPincode : "chennai 600-081"}
 						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
@@ -274,12 +273,15 @@ const AllUserEntries = (props, ref) => {
 					<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "12px" }}>
 					{data.articleName.map((item, index) => {
 						return <span>{item},</span>
-					})}
+					})} ({data.metal})
 					</div>
 					</li>
-					<li>{data.metal}</li>
 					<li> {data.gram}.{data.mg} </li>
+					<li>{data.presentValue}</li>
 					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
+					
+					<li>{data.deliveryRecNum}</li>
+					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : "SELF"}</li>
 				</ul>
 			);
 
@@ -293,7 +295,6 @@ const AllUserEntries = (props, ref) => {
 				return (
 					<ul className="table-body" key={data.billNumber}>
 						<li>{data.cName}</li>
-						<li>{data.deliveryRecNum}</li>
 						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 							{data.address} {data.cityPincode}
 							{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
@@ -304,16 +305,17 @@ const AllUserEntries = (props, ref) => {
 						<li>
 						{ data.redemptionDate ? calculateInterest(data.date, data.amount, data.redemptionDate) : " "  }
 						</li>
-						<li>
-							<div style={{ "position": "relative" }} className="showMore"> {data.articleName[0]}
-								<ul className="all-articles">
-									{renderArticleList(data.articleName)}
-								</ul>
-							</div>
-						</li>
-						<li>{data.metal}</li>
+						<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "12px" }}>
+					{data.articleName.map((item, index) => {
+						return <span>{item},</span>
+					})} ({data.metal})
+					</div>
+					</li>
 						<li> {data.gram}.{data.mg} </li>
+						<li>{data.presentValue}</li>
 						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
+						<li>{data.deliveryRecNum}</li>
+						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : "SELF"}</li>
 											</ul>
 				);
 		});
@@ -406,26 +408,38 @@ const AllUserEntries = (props, ref) => {
 					</div>
 				</div>
 				<div className="bill-header show-on-print" id="header">
-					<div style={{ "marginBottom": "2px", "fontSize": "14px", "paddingLeft": "10px" }}> PLEDGE BOOk - NAKODA Pawn Broker  Plot No.9, V.O.C. Nagar, Market Lane,  Tondiarpet, Chennai- 600 081 </div>
-					<div style={{ "display": "flex" }}>
-						<div style={{ "padding": "5px 0 5px 15px", "fontSize": "14px" }}> FORM E Section 10[1] (a) &amp; Rule 7</div>
-						<div style={{ "padding": "5px 0 5px 0", "fontSize": "14px", "marginLeft": "auto" }}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}>{value.data.license}</span></div>
+					
+				<div style={{ "display": "flex", "alignItems":"baseline" }}>
+				<div>
+					<div style={{ "marginBottom": "2px", "fontSize": "12px", "paddingLeft": "10px" }}> PLEDGE BOOk - NAKODA Pawn Broker  Plot No.9, V.O.C. Nagar, Market Lane,  Tondiarpet, Chennai- 600 081 </div>
+						
+						<div style={{ "padding": "5px 0 5px 10px", "fontSize": "12px", "float":"left"}}> FORM E Section 10[1] (a) &amp; Rule 7</div>
+						<div style={{ "padding": "5px 0 5px 0", "fontSize": "12px", "float":"right"}}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}>{value.data.license}</span></div>
+						</div>
+						<div style={{ "fontSize": "12px", "width":"40%", "marginLeft":"auto"}}>
+							<ul>
+								<li>All items in the PLEDGE BOOK except items 6, 11 &nbsp; 13 respecting each pledge shall made on the day of the pawning thereof</li>
+								<li>4 Rate of Interest charged 16%</li>
+								<li>9 The time agreed upon for the redemption  of the pawn - one year</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 				{entries && entries.length ?
 					<div style={{ "display": "table", "width": "100%", "marginTop": "5px" }} className="pledge-entries">
 						<ul className="table-header" style={{ "fontWeight": "bold" }}>
-							<li>Name</li>
-							<li style={{ "width": "5%" }}>DLY Receipt #</li>
-							<li style={{ "width": "20%" }}>Address</li>
+							<li style={{ "width": "10%", "wordBreak":"break-all"}}>Name</li>
+							<li style={{ "width": "15%" }}>Address</li>
 							<li style={{ "width": "6%" }}>Date</li>
-							<li style={{ "width": "7%" }}>Bill No.</li>
-							<li style={{ "width": "7%" }}>Amount</li>
+							<li style={{ "width": "5%" }}>Bill No.</li>
+							<li style={{ "width": "5%" }}>Amount</li>
 							<li style={{ "width": "7%" }}>Redemption Amount</li>
 							<li>Article Name</li>
-							<li style={{ "width": "6%" }}>Metal</li>
 							<li style={{ "width": "4%" }}> Weight </li>
+							<li style={{ "width": "4%" }}> Present Value </li>
 							<li style={{ "width": "6%" }}>Redemption Date</li>
+							<li style={{ "width": "5%" }}>DLY Receipt #</li>
+							<li style={{ "width": "6%" }}>Redeemer's Name</li>
 						</ul>
 						{isSearch ? <RenderSearchData /> : <RenderTableData />}
 					</div> :
