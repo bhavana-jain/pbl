@@ -27,6 +27,12 @@ const AllUserEntries = (props, ref) => {
 	const [delId, setDelId] = useState();
 	const [deleteEntry, confirmDeletion] = useState(false);
 
+	const[redeemedBy, setRedeemedBy] = useState();
+	const[otherRedeemer, setRedeemer] = useState();
+	const[redeemer, setRedeemerName] = useState("Self");
+
+	const redemptionBy = useRef();
+
 	let value = useContext(User);
 
 	const redemDate = useRef(moment(new Date()).format('YYYY-MM-DD'));
@@ -235,15 +241,15 @@ const AllUserEntries = (props, ref) => {
 
 	const transferEntry = async (e) => {
 		e.preventDefault();
-		console.log(redemptionDetails);
-		await axios.put('http://localhost:4000/customers/update-student/' + redemptionDetails._id, {
-			...redemptionDetails, "deliveryRecNum": deliveryNumber
-		}, { headers: { 'Content-Type': 'application/json' } })
-			.then(res => {
-				setToRedeemed(false);
-				console.log(res.data);
-				getLists();
-			});
+		
+		 await axios.put('http://localhost:4000/customers/update-student/' + redemptionDetails._id, {
+		 	...redemptionDetails, "deliveryRecNum": deliveryNumber, "redeemer":redeemer
+		 }, { headers: { 'Content-Type': 'application/json' } })
+		 	.then(res => {
+		 		setToRedeemed(false);
+		 		console.log(res.data);
+		 		getLists();
+ 	});
 	}
 
 	// Cancel delete entry
@@ -950,10 +956,10 @@ const AllUserEntries = (props, ref) => {
 				{redeemEntry && redemptionDetails?
 					<>
 						<div className="page-overlay"></div>
-						<div className="delete-modal">
+						<div className="delete-modal entry-form">
 							<button className="close-modal" onClick={cancelDelete} ></button>
 							<p> Are you sure you want to redeem entry with Bill No: <strong> {redemptionDetails.billNumber} </strong> </p>
-							<p><label htmlFor='redemptionDate'></label>
+							<p><label htmlFor='redemptionDate'>Redemption Date</label>
 								<input type="date" name="redemptionDate" placeholder="Enter date"
 									defaultValue={moment(new Date()).format('YYYY-MM-DD')}
 									value={redData ? moment(new Date(redData.redemptionDate)).format('YYYY-MM-DD') : moment(new Date()).format('YYYY-MM-DD')}
@@ -962,9 +968,25 @@ const AllUserEntries = (props, ref) => {
 							</p>
 							<p><strong>Redemption Amount: </strong> {redemptionDetails.amount} </p>
 							<p><strong> Interest: </strong>{calculateInterest(redemptionDetails.date, redemptionDetails.amount)}</p>
-							<button onClick={transferEntry}> Yes </button>
+							<div className='entry-form'>
+							<>
+							<label htmlFor="redeemedBy" style={{ "display": "inline-block" }}>Redeemed By</label>
+					<select id="redeemedBy" onChange={(e)=> {setRedeemedBy(e.target.value); setRedeemerName(e.target.value);}} value={redeemedBy} className="metal-type" ref={redemptionBy}>
+						<option value="self" selected>SELF</option>
+						<option value="others">OTHERS</option>
+					</select></>
+					{redeemedBy =="others" ? 
+							<>
+							<label htmlFor="otherRedeemer" style={{ "display": "inline-block" }}>&nbsp;</label>
+							<input type='text' id="otherRedeemer" placeholder='Redeemer Name'onChange={(e)=> {setRedeemer(e.target.value);setRedeemerName(e.target.value)}} />
+							</> : '' }
+				</div>
+				<div style={{"clear":"both"}}>
+				<button onClick={transferEntry}> Yes </button>
 							<button onClick={cancelDelete}> No </button>
+				</div>
 						</div>
+						
 					</>
 					: ''}
 			</div>

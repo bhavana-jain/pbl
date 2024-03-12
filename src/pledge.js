@@ -281,7 +281,7 @@ const AllUserEntries = (props, ref) => {
 					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
 					
 					<li>{data.deliveryRecNum}</li>
-					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : "SELF"}</li>
+					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : data.redeemer}</li>
 				</ul>
 			);
 
@@ -315,7 +315,7 @@ const AllUserEntries = (props, ref) => {
 						<li>{data.presentValue}</li>
 						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
 						<li>{data.deliveryRecNum}</li>
-						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : "SELF"}</li>
+						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : data.redeemer}</li>
 											</ul>
 				);
 		});

@@ -69,6 +69,9 @@ let customerSchema = new Schema({
 	},
 	deliveryRecNum: {
 		type: String
+	},
+	redeemer: {
+		type: String
 	}
 }, {
 	collection: 'customerList'

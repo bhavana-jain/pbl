@@ -500,17 +500,18 @@ const removeArticle = (index) => {
 					<input type="text" name="remark" placeholder="Remark" onChange={handleChange} value={inputVal.remark} autoComplete="off" />
 				</div> */}
 				<div>
-					<label htmlFor="idProof">Identity Proof</label>
-					<input type="text" name="idProof" placeholder="Identity Proof" onChange={handleChange} value={inputVal.idProof} autoComplete="off" />
-				</div>
-				<div>
 					<label htmlFor="metal" style={{ "display": "inline-block" }}>Metal</label>
 					<select id="metal" onChange={updateMetal} value={metal} className="metal-type" ref={metalType}>
 						<option value="GOLD" selected>GOLD</option>
 						<option value="SILVER">SILVER</option>
 					</select>
 				</div>
-				<div style={{ "float": "none" }}> 
+				
+				<div>
+					<label htmlFor="idProof">Identity Proof</label>
+					<input type="text" name="idProof" placeholder="Identity Proof" onChange={handleChange} value={inputVal.idProof} autoComplete="off" />
+				</div>
+				<div> 
 					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>				
 					{/* <button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button> */}
 					{article.length > 0 ? <ul className='articles'>{article.map(function (ele, i) {
