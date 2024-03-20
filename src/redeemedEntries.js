@@ -305,9 +305,11 @@ const AllUserEntries = (props, ref) => {
 					<div style={{ "marginLeft": "auto" }}> Total: <span className="content-spacer"> 
 					{finalAmount} </span> </div>
 				</div>
-				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0" }}>
-					<div style={{ "marginLeft": "auto" }}> Signature or Thumb Impression of the Pawner </div>
-				</div>
+				<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0","alignItems":"center", "justifyContent":"space-between" }}>
+						<div> &nbsp; </div>
+						<div className="sign-icon"></div>
+						<div> Signature or Thumb Impression of the Pawner </div>
+					</div>
 			</div>
 		)
 	}
@@ -410,9 +412,10 @@ const AllUserEntries = (props, ref) => {
 							</tr>
 						</tbody>
 					</table>
-					<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "borderBottom":"1px solid #000" }}>
+					<div style={{ "display": "flex", "fontWeight": "bold", "padding": "30px 0 10px 0", "borderBottom":"1px solid #000", "alignItems":"center", "justifyContent":"space-between" }}>
 						<div> Signature of pawn broker </div>
-						<div style={{ "marginLeft": "auto" }}> Sign / LHTI of pawner </div>
+						<div className="sign-icon"></div>
+						<div> Sign / LHTI of pawner </div>
 					</div>
 					
 					<p style={{ "fontWeight": "bold", "textAlign": "center", "fontSize": "16px", "margin":"7px 0px" }}>Terms &amp; Conditions</p>

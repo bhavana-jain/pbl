@@ -539,6 +539,7 @@ input[type=number] {
 }
 
 @media print {
+	.pledge-table > li {font-weight:100;}
 	.hide-on-print { display: none; }
 	.bill-header {
 		border-bottom: 1px solid #000;
@@ -887,3 +888,10 @@ input[type=number] {
 	padding: 7px;
 	font-size: 12px;margin-right: 7px;display: inline-block;
 	margin-bottom: 7px;}
+.sign-icon {
+	background: url('./images/sign.png') no-repeat;
+	width: 25px;
+	height: 25px;
+	background-size: cover;
+}
+.pledge-table > li {font-weight: bold;}

@@ -511,7 +511,7 @@ const removeArticle = (index) => {
 					<label htmlFor="idProof">Identity Proof</label>
 					<input type="text" name="idProof" placeholder="Identity Proof" onChange={handleChange} value={inputVal.idProof} autoComplete="off" />
 				</div>
-				<div> 
+				<div className="relative"> 
 					<label htmlFor="articleName" style={{ "display": "inline-block" }}>Article Name</label>				
 					{/* <button className="add-more" onClick={appendInput} style={{ "display": "inline-block" }}> + </button> */}
 					{article.length > 0 ? <ul className='articles'>{article.map(function (ele, i) {
@@ -588,6 +588,7 @@ const removeArticle = (index) => {
 					/>
 				</div>
 			</form>
+			<PledgeBill test={formVal} billType="Original Bill" />
 			<div ref={el => (billPrint = el)} id="pledgeBill">
 				 <PledgeBill test={formVal} billType="Original Bill" />
 				<PledgeBill test={formVal} billType="Duplicate Bill" /> 

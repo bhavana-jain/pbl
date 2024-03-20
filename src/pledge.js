@@ -9,6 +9,7 @@ import ReactToPrint from "react-to-print";
 import NavBar from './navBar.js';
 import moment from 'moment';
 import Pagination from './components/pagination';
+import * as html2canvas from "html2canvas"
 import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
@@ -242,6 +243,23 @@ const AllUserEntries = (props, ref) => {
 		});
 		return list;
 	}
+const generateImages = () => {
+	alert('me');
+	setTimeout(() => {
+		html2canvas(document.getElementById('print-area'), ).then(function(canvas) {
+			var data = canvas.toDataURL('image/jpeg');
+			var src = encodeURI(data);
+			document.getElementById('screenshot').src = src;
+		}); }, 1000);
+}
+	const SetPrintPages = () => {
+return (
+	<section id="test-result">
+      <h2>JPEG</h2>
+      <div><img src="" id="screenshot" /></div>
+    </section>
+)
+	}
 
 	// pagination logic
 	const [currentPage, setCurrentPage] = useState(1);
@@ -258,7 +276,7 @@ const AllUserEntries = (props, ref) => {
 		let data = currentTableData.map(function (data, idx) {
 			
 			return (
-				<ul className="table-body" key={data.billNumber}>
+				<ul className="table-body pledge-table" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 						{data.address} {data.cityPincode ? data.cityPincode : "chennai 600-081"}
@@ -293,7 +311,7 @@ const AllUserEntries = (props, ref) => {
 		let data = entries.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
 			
 				return (
-					<ul className="table-body" key={data.billNumber}>
+					<ul className="table-body pledge-table"  key={data.billNumber}>
 						<li>{data.cName}</li>
 						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 							{data.address} {data.cityPincode}
@@ -402,11 +420,13 @@ const AllUserEntries = (props, ref) => {
 						</div> : ''}
 						<div>
 							<button onClick={downloadData} style={{ "marginRight": "15px" }}> Download </button>
-							<button onClick={printEntries}>Print</button>
+							<button onClick={generateImages}>Print</button>
 						</div>
 						</div>
 					</div>
 				</div>
+				<div><SetPrintPages/></div>
+				<div id="print-area">
 				<div className="bill-header show-on-print" id="header">
 					
 				<div style={{ "display": "flex", "alignItems":"baseline" }}>
@@ -444,7 +464,7 @@ const AllUserEntries = (props, ref) => {
 						{isSearch ? <RenderSearchData /> : <RenderTableData />}
 					</div> :
 					<h3> Loading.. please wait </h3>}
-
+</div>
 			</div>
 		</>
 	)

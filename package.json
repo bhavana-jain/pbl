@@ -11,6 +11,7 @@
     "cors": "^2.8.5",
     "emailjs": "^4.0.2",
     "firebase": "^9.23.0",
+    "html2canvas": "^1.4.1",
     "js-file-download": "^0.4.12",
     "json-server": "^0.17.0",
     "lodash": "^4.17.21",
