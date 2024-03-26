@@ -14,7 +14,7 @@ import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 
-let PageSize = 25, finalAmount;
+let PageSize = 30, finalAmount, page1, page2;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
@@ -245,19 +245,114 @@ const AllUserEntries = (props, ref) => {
 	}
 const generateImages = () => {
 	alert('me');
-	setTimeout(() => {
-		html2canvas(document.getElementById('print-area'), ).then(function(canvas) {
-			var data = canvas.toDataURL('image/jpeg');
-			var src = encodeURI(data);
-			document.getElementById('screenshot').src = src;
-		}); }, 1000);
+	let newwin;
+	var divToPrint = document.getElementById("print-area");
+	var styles = document.createElement("style");
+	styles.setAttribute("id","landscape");
+	styles.setAttribute("type", "text/css");
+	styles.setAttribute("media", "print");
+	styles.textContent = `@page { size: landscape; }.pledge-entries {
+		table-layout: fixed;
+	}
+	.pledge-entries .table-header>li {
+		font-size: 10px !important;
+		word-spacing: 1px;
+	}
+	.pledge-entries .table-header>li,
+	.pledge-entries .table-body>li {
+		font-size: 12px;
+		word-spacing: 1px;
+	}.table-header,
+	.table-body {
+		display: table-row;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	.table-header>li,
+	.table-body>li {
+		border: 1px solid #ccc;
+		border-right: 0;
+		font-size: 14px;
+		text-align: center;
+		padding: 5px;
+		display: table-cell;
+		vertical-align: middle;
+		text-transform: uppercase;
+		vertical-align: middle;
+	}
+	
+	.table-body>li  {
+		font-size: 12px;
+	}
+	
+	.table-header>li,
+	.table-body>li:last-child {
+		border-right: 1px solid #ccc;
+	}
+	
+	.table-header>li {
+		padding: 10px 5px;
+	}
+	#page2 .table-header > li {
+		height: autopx;
+		padding: 10px 5px !important;
+		font-size: 12px;
+	  }
+	`;
+	document.head.appendChild(styles);
+	var divToPrintHTML = divToPrint.outerHTML;
+	window.print();
+	
 }
-	const SetPrintPages = () => {
+window.onafterprint = (event) => {
+	console.log("After print");
+	document.getElementById('landscape').remove();
+  };
+  const SetHeader = () => {
+return(
+	<div className="bill-header show-on-print" id="header" style={{ "marginBottom": "0", "borderBottom":"0" }}>
+					
+					<div style={{ "display": "flex", "alignItems":"baseline" }}>
+					<div>
+						<div style={{ "marginBottom": "2px", "fontSize": "12px", "paddingLeft": "10px" }}> PLEDGE BOOk - NAKODA Pawn Broker  Plot No.9, V.O.C. Nagar, Market Lane,  Tondiarpet, Chennai- 600 081 </div>
+							
+							<div style={{ "padding": "5px 0 5px 10px", "fontSize": "12px", "float":"left"}}> FORM E Section 10[1] (a) &amp; Rule 7</div>
+							<div style={{ "padding": "5px 0 5px 0", "fontSize": "12px", "float":"right"}}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}>{value.data.license}</span></div>
+							</div>
+							<div style={{ "fontSize": "12px", "width":"40%", "marginLeft":"auto"}}>
+								<ul>
+									<li>All items in the PLEDGE BOOK except items 6, 11 &nbsp; 13 respecting each pledge shall made on the day of the pawning thereof</li>
+									<li>4 Rate of Interest charged 16%</li>
+									<li>9 The time agreed upon for the redemption  of the pawn - one year</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+)
+  }
+	const SetPrintPages = (page1) => {
 return (
-	<section id="test-result">
-      <h2>JPEG</h2>
-      <div><img src="" id="screenshot" /></div>
-    </section>
+	<>
+				<div style={{ "display": "table", "width": "100%"}} className="pledge-entries">
+						<ul className="table-header" style={{ "fontWeight": "bold" }}>
+							<li style={{ "width": "10%", "wordBreak":"break-all"}}>Name</li>
+							<li style={{ "width": "15%" }}>Address</li>
+							<li style={{ "width": "6%" }}>Date</li>
+							<li style={{ "width": "5%" }}>Bill No.</li>
+							<li style={{ "width": "5%" }}>Amount</li>
+							<li style={{ "width": "7%" }}>Redemption Amount</li>
+							<li>Article Name</li>
+							<li style={{ "width": "4%" }}> Weight </li>
+							<li style={{ "width": "4%" }}> Present Value </li>
+							<li style={{ "width": "6%" }}>Redemption Date</li>
+							<li style={{ "width": "5%" }}>DLY Receipt #</li>
+							<li style={{ "width": "6%" }}>Redeemer's Name</li>
+						</ul>
+						{DataTable(page1)}
+					</div> 
+					</>
 )
 	}
 
@@ -271,16 +366,15 @@ return (
 		return entries.slice(firstPageIndex, lastPageIndex);
 	}, [currentPage, entries, isSearch]);
 
-	// Default page state with pagination
-	const RenderTableData = () => {
-		let data = currentTableData.map(function (data, idx) {
+	const DataTable = (entry) => {
+		let data = entry.map(function (data, idx) {
 			
 			return (
 				<ul className="table-body pledge-table" key={data.billNumber}>
 					<li style={{ "textAlign": "left" }}>{data.cName}</li>
 					<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
 						{data.address} {data.cityPincode ? data.cityPincode : "chennai 600-081"}
-						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number"> {data.contactNo} </div>}
+						{data.contactNo == "" || data.contactNo == undefined || data.contactNo == null ? "" : <div className="contact-number hide-on-print"> {data.contactNo} </div>}
 					</li>
 					<li>{data.date == "" || data.date == undefined || data.date == null || data.date == "Invalid date" ? '' : moment(data.date).format('DD/MM/YYYY')} </li>
 					<li>{data.billNumber}</li>
@@ -306,11 +400,39 @@ return (
 		});
 		return data
 	}
+	// Default page state with pagination
+	const RenderTableData = () => {
+		setSecondPage(false);
+		page1= currentTableData.slice(0, 15);
+		return (
+			<div style={{"pageBreakAfter":"always"}}>
+			<SetHeader />
+			{SetPrintPages(page1)}
+			</div>
+		)
+	}
+	const RenderTableData2 = () => {
+		setSecondPage(true);
+		page2= currentTableData.slice(15, 30);
+		if(currentTableData.length > 15 ){
+			return (
+				<div id="page2" style={{"pageBreakAfter":"always"}}>
+				<SetHeader />
+				{SetPrintPages(page2)}
+				</div>
+			)
+		}
+		else {
+			return false;
+		}
+		
+	}
 	// Show only search result
 	const RenderSearchData = () => {
 		let data = entries.filter((ele) => ele.cName.toLowerCase() == searchText.toLowerCase() || ele.billNumber == searchText).map(function (data, idx) {
 			
 				return (
+					
 					<ul className="table-body pledge-table"  key={data.billNumber}>
 						<li>{data.cName}</li>
 						<li style={{ "textAlign": "left", "paddingLeft": "10px" }}>
@@ -425,43 +547,30 @@ return (
 						</div>
 					</div>
 				</div>
-				<div><SetPrintPages/></div>
 				<div id="print-area">
-				<div className="bill-header show-on-print" id="header">
-					
-				<div style={{ "display": "flex", "alignItems":"baseline" }}>
-				<div>
-					<div style={{ "marginBottom": "2px", "fontSize": "12px", "paddingLeft": "10px" }}> PLEDGE BOOk - NAKODA Pawn Broker  Plot No.9, V.O.C. Nagar, Market Lane,  Tondiarpet, Chennai- 600 081 </div>
-						
-						<div style={{ "padding": "5px 0 5px 10px", "fontSize": "12px", "float":"left"}}> FORM E Section 10[1] (a) &amp; Rule 7</div>
-						<div style={{ "padding": "5px 0 5px 0", "fontSize": "12px", "float":"right"}}>P.B.L No. <span style={{ "display": "inline-block", "width": "150px" }}>{value.data.license}</span></div>
-						</div>
-						<div style={{ "fontSize": "12px", "width":"40%", "marginLeft":"auto"}}>
-							<ul>
-								<li>All items in the PLEDGE BOOK except items 6, 11 &nbsp; 13 respecting each pledge shall made on the day of the pawning thereof</li>
-								<li>4 Rate of Interest charged 16%</li>
-								<li>9 The time agreed upon for the redemption  of the pawn - one year</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 				{entries && entries.length ?
-					<div style={{ "display": "table", "width": "100%", "marginTop": "5px" }} className="pledge-entries">
-						<ul className="table-header" style={{ "fontWeight": "bold" }}>
-							<li style={{ "width": "10%", "wordBreak":"break-all"}}>Name</li>
-							<li style={{ "width": "15%" }}>Address</li>
-							<li style={{ "width": "6%" }}>Date</li>
-							<li style={{ "width": "5%" }}>Bill No.</li>
-							<li style={{ "width": "5%" }}>Amount</li>
-							<li style={{ "width": "7%" }}>Redemption Amount</li>
-							<li>Article Name</li>
-							<li style={{ "width": "4%" }}> Weight </li>
-							<li style={{ "width": "4%" }}> Present Value </li>
-							<li style={{ "width": "6%" }}>Redemption Date</li>
-							<li style={{ "width": "5%" }}>DLY Receipt #</li>
-							<li style={{ "width": "6%" }}>Redeemer's Name</li>
-						</ul>
-						{isSearch ? <RenderSearchData /> : <RenderTableData />}
+					<div>
+						{isSearch ? 
+						
+				<div style={{ "display": "table", "width": "100%"}} className="pledge-entries">
+				<ul className="table-header" style={{ "fontWeight": "bold" }}>
+					<li style={{ "width": "10%", "wordBreak":"break-all"}}>Name</li>
+					<li style={{ "width": "15%" }}>Address</li>
+					<li style={{ "width": "6%" }}>Date</li>
+					<li style={{ "width": "5%" }}>Bill No.</li>
+					<li style={{ "width": "5%" }}>Amount</li>
+					<li style={{ "width": "7%" }}>Redemption Amount</li>
+					<li>Article Name</li>
+					<li style={{ "width": "4%" }}> Weight </li>
+					<li style={{ "width": "4%" }}> Present Value </li>
+					<li style={{ "width": "6%" }}>Redemption Date</li>
+					<li style={{ "width": "5%" }}>DLY Receipt #</li>
+					<li style={{ "width": "6%" }}>Redeemer's Name</li>
+				</ul>
+				<RenderSearchData /> 
+			</div> 
+						
+						: <><RenderTableData /><RenderTableData2 /> </>}
 					</div> :
 					<h3> Loading.. please wait </h3>}
 </div>
