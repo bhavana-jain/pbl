@@ -402,7 +402,6 @@ return (
 	}
 	// Default page state with pagination
 	const RenderTableData = () => {
-		setSecondPage(false);
 		page1= currentTableData.slice(0, 15);
 		return (
 			<div style={{"pageBreakAfter":"always"}}>
@@ -412,7 +411,6 @@ return (
 		)
 	}
 	const RenderTableData2 = () => {
-		setSecondPage(true);
 		page2= currentTableData.slice(15, 30);
 		if(currentTableData.length > 15 ){
 			return (
