@@ -80,7 +80,7 @@ const PledgeBill = React.forwardRef((props, ref) => {
 							</tr>
 							<tr className="empty-child">
 								<td>Principle of the loan amount</td>
-								<td className='bold' style={{"fontSize":"11pt"}}>{val.amount}</td>
+								<td className='bold' style={{"fontSize":"12pt"}}>{val.amount}</td>
 								<td style={{ "borderLeft": "1px solid #000" }}>Rupees in words</td>
 								<td style={{ "borderLeft": "1px solid #000" }} className='bold'>{val.amount ? toWords.convert(parseInt(val.amount), { currency: true }) : ""} </td>
 								<td>Old Bill No.</td>

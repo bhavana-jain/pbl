@@ -69,6 +69,7 @@ const Account = () => {
 
   return (
     <div className='page-bg'>
+      
       <form className={`addAccount ${userLogin ? "show" : "hide"}`}>
         <div>
           <label htmlFor="userName">User Name</label>

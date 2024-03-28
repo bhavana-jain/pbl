@@ -244,7 +244,6 @@ const AllUserEntries = (props, ref) => {
 		return list;
 	}
 const generateImages = () => {
-	alert('me');
 	let newwin;
 	var divToPrint = document.getElementById("print-area");
 	var styles = document.createElement("style");
@@ -260,7 +259,7 @@ const generateImages = () => {
 	}
 	.pledge-entries .table-header>li,
 	.pledge-entries .table-body>li {
-		font-size: 12px;
+		font-size: 11px;
 		word-spacing: 1px;
 	}.table-header,
 	.table-body {
@@ -382,7 +381,7 @@ return (
 					<li>
 						{ data.redemptionDate ? calculateInterest(data.date, data.amount, data.redemptionDate) : " " }
 						</li>
-					<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "12px" }}>
+					<li><div style={{"width":"100%", "wordBreak":"break-all", "fontSize": data.articleName.length > 2 ? "10px" : "11px" }}>
 					{data.articleName.map((item, index) => {
 						return <span>{item},</span>
 					})} ({data.metal})

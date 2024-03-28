@@ -507,6 +507,7 @@ const AllUserEntries = (props, ref) => {
 			</div>
 		)
 	}
+	
 	// Default page state with pagination
 	const RenderTableData = () => {
 		let data = currentTableData.map(function (data, idx) {
@@ -642,7 +643,7 @@ const AllUserEntries = (props, ref) => {
 	// pagination logic
 	const [currentPage, setCurrentPage] = useState(1);
 	const currentTableData = useMemo(() => {
-		console.log(isSearch);
+console.log(isSearch);
 		const firstPageIndex = (currentPage - 1) * PageSize;
 		const lastPageIndex = firstPageIndex + PageSize;
 		console.log(filterRedeemed.length);
