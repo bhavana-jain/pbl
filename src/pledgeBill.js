@@ -63,9 +63,9 @@ const PledgeBill = React.forwardRef((props, ref) => {
 						<tbody>
 							<tr>
 								<td>Bill No</td>
-								<td className='bold'>{val.billNumber}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}>{val.billNumber}</td>
 								<td>Pledge Date</td>
-								<td className='bold' style={{"fontSize":"11pt"}}>{val.date == "" || val.date == undefined || val.date == null || val.date == "Invalid date" ? '' : moment(val.date).format('DD/MM/YYYY')}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}>{val.date == "" || val.date == undefined || val.date == null || val.date == "Invalid date" ? '' : moment(val.date).format('DD/MM/YYYY')}</td>
 								<td>Mobile</td>
 								<td className='bold' style={{"fontSize":"11pt"}}> {val.contactNo}</td>
 								</tr>
@@ -80,11 +80,11 @@ const PledgeBill = React.forwardRef((props, ref) => {
 							</tr>
 							<tr className="empty-child">
 								<td>Principle of the loan amount</td>
-								<td className='bold' style={{"fontSize":"12pt"}}>{val.amount}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}>{val.amount}</td>
 								<td style={{ "borderLeft": "1px solid #000" }}>Rupees in words</td>
 								<td style={{ "borderLeft": "1px solid #000" }} className='bold'>{val.amount ? toWords.convert(parseInt(val.amount), { currency: true }) : ""} </td>
 								<td>Old Bill No.</td>
-								<td className='bold'> {val.oldBillNumber}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}> {val.oldBillNumber}</td>
 							</tr>
 							<tr>
 							

@@ -514,9 +514,9 @@ const AllUserEntries = (props, ref) => {
 						<tbody>
 						<tr>
 								<td>Bill No.</td>
-								<td className='bold'>{billDetails.billNumber}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}>{billDetails.billNumber}</td>
 								<td>Pledge Date</td>
-								<td className='bold'> {billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')} </td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}> {billDetails.date == "" || billDetails.date == undefined || billDetails.date == null || billDetails.date == "Invalid date" ? '' : moment(billDetails.date).format('DD/MM/YYYY')} </td>
 								<td>Mobile No.</td>
 								<td className='bold'>{billDetails.contactNo}</td>
 								
@@ -532,11 +532,11 @@ const AllUserEntries = (props, ref) => {
 														
 							<tr className="empty-child">
 							<td>Principle of the loan amount</td>
-								<td className='bold'>{billDetails.amount}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}>{billDetails.amount}</td>
 								<td style={{ "borderLeft": "1px solid #000" }}>Rupees in words</td>
 								<td style={{ "borderLeft": "1px solid #000" }} className='bold'>{billDetails.amount ? toWords.convert(parseInt(billDetails.amount), { currency: true }) : ""} </td>
 								<td>Old Bill No.</td>
-								<td className='bold'> {billDetails.oldBillNumber}</td>
+								<td className='bold' style={{"fontSize":"11.5pt"}}> {billDetails.oldBillNumber}</td>
 							</tr>
 							<tr>
 								
