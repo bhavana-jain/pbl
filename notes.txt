@@ -4,6 +4,8 @@
 
 mongoimport --db dbname --collection collectionName --file filename (in json format) --jsonArray --maintainInsertionOrder
 
+mongoimport --db nakoda --collection customerList --file C:\PBL\backend\data\hemanth.json --jsonArray --maintainInsertionOrder
+
 mongosh
-switch dbName
+use dbName
 db.collectionName.drop()

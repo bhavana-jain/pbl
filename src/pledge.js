@@ -322,7 +322,7 @@ return(
 							</div>
 							<div style={{ "fontSize": "12px", "width":"40%", "marginLeft":"auto"}}>
 								<ul>
-									<li>All items in the PLEDGE BOOK except items 6, 11 &nbsp; 13 respecting each pledge shall made on the day of the pawning thereof</li>
+									<li>All entries in the PLEDGE BOOK except items 6, 11 &nbsp; 13 respecting each pledge shall made on the day of the pawning thereof</li>
 									<li>4 Rate of Interest charged 16%</li>
 									<li>9 The time agreed upon for the redemption  of the pawn - one year</li>
 								</ul>
@@ -390,9 +390,8 @@ return (
 					<li> {data.gram}.{data.mg} </li>
 					<li>{data.presentValue}</li>
 					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
-					
 					<li>{data.deliveryRecNum}</li>
-					<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : data.redeemer}</li>
+					<li className="">{data.redemptionDate && data.redeemer ? data.redeemer : ''} {data.redemptionDate && !data.redeemer ? 'SELF' : ''}</li>
 				</ul>
 			);
 
@@ -452,7 +451,7 @@ return (
 						<li>{data.presentValue}</li>
 						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : moment(data.redemptionDate).format('DD/MM/YYYY')}</li>
 						<li>{data.deliveryRecNum}</li>
-						<li className="">{data.redemptionDate == "" || data.redemptionDate == undefined || data.redemptionDate == null || data.redemptionDate == "Invalid date" ? '' : data.redeemer}</li>
+						<li className="">{data.redemptionDate && data.redeemer ? data.redeemer : ''} {data.redemptionDate && !data.redeemer ? 'SELF' : ''}</li>
 											</ul>
 				);
 		});
