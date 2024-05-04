@@ -313,6 +313,7 @@ const removeArticle = (index) => {
 			});
 		getLists();
 		setBillNumber();
+		articleList([]);
 		// Remove all article input field and append only one. Also clear the article array
 		// articleList([]);
 		// document.getElementById("addArticle").innerHTML = "";
