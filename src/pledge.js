@@ -9,12 +9,11 @@ import ReactToPrint from "react-to-print";
 import NavBar from './navBar.js';
 import moment from 'moment';
 import Pagination from './components/pagination';
-import * as html2canvas from "html2canvas"
 import _ from 'lodash';
 import { ToWords } from 'to-words';
 import { User } from './userContext.js';
 
-let PageSize = 30, finalAmount, page1, page2;
+let PageSize = 34, finalAmount, page1, page2;
 const toWords = new ToWords();
 const AllUserEntries = (props, ref) => {
 	const [entries, fetchUserEntries] = useState([]);
@@ -400,7 +399,7 @@ return (
 	}
 	// Default page state with pagination
 	const RenderTableData = () => {
-		page1= currentTableData.slice(0, 15);
+		page1= currentTableData.slice(0, 17);
 		return (
 			<div style={{"pageBreakAfter":"always"}}>
 			<SetHeader />
@@ -409,7 +408,7 @@ return (
 		)
 	}
 	const RenderTableData2 = () => {
-		page2= currentTableData.slice(15, 30);
+		page2= currentTableData.slice(18, 34);
 		if(currentTableData.length > 15 ){
 			return (
 				<div id="page2" style={{"pageBreakAfter":"always"}}>
